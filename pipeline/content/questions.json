@@ -1,0 +1,494 @@
+{
+ "likert": [
+  {
+   "id": 1,
+   "text": "I naturally think in terms of long-range goals and strategic plans.",
+   "gift": "strategist"
+  },
+  {
+   "id": 2,
+   "text": "I am energized by challenging the status quo to bring about necessary change.",
+   "gift": "catalyst"
+  },
+  {
+   "id": 3,
+   "text": "I feel most satisfied when I have completed a practical task with excellence.",
+   "gift": "servant"
+  },
+  {
+   "id": 4,
+   "text": "Building many positive, encouraging relationships is one of my highest priorities.",
+   "gift": "enthusiast"
+  },
+  {
+   "id": 5,
+   "text": "My primary drive is to create an environment where people feel emotionally safe and accepted.",
+   "gift": "lover"
+  },
+  {
+   "id": 6,
+   "text": "I feel a deep need for quiet time alone to think, process, and recharge.",
+   "gift": "erudite"
+  },
+  {
+   "id": 7,
+   "text": "I am a good manager of resources (time, money, people) and use them wisely.",
+   "gift": "host"
+  },
+  {
+   "id": 8,
+   "text": "I am driven to build systems and structures that create order and ensure long-term success, and will see my plans come to fruition, even if it takes days, months, or years.",
+   "gift": "strategist"
+  },
+  {
+   "id": 9,
+   "text": "When I see a problem, my first instinct is to identify the root truth, even if it's uncomfortable.",
+   "gift": "catalyst"
+  },
+  {
+   "id": 10,
+   "text": "People describe me as meticulous and conscientious in the tasks I complete for them.",
+   "gift": "servant"
+  },
+  {
+   "id": 11,
+   "text": "I often verbally affirm others' potential and strengths in all spheres of my life.",
+   "gift": "enthusiast"
+  },
+  {
+   "id": 12,
+   "text": "I have a deep, intuitive sense of the emotional state of others and feel moved to undo their aloneness in places of pain.",
+   "gift": "lover"
+  },
+  {
+   "id": 13,
+   "text": "Before I accept something as fact, I feel compelled to research and validate it for myself.",
+   "gift": "erudite"
+  },
+  {
+   "id": 14,
+   "text": "I get great joy, and am gifted at being hospitable and making people feel comfortable and cherished.",
+   "gift": "host"
+  },
+  {
+   "id": 15,
+   "text": "I am a natural leader and take a long-term view of leadership and the development of others.",
+   "gift": "strategist"
+  },
+  {
+   "id": 16,
+   "text": "I am more concerned with integrity and authenticity than with keeping everyone comfortable.",
+   "gift": "catalyst"
+  },
+  {
+   "id": 17,
+   "text": "It frustrates me when I see people not doing their fair share of the work.",
+   "gift": "servant"
+  },
+  {
+   "id": 18,
+   "text": "I am energized by rallying people together around a hopeful, positive vision.",
+   "gift": "enthusiast"
+  },
+  {
+   "id": 19,
+   "text": "I am known for my long-suffering unconditional love and acceptance.",
+   "gift": "lover"
+  },
+  {
+   "id": 20,
+   "text": "I research deeper and more complex topics than most others just for the sake of knowing the information.",
+   "gift": "erudite"
+  },
+  {
+   "id": 21,
+   "text": "I usually have what others need, such as snacks, drinks, or other useful items, such as tissues, before others know that they need it.",
+   "gift": "host"
+  },
+  {
+   "id": 22,
+   "text": "I have goals in place and don't like to deviate from them until they are completed.",
+   "gift": "strategist"
+  },
+  {
+   "id": 23,
+   "text": "I am a pioneering spirit, always having new and innovative ideas and solutions.",
+   "gift": "catalyst"
+  },
+  {
+   "id": 24,
+   "text": "People can count on me to be dependable and to finish the tasks I start.",
+   "gift": "servant"
+  },
+  {
+   "id": 25,
+   "text": "I feel fulfilled when I can inspire and rally others to become passionate about what I am most passionate about at a given time.",
+   "gift": "enthusiast"
+  },
+  {
+   "id": 26,
+   "text": "I tend to deescalate conflict and am often a peacemaker.",
+   "gift": "lover"
+  },
+  {
+   "id": 27,
+   "text": "I am frustrated by superficial conversations that don't interest me and prefer deep, intellectually stimulating discussions.",
+   "gift": "erudite"
+  },
+  {
+   "id": 28,
+   "text": "I am super resourceful.",
+   "gift": "host"
+  },
+  {
+   "id": 29,
+   "text": "I have little patience for activities that do not align with the main goal or vision.",
+   "gift": "strategist"
+  },
+  {
+   "id": 30,
+   "text": "I feel compelled to speak up against injustice or hypocrisy.",
+   "gift": "catalyst"
+  },
+  {
+   "id": 31,
+   "text": "I show my love for others by taking practical action to meet their tangible needs.",
+   "gift": "servant"
+  },
+  {
+   "id": 32,
+   "text": "I am naturally optimistic and believe the best about people and situations.",
+   "gift": "enthusiast"
+  },
+  {
+   "id": 33,
+   "text": "I can become emotionally overwhelmed because I sometimes absorb the pain of others.",
+   "gift": "lover"
+  },
+  {
+   "id": 34,
+   "text": "I prefer to be alone studying the things I am passionate about or explaining them to interested individuals.",
+   "gift": "erudite"
+  },
+  {
+   "id": 35,
+   "text": "I enjoy stewarding and multiplying resources so I can be more generous.",
+   "gift": "host"
+  },
+  {
+   "id": 36,
+   "text": "My motto could be, \"Good leaders create a vision, articulate the vision, passionately own the vision, and relentlessly drive it to completion.\" - Jack Welch.",
+   "gift": "strategist"
+  },
+  {
+   "id": 37,
+   "text": "I have a strong inner sense of what is right and wrong.",
+   "gift": "catalyst"
+  },
+  {
+   "id": 38,
+   "text": "I often notice and move to meet the practical needs in a room before anyone else does.",
+   "gift": "servant"
+  },
+  {
+   "id": 39,
+   "text": "I have a strong intuition about interpersonal dynamics and work to build bridges between people.",
+   "gift": "enthusiast"
+  },
+  {
+   "id": 40,
+   "text": "I am fiercely protective of the vulnerable and instinctively shield them from harm.",
+   "gift": "lover"
+  },
+  {
+   "id": 41,
+   "text": "I am not easily swayed by peer pressure or others' approval, as I have strong convictions and desires.",
+   "gift": "erudite"
+  },
+  {
+   "id": 42,
+   "text": "I view the resources I have as something I've been entrusted with for the benefit of others.",
+   "gift": "host"
+  },
+  {
+   "id": 43,
+   "text": "I excel at architecting a long-term plan and then delegating to the right people to bring that vision to reality.",
+   "gift": "strategist"
+  },
+  {
+   "id": 44,
+   "text": "I am compelled to challenge the status quo and uproot broken systems to achieve radical, not just incremental, transformation.",
+   "gift": "catalyst"
+  },
+  {
+   "id": 45,
+   "text": "I feel most fulfilled after a hard day of tangible, productive work.",
+   "gift": "servant"
+  },
+  {
+   "id": 46,
+   "text": "I'm energized by rallying people together, using fun and celebration to build connections and inspire a shared sense of optimism.",
+   "gift": "enthusiast"
+  },
+  {
+   "id": 47,
+   "text": "I feel most loved when someone listens to me with their whole heart and understands my feelings.",
+   "gift": "lover"
+  },
+  {
+   "id": 48,
+   "text": "I feel most loved when someone engages me in a deeply intellectual conversation.",
+   "gift": "erudite"
+  },
+  {
+   "id": 49,
+   "text": "I constantly am thinking about how myself and others can engage in wise financial stewardship.",
+   "gift": "host"
+  }
+ ],
+ "forcedChoice": [
+  {
+   "id": 50,
+   "stem": "I am more driven to...",
+   "a": "Challenge a broken system to get to the truth.",
+   "b": "Diligently complete the tasks needed to keep the current system running.",
+   "giftA": "catalyst",
+   "giftB": "servant"
+  },
+  {
+   "id": 51,
+   "stem": "I am more driven to...",
+   "a": "Inspire a group of people with a hopeful, positive vision.",
+   "b": "Confront a group with an uncomfortable reality that leads to transformation.",
+   "giftA": "enthusiast",
+   "giftB": "catalyst"
+  },
+  {
+   "id": 52,
+   "stem": "I am more driven to...",
+   "a": "Speak a hard truth, even if it causes emotional discomfort.",
+   "b": "Protect someone's feelings, even if it means avoiding a hard truth.",
+   "giftA": "catalyst",
+   "giftB": "lover"
+  },
+  {
+   "id": 53,
+   "stem": "When leading, my priority is...",
+   "a": "Ensuring the team stays the course on a well-thought-out master plan.",
+   "b": "Allowing for disruptive innovation that might improve upon the master plan.",
+   "giftA": "strategist",
+   "giftB": "catalyst"
+  },
+  {
+   "id": 54,
+   "stem": "I am more drawn to...",
+   "a": "A deep, analytical dive into a complex subject.",
+   "b": "A bold, pioneering adventure that challenges my limits.",
+   "giftA": "erudite",
+   "giftB": "catalyst"
+  },
+  {
+   "id": 55,
+   "stem": "My focus is more on...",
+   "a": "Wisely stewarding resources to fund a bold, risky, but potentially revolutionary idea or adventure.",
+   "b": "Wisely stewarding resources to ensure long-term stability and security.",
+   "giftA": "catalyst",
+   "giftB": "host"
+  },
+  {
+   "id": 56,
+   "stem": "I prefer to show support by...",
+   "a": "Cheerfully rallying and encouraging the person.",
+   "b": "Practically helping them with their to-do list.",
+   "giftA": "enthusiast",
+   "giftB": "servant"
+  },
+  {
+   "id": 57,
+   "stem": "I believe love is best expressed by...",
+   "a": "Providing tangible help and practical solutions.",
+   "b": "Providing a safe, empathetic presence for someone's emotions.",
+   "giftA": "servant",
+   "giftB": "lover"
+  },
+  {
+   "id": 58,
+   "stem": "In a group project, I focus on...",
+   "a": "The long-term vision and overall strategy.",
+   "b": "The immediate tasks that need to be done right now.",
+   "giftA": "strategist",
+   "giftB": "servant"
+  },
+  {
+   "id": 59,
+   "stem": "I am more likely to be...",
+   "a": "Frustrated by inaction and analysis paralysis.",
+   "b": "Frustrated by rushed decisions made without thorough research.",
+   "giftA": "servant",
+   "giftB": "erudite"
+  },
+  {
+   "id": 60,
+   "stem": "When giving a gift, I am more concerned with...",
+   "a": "Ensuring everyone contributes fairly and the gift is practical.",
+   "b": "Ensuring the gift is generous, empowering, and makes the recipient feel cherished.",
+   "giftA": "servant",
+   "giftB": "host"
+  },
+  {
+   "id": 61,
+   "stem": "A healthy relationship requires...",
+   "a": "Deep emotional safety and unconditional acceptance.",
+   "b": "Uplifting joy and mutual celebration.",
+   "giftA": "lover",
+   "giftB": "enthusiast"
+  },
+  {
+   "id": 62,
+   "stem": "I am more inclined to...",
+   "a": "Let my decisions be guided by the emotional needs of the people involved.",
+   "b": "Let my decisions be guided by the objective goals of the plan.",
+   "giftA": "lover",
+   "giftB": "strategist"
+  },
+  {
+   "id": 63,
+   "stem": "My approach to problems is more...",
+   "a": "Analytical and logical, based on verifiable facts.",
+   "b": "Empathetic and intuitive, based on people's feelings.",
+   "giftA": "erudite",
+   "giftB": "lover"
+  },
+  {
+   "id": 64,
+   "stem": "When considering a large donation, I prioritize...",
+   "a": "The immediate emotional relief and comfort it will bring to an individual.",
+   "b": "The long-term strategic impact and stewardship of the organization receiving it.",
+   "giftA": "lover",
+   "giftB": "host"
+  },
+  {
+   "id": 65,
+   "stem": "I am more energized by...",
+   "a": "Creating a detailed, systematic plan to achieve a goal.",
+   "b": "Inspiring and rallying a team towards a shared objective.",
+   "giftA": "strategist",
+   "giftB": "enthusiast"
+  },
+  {
+   "id": 66,
+   "stem": "I find it more important to be...",
+   "a": "Intellectually rigorous and precise.",
+   "b": "Relationally warm and encouraging.",
+   "giftA": "erudite",
+   "giftB": "enthusiast"
+  },
+  {
+   "id": 67,
+   "stem": "When planning an event, I focus more on...",
+   "a": "The relational atmosphere and ensuring people have fun and connect.",
+   "b": "The budget and resources, ensuring a high-quality experience through wise stewardship.",
+   "giftA": "enthusiast",
+   "giftB": "host"
+  },
+  {
+   "id": 68,
+   "stem": "My leadership style is more focused on...",
+   "a": "Architecting brilliant, long-term systems and plans.",
+   "b": "Patiently mentoring individuals to help them master a subject.",
+   "giftA": "strategist",
+   "giftB": "erudite"
+  },
+  {
+   "id": 69,
+   "stem": "I would rather...",
+   "a": "Build a detailed budget and investment plan.",
+   "b": "Build a comprehensive research paper with extensive citations.",
+   "giftA": "host",
+   "giftB": "erudite"
+  },
+  {
+   "id": 70,
+   "stem": "When making a big decision, I trust...",
+   "a": "A strategic plan that lays out the path to a future goal.",
+   "b": "A prudent financial plan that ensures resources are used wisely.",
+   "giftA": "strategist",
+   "giftB": "host"
+  }
+ ],
+ "scenarios": [
+  {
+   "id": 1,
+   "stem": "A volunteer project you are on is missing deadlines and team morale is plummeting.",
+   "options": [
+    "Call an emergency meeting to re-architect the master plan, clarify the vision, and re-delegate tasks.",
+    "Privately check in with each team member to see how they are feeling, creating a safe space for them to voice concerns.",
+    "Find the biggest practical bottleneck and just start doing the work yourself to get momentum going again.",
+    "Directly confront the unspoken issue you believe is causing the failure, pushing for honesty to clear the air."
+   ],
+   "gifts": [
+    "strategist",
+    "lover",
+    "servant",
+    "catalyst"
+   ]
+  },
+  {
+   "id": 2,
+   "stem": "A close friend is devastated after being laid off from their job.",
+   "options": [
+    "Immediately start reminding them of their strengths, telling them this is a setup for a comeback, and painting a positive picture of their future.",
+    "Offer a significant and thoughtful financial gift to cover their expenses for a month, empowering them to search for a new job without stress.",
+    "Spend hours with them researching the job market, analyzing their resume, and helping them build a logical, data-driven plan for their job search.",
+    "Sit with them in their grief, listen without judgment, and let them know you are there for them no matter what, validating their feelings of loss and fear."
+   ],
+   "gifts": [
+    "enthusiast",
+    "host",
+    "erudite",
+    "lover"
+   ]
+  },
+  {
+   "id": 3,
+   "stem": "You are on the planning committee for a large community-wide charity event.",
+   "options": [
+    "Take charge of the budget and fundraising, ensuring every dollar is used wisely to create a high-quality, memorable, and generous experience.",
+    "Volunteer to be the MC or lead the welcoming committee, focusing on creating a fun, high-energy, and relational atmosphere.",
+    "Take on the role of overall event coordinator, developing the master timeline, defining roles for all teams, and making sure the event achieves its objective.",
+    "Sign up for the setup and teardown crew, quietly ensuring all the practical, hands-on work gets done with excellence."
+   ],
+   "gifts": [
+    "host",
+    "enthusiast",
+    "strategist",
+    "servant"
+   ]
+  },
+  {
+   "id": 4,
+   "stem": "You receive an unexpected financial windfall of $5,000.",
+   "options": [
+    "Use it to fund a bold, adventurous trip, or invest it in a high-risk, high-reward idea you believe in.",
+    "Put it toward a major long-term goal (like a down payment or a business plan), allocating it according to your life strategy.",
+    "Immediately think of a person or cause that could benefit and give a generous, empowering gift.",
+    "Spend it on a fantastic party or group vacation to create a lasting, joyful memory with the people you love."
+   ],
+   "gifts": [
+    "catalyst",
+    "strategist",
+    "host",
+    "enthusiast"
+   ]
+  }
+ ],
+ "giftMax": {
+  "catalyst": 60,
+  "servant": 60,
+  "enthusiast": 64,
+  "lover": 60,
+  "strategist": 64,
+  "erudite": 56,
+  "host": 64
+ }
+}
