@@ -5,7 +5,7 @@ Static site for **7giftsofthefather.pages.dev** — the 7 Motivational Giftings 
 ## Structure
 
 - `site/` — the deployable static site (what Cloudflare Pages serves)
-  - 50 prerendered pages in a light editorial design system (Fraunces + Inter, hairline rules, gift-color ink): home, 7 gift pages, 35 archetype pages, archetype library, biblical foundation, profile guide, assessment, results
+  - 50 prerendered pages in the "Garnet & Vellum" hybrid design system (wine-dark garnet chrome, candlelight gold, parchment reading surfaces, Fraunces + Inter, gift-color ink): home, 7 gift pages, 35 archetype pages, archetype library, biblical foundation, profile guide, assessment, results
   - `js/data.js` — generated content bundle + official scoring engine (`window.computeScores`)
   - `js/assessment.js` — 77-question wizard (autosave to localStorage, resume support)
   - `js/results.js` — intensity bar chart, archetype reveal, top-3 deep dives

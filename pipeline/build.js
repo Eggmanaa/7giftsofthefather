@@ -12,13 +12,13 @@ const QCOUNT = questions.likert.length + questions.forcedChoice.length + questio
 
 const ORDER = ['catalyst', 'servant', 'erudite', 'enthusiast', 'host', 'strategist', 'lover'];
 const META = {
-  catalyst:   { ink: 'var(--catalyst)',   bar: 'var(--catalyst-bar)',   metaphorColor: 'Lava Red' },
-  servant:    { ink: 'var(--servant)',    bar: 'var(--servant-bar)',    metaphorColor: 'Construction Yellow' },
-  erudite:    { ink: 'var(--erudite)',    bar: 'var(--erudite-bar)',    metaphorColor: 'Rich Brown' },
-  enthusiast: { ink: 'var(--enthusiast)', bar: 'var(--enthusiast-bar)', metaphorColor: 'Rose Gold' },
-  host:       { ink: 'var(--host)',       bar: 'var(--host-bar)',       metaphorColor: 'Emerald Green' },
-  strategist: { ink: 'var(--strategist)', bar: 'var(--strategist-bar)', metaphorColor: 'Platinum' },
-  lover:      { ink: 'var(--lover)',      bar: 'var(--lover-bar)',      metaphorColor: 'Soft Lavender' },
+  catalyst:   { ink: 'var(--catalyst)',   bar: 'var(--catalyst-bar)',   glow: 'rgba(198,81,45,.34)',   metaphorColor: 'Lava Red' },
+  servant:    { ink: 'var(--servant)',    bar: 'var(--servant-bar)',    glow: 'rgba(213,162,20,.28)',  metaphorColor: 'Construction Yellow' },
+  erudite:    { ink: 'var(--erudite)',    bar: 'var(--erudite-bar)',    glow: 'rgba(169,141,108,.30)', metaphorColor: 'Rich Brown' },
+  enthusiast: { ink: 'var(--enthusiast)', bar: 'var(--enthusiast-bar)', glow: 'rgba(199,126,139,.30)', metaphorColor: 'Rose Gold' },
+  host:       { ink: 'var(--host)',       bar: 'var(--host-bar)',       glow: 'rgba(59,154,108,.28)',  metaphorColor: 'Emerald Green' },
+  strategist: { ink: 'var(--strategist)', bar: 'var(--strategist-bar)', glow: 'rgba(133,147,163,.28)', metaphorColor: 'Platinum' },
+  lover:      { ink: 'var(--lover)',      bar: 'var(--lover-bar)',      glow: 'rgba(154,139,203,.30)', metaphorColor: 'Soft Lavender' },
 };
 const NAME2SLUG = { Catalyst: 'catalyst', Servant: 'servant', Erudite: 'erudite', Enthusiast: 'enthusiast', Host: 'host', Strategist: 'strategist', Lover: 'lover' };
 
@@ -256,7 +256,7 @@ function giftPage(slug) {
   const prev = gifts[prevSlug], next = gifts[nextSlug];
 
   const body = `
-<header class="gift-hero" style="--g:${m.bar};--g-dark:${m.ink}">
+<header class="gift-hero" style="--g:${m.bar};--g-dark:${m.ink};--g-glow:${m.glow};--g-on-dark:${m.bar}">
   <img src="../images/${slug}.webp" alt="${esc(g.name)} — ${esc(g.metaphor.title)} logo" fetchpriority="high" width="168" height="168">
   <div class="kicker">Gift ${idx + 1} of 7 · ${m.metaphorColor}</div>
   <h1>${esc(g.name)}</h1>
@@ -280,7 +280,7 @@ function giftPage(slug) {
         <p>${esc(g.metaphor.description)}</p>
       </div>
       <div class="verse-card rv">
-        <div class="g-label" style="color:var(--gold-ink)">Foundational Verses</div>
+        <div class="g-label">Foundational Verses</div>
         ${verses}
       </div>
     </div>
@@ -346,7 +346,7 @@ function giftPage(slug) {
   </div>
 </section>
 
-<section class="commission">
+<section class="commission" style="--g-glow:${m.glow}">
   <div class="rv">
     <div class="g-label" style="color:var(--gold-ink)">${esc(g.name)}'s Commission</div>
     <blockquote>“${esc(commissionText)}”</blockquote>
