@@ -480,15 +480,63 @@
     "host",
     "enthusiast"
    ]
+  },
+  {
+   "id": 5,
+   "stem": "You discover that a long-standing policy in your church or workplace is quietly hurting the very people it was meant to serve.",
+   "options": [
+    "Name the problem openly and press leadership for immediate, meaningful change, even if it ruffles feathers.",
+    "Quietly begin helping the people affected in practical, tangible ways while the debate plays out.",
+    "Research the policy's history and gather the data needed to build a careful, well-documented case for reform.",
+    "Seek out those who have been hurt, listen to their stories, and make sure no one carries the pain alone."
+   ],
+   "gifts": [
+    "catalyst",
+    "servant",
+    "erudite",
+    "lover"
+   ]
+  },
+  {
+   "id": 6,
+   "stem": "Your team is asked to launch a brand-new initiative from scratch, with wide freedom in how to begin.",
+   "options": [
+    "Challenge the assumptions behind the old way of doing things and cast a bold, disruptive vision for what this could become.",
+    "Study how others have done it—gathering research, best practices, and lessons learned before anything is decided.",
+    "Architect the master plan: phases, roles, milestones, and a clear picture of success at the end.",
+    "Take charge of resourcing it—securing the budget, space, and supplies so the team launches generously provided for."
+   ],
+   "gifts": [
+    "catalyst",
+    "erudite",
+    "strategist",
+    "host"
+   ]
+  },
+  {
+   "id": 7,
+   "stem": "A new family joins your community and seems overwhelmed by the transition.",
+   "options": [
+    "Show up with practical help: meals, moving boxes, school runs—whatever lightens their load this week.",
+    "Welcome them warmly, introduce them to everyone, and speak hope and excitement over their new chapter.",
+    "Make unhurried space to hear their story and keep checking in on how they are really doing.",
+    "Patiently orient them—explaining how everything works and thoroughly answering every question they have."
+   ],
+   "gifts": [
+    "servant",
+    "enthusiast",
+    "lover",
+    "erudite"
+   ]
   }
  ],
  "giftMax": {
-  "catalyst": 60,
-  "servant": 60,
-  "enthusiast": 64,
-  "lover": 60,
-  "strategist": 64,
-  "erudite": 56,
-  "host": 64
+  "catalyst": 68,
+  "servant": 68,
+  "enthusiast": 68,
+  "lover": 68,
+  "strategist": 68,
+  "erudite": 68,
+  "host": 68
  }
 }

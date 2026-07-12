@@ -59,18 +59,24 @@ for (const g of ORDER) {
       else if (q.giftB === 'catalyst') { s.fc[q.id] = 'a'; }
       else s.fc[q.id] = 'a';
     });
-    // S1: catalyst idx = gifts.indexOf; set most there. S4: least on catalyst.
+    // S1: catalyst MOST. S4: catalyst LEAST. All other scenarios: catalyst untouched
+    // (if present it earns the +1 "unchosen" point per the spec).
+    let bystander = 0;
     Q.scenarios.forEach(sc => {
       const i = sc.gifts.indexOf('catalyst');
       if (sc.id === 1) s.sjt[sc.id] = { most: i, least: (i + 1) % 4 };
       else if (sc.id === 4) s.sjt[sc.id] = { most: (i + 1) % 4, least: i };
-      else s.sjt[sc.id] = { most: 0, least: 1 };
+      else {
+        const opts = [0,1,2,3].filter(x => x !== i);
+        s.sjt[sc.id] = { most: opts[0], least: opts[1] };
+        if (i >= 0) bystander++;
+      }
     });
+    s._expected = 14 + 12 + 4 + 0 + bystander; // likert + FC + S1 most + S4 least + unchosen points
   });
   const r = W.computeScores(st);
-  // expected raw catalyst = 14 (likert) + 12 (3 FC wins) + 4 (S1 most) + 0 (S4 least) = 30
-  assert(r.raw.catalyst === 30, `spec arithmetic: expected raw 30, got ${r.raw.catalyst}`);
-  assert(r.scores.catalyst === Math.round(30 / Q.giftMax.catalyst * 100), 'normalization uses gift max');
+  assert(r.raw.catalyst === st._expected, `spec arithmetic: expected raw ${st._expected}, got ${r.raw.catalyst}`);
+  assert(r.scores.catalyst === Math.round(st._expected / Q.giftMax.catalyst * 100), 'normalization uses gift max');
 }
 
 /* T4: 500 random profiles — bounds, archetype always found, top3 = 3 distinct */
