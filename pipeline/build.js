@@ -12,13 +12,13 @@ const QCOUNT = questions.likert.length + questions.forcedChoice.length + questio
 
 const ORDER = ['catalyst', 'servant', 'erudite', 'enthusiast', 'host', 'strategist', 'lover'];
 const META = {
-  catalyst:   { ink: 'var(--catalyst)',   bar: 'var(--catalyst-bar)',   glow: 'rgba(198,81,45,.34)',   metaphorColor: 'Lava Red' },
-  servant:    { ink: 'var(--servant)',    bar: 'var(--servant-bar)',    glow: 'rgba(213,162,20,.28)',  metaphorColor: 'Construction Yellow' },
-  erudite:    { ink: 'var(--erudite)',    bar: 'var(--erudite-bar)',    glow: 'rgba(169,141,108,.30)', metaphorColor: 'Rich Brown' },
-  enthusiast: { ink: 'var(--enthusiast)', bar: 'var(--enthusiast-bar)', glow: 'rgba(199,126,139,.30)', metaphorColor: 'Rose Gold' },
-  host:       { ink: 'var(--host)',       bar: 'var(--host-bar)',       glow: 'rgba(59,154,108,.28)',  metaphorColor: 'Emerald Green' },
-  strategist: { ink: 'var(--strategist)', bar: 'var(--strategist-bar)', glow: 'rgba(133,147,163,.28)', metaphorColor: 'Platinum' },
-  lover:      { ink: 'var(--lover)',      bar: 'var(--lover-bar)',      glow: 'rgba(154,139,203,.30)', metaphorColor: 'Soft Lavender' },
+  catalyst:   { ink: 'var(--catalyst)',   bar: 'var(--catalyst-bar)',   glow: 'rgba(198,81,45,.34)',   hero9: '#391710', hero8: '#482014',   metaphorColor: 'Lava Red' },
+  servant:    { ink: 'var(--servant)',    bar: 'var(--servant-bar)',    glow: 'rgba(213,162,20,.28)',  hero9: '#332809', hero8: '#42340D',  metaphorColor: 'Construction Yellow' },
+  erudite:    { ink: 'var(--erudite)',    bar: 'var(--erudite-bar)',    glow: 'rgba(169,141,108,.30)', hero9: '#2E2117', hero8: '#3B2C1F', metaphorColor: 'Rich Brown' },
+  enthusiast: { ink: 'var(--enthusiast)', bar: 'var(--enthusiast-bar)', glow: 'rgba(199,126,139,.30)', hero9: '#371C23', hero8: '#452630', metaphorColor: 'Rose Gold' },
+  host:       { ink: 'var(--host)',       bar: 'var(--host-bar)',       glow: 'rgba(59,154,108,.28)',  hero9: '#0F2E1E', hero8: '#154028',  metaphorColor: 'Emerald Green' },
+  strategist: { ink: 'var(--strategist)', bar: 'var(--strategist-bar)', glow: 'rgba(133,147,163,.28)', hero9: '#20262E', hero8: '#2A323C', metaphorColor: 'Platinum' },
+  lover:      { ink: 'var(--lover)',      bar: 'var(--lover-bar)',      glow: 'rgba(154,139,203,.30)', hero9: '#261C3B', hero8: '#31264E', metaphorColor: 'Soft Lavender' },
 };
 const NAME2SLUG = { Catalyst: 'catalyst', Servant: 'servant', Erudite: 'erudite', Enthusiast: 'enthusiast', Host: 'host', Strategist: 'strategist', Lover: 'lover' };
 
@@ -256,7 +256,7 @@ function giftPage(slug) {
   const prev = gifts[prevSlug], next = gifts[nextSlug];
 
   const body = `
-<header class="gift-hero" style="--g:${m.bar};--g-dark:${m.ink};--g-glow:${m.glow};--g-on-dark:${m.bar}">
+<header class="gift-hero" style="--g:${m.bar};--g-dark:${m.ink};--g-glow:${m.glow};--g-on-dark:${m.bar};--hero-9:${m.hero9};--hero-8:${m.hero8}">
   <img src="../images/${slug}.webp" alt="${esc(g.name)} — ${esc(g.metaphor.title)} logo" fetchpriority="high" width="168" height="168">
   <div class="kicker">Gift ${idx + 1} of 7 · ${m.metaphorColor}</div>
   <h1>${esc(g.name)}</h1>
@@ -346,7 +346,7 @@ function giftPage(slug) {
   </div>
 </section>
 
-<section class="commission" style="--g-glow:${m.glow}">
+<section class="commission" style="--g-glow:${m.glow};--hero-9:${m.hero9};--hero-8:${m.hero8}">
   <div class="rv">
     <div class="g-label" style="color:var(--gold-ink)">${esc(g.name)}'s Commission</div>
     <blockquote>“${esc(commissionText)}”</blockquote>
@@ -416,7 +416,32 @@ function archetypesIndex() {
     <h3>From Single Gifts to a Motivational Chord</h3>
     <p>${esc(o.chord)}</p>
     <h3>The Three Axes of Contribution: Why, How, and Who</h3>
-    <p>${esc(o.axes)}</p>
+    <p>The seven gifts align along three axes of contribution—each answering a question every community must answer. Reading an archetype across these axes reveals its natural orientation, its strengths, and its likely blind spots at a glance.</p>
+    <div class="axis-block rv">
+      <div class="axis-head"><span class="axis-word">Why</span><span class="axis-sub">Vision &amp; Truth</span></div>
+      <p class="axis-role">The visionary compass: purpose, principle, and direction.</p>
+      <ul class="axis-gifts">
+        <li><a class="g-tag catalyst" href="../gifts/catalyst.html">Catalyst</a><em>“What is the truth that will unlock transformation here?”</em></li>
+        <li><a class="g-tag erudite" href="../gifts/erudite.html">Erudite</a><em>“Is this worthy of deep and careful study?”</em></li>
+        <li><a class="g-tag strategist" href="../gifts/strategist.html">Strategist</a><em>“Where are we going—and what is the best way to get there?”</em></li>
+      </ul>
+    </div>
+    <div class="axis-block rv">
+      <div class="axis-head"><span class="axis-word">How</span><span class="axis-sub">Action &amp; Execution</span></div>
+      <p class="axis-role">The engine room: diligent work and wise provision turn vision into reality.</p>
+      <ul class="axis-gifts">
+        <li><a class="g-tag servant" href="../gifts/servant.html">Servant of All</a><em>“What needs to be done, and who is doing it?”</em></li>
+        <li><a class="g-tag host" href="../gifts/host.html">Host</a><em>“How are we stewarding our resources?”</em></li>
+      </ul>
+    </div>
+    <div class="axis-block rv">
+      <div class="axis-head"><span class="axis-word">Who</span><span class="axis-sub">Connection &amp; Care</span></div>
+      <p class="axis-role">The relational glue: people stay valued, connected, and cared for.</p>
+      <ul class="axis-gifts">
+        <li><a class="g-tag enthusiast" href="../gifts/enthusiast.html">Enthusiast</a><em>“Are we building a bond?”</em></li>
+        <li><a class="g-tag lover" href="../gifts/lover.html">Lover</a><em>“Is this a safe place for the heart?”</em></li>
+      </ul>
+    </div>
     <h3>How to Use This Guide</h3>
     <p>${esc(o.howto)}</p>
   </div>
@@ -538,8 +563,8 @@ function foundationPage() {
 
 <section class="section">
   <div class="wrap narrow prose rv">
-    <h3 style="margin-top:0">The Father as Divine Architect</h3>
-    <p>While other passages attribute spiritual gifts to the Holy Spirit (1 Corinthians 12) or to Jesus Christ (Ephesians 4), Romans 12 points uniquely to <strong>God the Father</strong> as the divine architect of our motivational design.</p>
+    <h3 style="margin-top:0">The Father, the Giver of Our Design</h3>
+    <p>While other passages attribute spiritual gifts to the Holy Spirit (1 Corinthians 12) or to Jesus Christ (Ephesians 4), Romans 12 points uniquely to <strong>God the Father</strong> as the source of our motivational design—the One who wove these drives into us before we took our first breath.</p>
     <blockquote>“For by the grace given me I say to every one of you: Do not think of yourself more highly than you ought, but rather think of yourself with sober judgment, in accordance with the <strong>faith God has distributed</strong> to each of you.”<cite>Romans 12:3</cite></blockquote>
     <p>The passage begins not with a list of gifts, but with a call to humility rooted in how we were made. In this context, the “faith God has distributed” can be understood as the specific measure of motivational grace apportioned to each of us.</p>
     <p>This is the key to “sober judgment.” Our motivational wiring is not an achievement we earned, but a portion of grace we were given by the Father. It is the foundational, operational style He hardwired into our being before we took our first breath.</p>
@@ -575,7 +600,7 @@ function foundationPage() {
 </section>
 
 <section class="cta-band"><div class="rv"><h2>Steward the grace you were given</h2><p>Discover your unique measure with the full assessment.</p><a class="btn btn-primary" href="assessment.html">Take the Assessment</a></div></section>`;
-  return layout({ title: 'The Biblical Foundation | 7 Gifts of the Father', desc: 'The scriptural basis for the Father\'s motivational gifts in Romans 12 — grace distributed by the divine architect of our motivational design.', body, root: '', active: 'foundation' });
+  return layout({ title: 'The Biblical Foundation | 7 Gifts of the Father', desc: 'The scriptural basis for the Father\'s motivational gifts in Romans 12 — grace distributed by the Father who designed us.', body, root: '', active: 'foundation' });
 }
 
 /* ---------------- understanding ---------------- */

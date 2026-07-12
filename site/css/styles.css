@@ -271,11 +271,13 @@ a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); bor
 /* ---------- gift detail ---------- */
 .gift-hero { padding: 76px 24px 64px; text-align: center; color: var(--on-dark);
   border-bottom: 1px solid var(--dark-line); position: relative; overflow: hidden;
-  background: linear-gradient(180deg, var(--garnet-9), var(--garnet-8)); }
+  background: linear-gradient(180deg, var(--hero-9, var(--garnet-9)), var(--hero-8, var(--garnet-8))); }
 .gift-hero::before { content: ""; position: absolute; inset: 0;
   background: radial-gradient(ellipse 56% 58% at 50% 8%, var(--g-glow, rgba(226,182,90,.2)), transparent 70%); }
 .gift-hero > * { position: relative; }
-.gift-hero img { width: 168px; height: 168px; margin: 0 auto 26px; border-radius: 24px; box-shadow: 0 24px 54px -16px rgba(0,0,0,.55); }
+.gift-hero img { width: 190px; height: 190px; margin: 0 auto 26px; border-radius: 26px;
+  background: linear-gradient(170deg, #FFFDF5, #F3EBD9); padding: 15px;
+  box-shadow: 0 24px 54px -16px rgba(0,0,0,.55), 0 0 0 1px rgba(240,206,130,.28); }
 .gift-hero .kicker { justify-content: center; color: var(--gold); }
 .gift-hero .kicker::before, .gift-hero .kicker::after { content: ""; width: 26px; height: 1px; background: var(--dark-line); }
 .gift-hero h1 { font-size: clamp(2.6rem, 5.4vw, 4rem); margin-bottom: 2px; color: #FAF3E1; }
@@ -340,7 +342,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); bor
 /* commission: garnet, gift-glow */
 .commission { text-align: center; padding: 96px 24px; color: var(--on-dark); position: relative; overflow: hidden;
   border-top: 1px solid var(--dark-line);
-  background: linear-gradient(180deg, var(--garnet-9), var(--garnet-8)); }
+  background: linear-gradient(180deg, var(--hero-9, var(--garnet-9)), var(--hero-8, var(--garnet-8))); }
 .commission::before { content: ""; position: absolute; inset: 0;
   background: radial-gradient(ellipse 50% 62% at 50% 0%, var(--g-glow, rgba(226,182,90,.18)), transparent 72%); }
 .commission > * { position: relative; }
@@ -378,6 +380,18 @@ a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); bor
 .sect-head h3 { font-size: 1.7rem; margin: 0; font-weight: 580; }
 .sect-head .tag { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-ink); font-weight: 700; }
 .sect-intro { color: var(--muted); max-width: 860px; margin-bottom: 28px; font-size: .96rem; }
+
+/* ---------- three axes ---------- */
+.axis-block { border-left: 2px solid var(--gold); padding: 4px 0 4px 26px; margin: 26px 0; }
+.axis-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
+.axis-word { font-family: var(--serif); font-style: italic; font-size: 1.7rem; font-weight: 560; color: var(--ink); }
+.axis-sub { font-size: .69rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-ink); font-weight: 700; }
+.axis-role { color: var(--muted); font-size: .97rem; margin: 0 0 12px; }
+.axis-gifts { list-style: none; padding: 0; margin: 0; }
+.axis-gifts li { display: flex; align-items: baseline; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--hairline); flex-wrap: wrap; }
+.axis-gifts li:last-child { border-bottom: none; }
+.axis-gifts li .g-tag { min-width: 128px; }
+.axis-gifts li em { font-family: var(--serif); color: var(--ink-soft); font-size: 1.02rem; }
 
 /* ---------- prose ---------- */
 .prose { font-size: 1.06rem; color: var(--ink-soft); }
