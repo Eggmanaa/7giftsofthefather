@@ -597,6 +597,9 @@ function archetypePage(a) {
       <div class="combo">${x.gifts.map(g => `<span class="g-tag ${NAME2SLUG[g]}">${g}</span>`).join('')}</div>
       <p>${esc(x.essence)}</p></a>`).join('\n');
 
+  const _sm = (a.scripture||"").match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+  const scQuote = _sm ? _sm[1].trim() : (a.scripture||"");
+  const scRef = _sm ? _sm[2].trim() : "";
   const body = `
 <header class="page-hero">
   <img class="arch-emblem" src="../images/archetypes/${a.slug}.webp" alt="${esc(a.name)} emblem" fetchpriority="high" width="170" height="170">
@@ -604,11 +607,49 @@ function archetypePage(a) {
   <h1>${esc(a.name)}</h1>
   <p class="lede" style="font-family:var(--serif);font-style:italic;font-size:1.24rem">${esc(a.essence)}</p>
   <div style="display:flex;justify-content:center;margin-top:22px">${gTags(a.gifts, '../')}</div>
+  <div class="axis-sig">Axis signature: <strong>${esc(a.axisSignature)}</strong></div>
 </header>
 
 <section class="section">
-  <div class="wrap narrow prose rv">
-    ${a.paragraphs.map(p => `<p style="font-size:1.08rem;line-height:1.85">${esc(p)}</p>`).join('\n')}
+  <div class="wrap narrow rv">
+    <p class="lead-prose big">${esc(a.chord)}</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="grid g3 framework-grid" style="--g:var(--gold);--g-dark:var(--gold-ink)">
+      <div class="card rv"><div class="fw-k">At Their Best</div><p>${esc(a.atBest)}</p></div>
+      <div class="card rv"><div class="fw-k">Under Stress · The Shadow</div><p>${esc(a.shadow)}</p></div>
+      <div class="card rv"><div class="fw-k">The Core Tension</div><p>${esc(a.coreTension)}</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap narrow">
+    <div class="grid g2">
+      <div class="rv"><div class="kicker">Where They Thrive</div>
+        <ul class="arch-thrive">${a.thrive.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>
+      <div class="rv growth-callout"><div class="fw-k">Growth Edge</div><p>${esc(a.growthEdge)}</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap narrow">
+    <div class="section-head rv"><div class="kicker center">In Relationship</div><h2>Playing Alongside the Seven Gifts</h2></div>
+    <div class="grid g2">
+      <div class="card rv"><div class="fw-k">Natural Harmony</div><p>${esc(a.harmonizes)}</p></div>
+      <div class="card rv"><div class="fw-k">Creative Friction</div><p>${esc(a.dissonance)}</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap narrow prose rv" style="text-align:center">
+    <blockquote class="arch-verse">${esc(scQuote)}<cite>${esc(scRef)}</cite></blockquote>
+    <p class="arch-exemplar"><strong>Embodied by</strong> · ${esc(a.exemplar)}</p>
   </div>
 </section>
 
@@ -826,7 +867,10 @@ function dataJs() {
   }
   const clientArch = archData.archetypes.map(a => ({
     num: a.num, name: a.name, slug: a.slug, gifts: a.gifts.map(g => NAME2SLUG[g]),
-    essence: a.essence, section: a.section, paragraphs: a.paragraphs,
+    essence: a.essence, section: a.section, axisSignature: a.axisSignature,
+    chord: a.chord, atBest: a.atBest, shadow: a.shadow, coreTension: a.coreTension,
+    thrive: a.thrive, growthEdge: a.growthEdge, harmonizes: a.harmonizes,
+    dissonance: a.dissonance, scripture: a.scripture, exemplar: a.exemplar,
   }));
   return `/* Generated data bundle */
 window.GIFT_ORDER = ${JSON.stringify(ORDER)};

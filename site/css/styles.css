@@ -610,3 +610,18 @@ footer { background: var(--garnet-9); color: var(--on-dark-faint); padding: 56px
   .tab-panel { display: block !important; page-break-before: always; }
   a { color: inherit; }
 }
+
+
+/* ---- upgraded archetype scaffold ---- */
+.fw-k{font-size:.67rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:10px}
+.growth-callout{background:var(--paper-2);border:1px solid var(--hairline-2);border-left:3px solid var(--gold);border-radius:12px;padding:22px 24px}
+.growth-callout p{margin:0;color:var(--ink-soft)}
+.arch-thrive{list-style:none;padding:0;margin:8px 0 0}
+.arch-thrive li{position:relative;padding-left:22px;margin-bottom:11px;color:var(--ink-soft)}
+.arch-thrive li::before{content:"\25C6";position:absolute;left:0;top:2px;color:var(--gold);font-size:.66rem}
+.axis-sig{margin-top:14px;font-size:.8rem;letter-spacing:.02em;color:var(--muted)}
+.axis-sig strong{color:var(--gold-ink)}
+.arch-verse{border:0;padding:0;margin:0 auto 10px;max-width:660px;font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1.5;color:var(--ink)}
+.arch-verse cite{display:block;margin-top:12px;font-family:var(--sans);font-style:normal;font-size:.67rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-ink);font-weight:700}
+.arch-exemplar{color:var(--muted);max-width:640px;margin:0 auto}
+.arch-exemplar strong{color:var(--ink)}

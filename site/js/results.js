@@ -41,7 +41,11 @@
       '<div class="combo">' + arch.gifts.map(function (s) {
         return '<a class="g-tag ' + s + '" href="/gifts/' + s + '">' + esc(GIFTS[s].name.replace('The ', '')) + '</a>';
       }).join('') + '</div>' +
-      '<div class="prose">' + arch.paragraphs.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' +
+      '<p class="lead-prose big" style="max-width:720px;margin:0 auto">' + esc(arch.chord) + '</p>' +
+      '<div class="grid g2" style="max-width:780px;margin:22px auto 0;text-align:left">' +
+        '<div class="card"><div class="fw-k">At Their Best</div><p>' + esc(arch.atBest) + '</p></div>' +
+        '<div class="card"><div class="fw-k">Under Stress</div><p>' + esc(arch.shadow) + '</p></div></div>' +
+      '<div class="growth-callout" style="max-width:780px;margin:16px auto 0;text-align:left"><div class="fw-k">Growth Edge</div><p>' + esc(arch.growthEdge) + '</p></div>' +
       '<p style="text-align:center;margin:22px 0 0" class="no-print"><a class="link-arrow" href="/archetypes/' + arch.slug + '">View the full archetype page <span class="ar">→</span></a></p>' +
       '</div></div></section>';
   }

@@ -109,7 +109,7 @@ for (const g of ORDER) {
   list.forEach(c => combos.add(c));
   assert(combos.size === 35, `35 unique combos, got ${combos.size}`);
   assert(W.ARCHETYPES.length === 35, '35 archetypes present');
-  assert(W.ARCHETYPES.every(a => a.paragraphs.length >= 3), 'every archetype has full description (3+ paragraphs)');
+  assert(W.ARCHETYPES.every(a => a.chord && a.atBest && a.shadow && a.coreTension && Array.isArray(a.thrive) && a.thrive.length >= 3 && a.growthEdge && a.harmonizes && a.dissonance && a.scripture && a.exemplar), 'every archetype has the full upgraded scaffold');
 }
 
 console.log(fails === 0 ? 'ALL SCORING TESTS PASSED ✔ (7 max-profiles, flat, spec arithmetic, 500 random, 35 combos)' : fails + ' FAILURES');
