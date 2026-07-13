@@ -34,6 +34,7 @@
   if (arch) {
     archHtml = '<section class="section" style="padding-top:64px"><div class="wrap narrow">' +
       '<div class="arch-reveal rv">' +
+      '<div class="arch-medal lg"><img src="/images/archetypes/' + arch.slug + '.webp" alt="' + esc(arch.name) + ' emblem" width="150" height="150"></div>' +
       '<div class="kicker">Your Archetype of the Soul · No. ' + arch.num + ' of 35</div>' +
       '<h2>' + esc(arch.name) + '</h2>' +
       '<p class="essence">“' + esc(arch.essence) + '”</p>' +
@@ -105,6 +106,32 @@
   }).join('');
   var panels = res.top3.map(giftPanel).join('');
 
+  function lowPanel(slug) {
+    var g = GIFTS[slug], sc = res.scores[slug], band = INT(sc), lg = window.LOW_GIFTS[slug];
+    if (!lg) return '';
+    var ink = INKC[slug];
+    return '<div class="card low-card rv" style="--g:' + BAR[slug] + ';--g-dark:' + ink + '">' +
+      '<div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:6px">' +
+      '<img src="/images/' + slug + '-thumb.webp" alt="" style="width:64px;height:64px;border-radius:12px">' +
+      '<div><div style="font-size:.67rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:' + ink + '">Score ' + sc + ' · <span class="intensity ' + band.cls + '">' + band.label + '</span></div>' +
+      '<h3 style="font-size:1.6rem;margin:2px 0 0">' + esc(g.name) + '</h3>' +
+      '<div style="font-family:var(--serif);font-style:italic;color:' + ink + ';font-size:1.05rem">' + esc(g.subtitle) + '</div></div></div>' +
+      '<div class="res-h">Where Life May Feel Harder</div>' +
+      '<p style="color:var(--ink-soft)">' + esc(lg.struggle) + '</p>' +
+      '<div class="res-h">Relating to ' + esc(g.name) + 's</div>' +
+      '<p style="color:var(--ink-soft)">' + esc(lg.friction) + '</p>' +
+      '<div class="res-h">Building the Bridge</div>' +
+      '<ul class="interact-list">' + lg.bridges.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
+      '<p style="margin:22px 0 0" class="no-print"><a class="link-arrow" href="/gifts/' + slug + '">Learn the language of ' + esc(g.name) + ' <span class="ar">→</span></a></p>' +
+      '</div>';
+  }
+  var bottom2 = res.ranked.slice(-2).reverse();
+  var quieterHtml = '<section class="section"><div class="wrap narrow">' +
+    '<div class="section-head rv"><div class="kicker center">Your Quieter Gifts</div><h2>Where Grace Must Be Borrowed</h2>' +
+    '<p>Your two lowest gifts are not flaws—they are the places where you were designed to need other people. Knowing them prevents your blind spots from becoming wounds, and turns the people who carry these gifts from irritations into allies.</p></div>' +
+    '<div class="grid" style="gap:26px">' + bottom2.map(lowPanel).join('') + '</div>' +
+    '</div></section>';
+
   var tieNote = res.tieResolved ? '<p style="text-align:center;color:var(--muted);font-size:.87rem;max-width:600px;margin:16px auto 0">Two or more gifts tied at the edge of your top three; your tiebreaker answer decided the blend. If the alternate combination resonates more, explore it in the <a href="/archetypes/">archetype library</a>.</p>' : '';
 
   app.innerHTML =
@@ -120,6 +147,7 @@
     '<p>These three gifts carry the highest intensity in your profile. Together they form your archetype; individually, each deserves deep exploration.</p></div>' +
     '<div class="top3-tabs no-print">' + tabs + '</div>' + panels +
     '</div></section>' +
+    quieterHtml +
     '<section class="section" style="padding:56px 0"><div class="res-actions no-print">' +
     '<button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>' +
     '<a class="btn btn-quiet" href="/assessment">Retake the Assessment</a>' +

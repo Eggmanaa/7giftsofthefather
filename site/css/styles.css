@@ -571,6 +571,22 @@ footer { background: var(--garnet-9); color: var(--on-dark-faint); padding: 56px
 .duel-opts button:hover { border-color: var(--garnet-7); transform: translateY(-1px); }
 .duel-opts button b { display: block; font-family: var(--serif); font-size: 1.15rem; color: var(--ink); font-weight: 580; margin-bottom: 3px; }
 
+/* ---------- archetype emblems ---------- */
+.arch-emblem { width: 170px; height: 170px; margin: 0 auto 18px; filter: drop-shadow(0 12px 30px rgba(0,0,0,.45)); }
+.arch-medal { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;
+  background: radial-gradient(circle at 38% 30%, var(--garnet-7), var(--garnet-9) 78%);
+  box-shadow: inset 0 0 0 1px rgba(226,182,90,.35), 0 4px 12px -4px rgba(42,20,26,.4); }
+.arch-card .arch-medal { width: 54px; height: 54px; margin-bottom: 2px; }
+.arch-card .arch-medal img { width: 44px; height: 44px; }
+.arch-medal.lg { width: 168px; height: 168px; margin: 0 auto 20px; display: flex;
+  box-shadow: inset 0 0 0 1px rgba(226,182,90,.4), 0 14px 34px -12px rgba(42,20,26,.45); }
+.arch-medal.lg img { width: 150px; height: 150px; }
+
+/* ---------- quieter gifts ---------- */
+.low-card { border-top: 2px solid var(--g, var(--hairline-2)); }
+.low-card .res-h { color: var(--g-dark, var(--gold-ink)); }
+.low-card .interact-list li::before { color: var(--g, var(--gold)); }
+
 /* ---------- reveal ---------- */
 .rv { opacity: 0; transform: translateY(16px); transition: opacity .65s var(--ease), transform .65s var(--ease); }
 .rv.in { opacity: 1; transform: none; }
