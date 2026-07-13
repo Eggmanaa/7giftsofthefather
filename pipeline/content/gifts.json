@@ -218,7 +218,7 @@
     "profileSummary": "The Servant of All possesses a divine compulsion to meet practical needs through tangible action and faithful work. They are the backbone of any organization, driven not by recognition but by the deep satisfaction of seeing tasks completed with excellence and people genuinely helped.",
     "foundationalVerses": [
       "Romans 12:7 - \"If it is serving, then serve; if it is teaching, then teach.\"",
-      "Galatians 5:13 - \"Serve one another humbly in love.\""
+      "Mark 10:43-44 - \"Whoever wants to become great among you must be your servant, and whoever wants to be first must be slave of all.\""
     ],
     "descriptiveWords": [
       "Industrious",
@@ -230,11 +230,11 @@
     ],
     "coreFramework": {
       "question": "What needs to be done, and who is doing it?",
-      "questionDescription": "The Servant of All instinctively scans for unmet practical needs and takes responsibility for ensuring they are addressed. They naturally think in terms of tasks, processes, and the step-by-step work required to serve others effectively.",
-      "energizer": "Diligent Work Ethic",
-      "energizerDescription": "Servants are energized by being around others who share their commitment to hard work and excellence. They thrive in environments where quality work is valued and appreciated.",
-      "drive": "Practical Service",
-      "driveDescription": "They are compelled to meet tangible, practical needs through faithful work and reliable action. Their greatest joy comes from knowing their labor has genuinely helped someone in a meaningful way."
+      "questionDescription": "The service-gifted are driven by an internal question that constantly scans their environment for practical needs and assesses whether everyone is contributing fairly.",
+      "energizer": "Visible Recognition & Shared Effort",
+      "energizerDescription": "They are energized when their practical contributions are specifically noticed and genuinely recognized, and they thrive when others step up to help.",
+      "drive": "Tangible Results",
+      "driveDescription": "They are driven by the deep satisfaction of completing a task, solving a practical problem, and seeing the high-quality result of their labor."
     },
     "strengths": [
       {
@@ -301,14 +301,14 @@
       }
     ],
     "leadershipStyle": {
-      "title": "Lead by Example",
-      "description": "Service-oriented leaders inspire through their work ethic and commitment to excellence.",
+      "title": "Servant Leader",
+      "description": "Service leaders lead through humble example and dedicated support.",
       "characteristics": [
-        "Model Excellence",
-        "Practical Leadership",
-        "Servant Leadership",
-        "Task Management",
-        "Reliability"
+        "Leading by Example",
+        "Practical Problem-Solving",
+        "Supportive Infrastructure",
+        "Attention to Detail",
+        "Consistent Follow-Through"
       ]
     },
     "interactions": [
@@ -402,7 +402,7 @@
       "gradient": "from-orange-800 to-yellow-700"
     },
     "metaphor": {
-      "title": "The Ancient Oak",
+      "title": "The Ancient Oak Tree",
       "description": "The Ancient Oak represents the deep-rooted wisdom and enduring strength of the teaching gift. Like an oak that grows slowly but stands for centuries, those with the gift of teaching develop profound understanding over time and become sources of reliable wisdom for generations.",
       "icon": "TreePine"
     },
@@ -421,11 +421,11 @@
     ],
     "coreFramework": {
       "question": "Is this subject worthy of my intellectual energy?",
-      "questionDescription": "The Erudite instinctively evaluates information and opportunities based on their intellectual merit and potential for deep understanding. They are selective about where they invest their mental energy, preferring depth over breadth.",
-      "energizer": "Pursuit of Deep Understanding",
-      "energizerDescription": "Erudites are energized by the process of learning, researching, and gaining mastery over complex subjects. They thrive in environments that value knowledge and intellectual rigor.",
-      "drive": "Knowledge and Truth",
-      "driveDescription": "They are compelled to seek truth through systematic study and to share their discoveries with others. Their greatest satisfaction comes from achieving deep understanding and helping others learn."
+      "questionDescription": "The Erudite filters the world through a lens of intellectual substance. Before investing their energy, they instinctively assess if a topic has sufficient depth and truth to justify the rigorous process of mastery.",
+      "energizer": "Deep Study & Genuine Curiosity from Others",
+      "energizerDescription": "They are energized by uninterrupted time for deep research and reflection. This energy is compounded when others show genuine curiosity and a sincere desire to learn what they have discovered.",
+      "drive": "To Acquire & Disseminate Knowledge",
+      "driveDescription": "They are driven by an insatiable desire to acquire a mastery-level understanding of complex subjects and feel a compulsion to disseminate that knowledge with clarity and precision."
     },
     "strengths": [
       {
@@ -492,14 +492,14 @@
       }
     ],
     "leadershipStyle": {
-      "title": "Thoughtful Authority",
-      "description": "Teaching-oriented leaders guide through expertise and careful analysis.",
+      "title": "The Wise Teacher",
+      "description": "Erudite leaders lead through wisdom, clarity, and the intellectual development of their team. They don't just give answers; they teach people how to think.",
       "characteristics": [
-        "Knowledge-Based Authority",
-        "Methodical Planning",
-        "Educational Leadership",
-        "Research-Driven Decisions",
-        "Intellectual Mentoring"
+        "Mentoring Focus",
+        "Clarity of Communication",
+        "Evidence-Based Decisions",
+        "Fostering a Learning Culture",
+        "Principled Guidance"
       ]
     },
     "interactions": [
@@ -612,11 +612,11 @@
     ],
     "coreFramework": {
       "question": "Are we building a bond?",
-      "questionDescription": "The Enthusiast instinctively evaluates situations based on their potential for creating meaningful connections and positive relationships. They naturally think in terms of building bridges and fostering unity.",
-      "energizer": "Positive Connection",
-      "energizerDescription": "Enthusiasts are energized by being around positive, growth-minded people who share their optimism and desire for meaningful relationships. They thrive in environments of mutual encouragement.",
-      "drive": "Relational Unity",
-      "driveDescription": "They are compelled to create environments where people feel valued, connected, and motivated to reach their potential. Their greatest joy comes from seeing others succeed and relationships flourish."
+      "questionDescription": "The Enthusiast constantly assesses the quality of relational connection, believing that authentic connection is the foundation for all positive growth.",
+      "energizer": "Heartfelt Connection & Shared Joy",
+      "energizerDescription": "They are energized by moments of authentic connection—shared laughter, meaningful conversation, and mutual celebration.",
+      "drive": "To Rally",
+      "driveDescription": "They are driven by an innate ability to rally people together around a shared purpose or possibility, turning individual potential into group momentum."
     },
     "strengths": [
       {
@@ -683,14 +683,15 @@
       }
     ],
     "leadershipStyle": {
-      "title": "Inspirational Connector",
-      "description": "Encouragement-oriented leaders inspire through relationships and positive vision.",
+      "title": "Inspirational Motivator",
+      "description": "Enthusiast leaders lead through inspiration and empowerment.",
       "characteristics": [
-        "Motivational Leadership",
-        "Team Building",
+        "Vision Casting",
+        "Strength-Based Development",
         "Positive Culture Creation",
-        "Relationship-Focused",
-        "Inspirational Communication"
+        "Recognition and Celebration",
+        "Coaching and Mentoring",
+        "Empowerment"
       ]
     },
     "interactions": [
@@ -791,7 +792,7 @@
     "profileSummary": "The Host understands that all resources are entrusted to them for the benefit of others through strategic stewardship. They are driven not by accumulation but by multiplication—finding ways to use what they have been given to empower others and create sustainable impact.",
     "foundationalVerses": [
       "Romans 12:8 - \"If it is giving, then give generously.\"",
-      "2 Corinthians 9:7 - \"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.\""
+      "Luke 6:38 - \"Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap. For with the measure you use, it will be measured to you.\""
     ],
     "descriptiveWords": [
       "Generous",
@@ -803,11 +804,11 @@
     ],
     "coreFramework": {
       "question": "How are we stewarding our resources?",
-      "questionDescription": "The Host instinctively evaluates situations based on resource stewardship and the potential for strategic impact. They naturally think in terms of wise investment and generous multiplication.",
-      "energizer": "Strategic Generosity",
-      "energizerDescription": "Hosts are energized by opportunities to deploy resources in ways that empower others and create lasting impact. They thrive when they can see their giving multiply and benefit many.",
-      "drive": "Resource Multiplication",
-      "driveDescription": "They are compelled to steward resources wisely and give strategically to create maximum positive impact. Their greatest joy comes from seeing their generosity empower others to succeed and give in return."
+      "questionDescription": "The Host constantly evaluates how they and others are managing what they've been entrusted with, assessing whether resources are being used wisely and strategically.",
+      "energizer": "Fruitful Impact & Expressed Gratitude",
+      "energizerDescription": "Hosts are energized when they see their resources making a real, tangible difference in others' lives and when their thoughtful giving is met with genuine gratitude.",
+      "drive": "To Steward & Multiply",
+      "driveDescription": "They are driven to create, manage, and multiply resources so they can give more generously and effectively, and to help others become good stewards as well."
     },
     "strengths": [
       {
@@ -874,14 +875,15 @@
       }
     ],
     "leadershipStyle": {
-      "title": "Empowering Steward",
-      "description": "Giving-oriented leaders inspire through strategic generosity and resource multiplication.",
+      "title": "The Steward Leader",
+      "description": "Host leaders lead through resource provision and strategic investment.",
       "characteristics": [
-        "Strategic Giving",
-        "Resource Development",
-        "Empowerment Leadership",
-        "Multiplication Focus",
-        "Stewardship Excellence"
+        "Resource Provision",
+        "Strategic Investment",
+        "Opportunity Creation",
+        "Welcoming Culture",
+        "Empowerment Focus",
+        "Stewardship Modeling"
       ]
     },
     "interactions": [
@@ -982,7 +984,7 @@
     "profileSummary": "The Strategist carries a divine capacity to see future possibilities and architect the systems required to make them reality. They are natural visionaries and systematic builders, driven by the ability to envision what could be and the determination to create the pathways to achieve it.",
     "foundationalVerses": [
       "Romans 12:8 - \"If it is to lead, do it diligently.\"",
-      "Proverbs 27:14 - \"Where there is no vision, the people perish.\""
+      "Proverbs 29:18 - \"Where there is no vision, the people perish.\""
     ],
     "descriptiveWords": [
       "Decisive",
@@ -994,11 +996,11 @@
     ],
     "coreFramework": {
       "question": "Where are we going, and what is the best way to get there?",
-      "questionDescription": "The Strategist instinctively thinks in terms of vision and systems. They naturally evaluate situations based on their alignment with long-term objectives and the systematic steps required to achieve them.",
-      "energizer": "Vision Clarity",
-      "energizerDescription": "Strategists are energized by clear, compelling visions of the future and the opportunity to build systems that make those visions reality. They thrive when working toward meaningful, long-term goals.",
-      "drive": "Strategic Direction",
-      "driveDescription": "They are compelled to create clear direction and systematic pathways toward meaningful goals. Their greatest satisfaction comes from seeing well-designed systems successfully achieve their intended outcomes."
+      "questionDescription": "The Strategist sees the world through a lens of vision and execution, instinctively assessing the ultimate goal and then architecting the most effective path to achieve it.",
+      "energizer": "Team Alignment & Measurable Progress",
+      "energizerDescription": "They are energized when the team is aligned with the vision and working together cohesively. Seeing measurable progress toward clear objectives fuels their drive.",
+      "drive": "To Architect Success",
+      "driveDescription": "They are compelled to provide direction, create order from chaos, and build systems that produce sustainable excellence, developing people and frameworks that succeed long-term."
     },
     "strengths": [
       {
@@ -1065,14 +1067,14 @@
       }
     ],
     "leadershipStyle": {
-      "title": "Visionary Architect",
-      "description": "Leadership-oriented leaders guide through strategic vision and systematic development.",
+      "title": "Strategic Architect",
+      "description": "Strategist leaders lead through vision, planning, and systematic execution.",
       "characteristics": [
-        "Vision Casting",
-        "Strategic Planning",
-        "Systems Development",
-        "People Development",
-        "Long-term Focus"
+        "Visionary Planning",
+        "Strategic Thinking",
+        "System Building",
+        "Team Development",
+        "Goal Achievement"
       ]
     },
     "interactions": [
@@ -1173,7 +1175,7 @@
     "profileSummary": "The Lover carries a divine heart that beats with compassion for the suffering and wounded, bringing healing presence wherever pain exists. They are natural empaths and healers, driven by an overwhelming desire to comfort, protect, and restore those who are hurting.",
     "foundationalVerses": [
       "Romans 12:8 - \"If it is to show mercy, do it cheerfully.\"",
-      "Blessed are the merciful, for they will be shown mercy.\" - Matthew 5:7"
+      "2 Corinthians 1:3-4 - \"Praise be to the God and Father of our Lord Jesus Christ, the Father of compassion and the God of all comfort, who comforts us in all our troubles, so that we can comfort those in any trouble with the comfort we ourselves receive from God.\""
     ],
     "descriptiveWords": [
       "Empathetic",
@@ -1185,11 +1187,11 @@
     ],
     "coreFramework": {
       "question": "Is this a safe place for the heart?",
-      "questionDescription": "The Lover instinctively evaluates situations based on their emotional safety and the potential for healing or harm. They are naturally attuned to the emotional climate and the needs of hurting hearts.",
-      "energizer": "Emotional Safety",
-      "energizerDescription": "Lovers are energized by environments where people feel safe to be vulnerable and where emotional healing is valued. They thrive when they can provide comfort and see hearts restored.",
-      "drive": "Compassionate Healing",
-      "driveDescription": "They are compelled to bring comfort, healing, and emotional restoration to those who are suffering. Their greatest joy comes from seeing wounded hearts find peace and wholeness."
+      "questionDescription": "The Lover constantly assesses the emotional climate of their surroundings, driven to create environments where hearts can be vulnerable without fear of judgment.",
+      "energizer": "Emotional Safety & Unconditional Acceptance",
+      "energizerDescription": "Lovers are energized by authentic, intimate relationships where they are loved and accepted for who they are, not just what they do. They thrive in environments of emotional honesty and gentle communication where they can offer and receive comfort freely.",
+      "drive": "To Comfort, Rescue, and Shield",
+      "driveDescription": "They are compelled to bring emotional comfort to those who are hurting, rescue those trapped in pain, and shield the vulnerable from further harm."
     },
     "strengths": [
       {
@@ -1257,13 +1259,13 @@
     ],
     "leadershipStyle": {
       "title": "Compassionate Shepherd",
-      "description": "Mercy-oriented leaders guide through empathy and emotional healing.",
+      "description": "Mercy leaders lead through care, understanding, and creating safe environments.",
       "characteristics": [
-        "Empathetic Leadership",
-        "Healing-Focused",
-        "Protective Care",
-        "Emotional Intelligence",
-        "Restorative Justice"
+        "Pastoral Care",
+        "Safe Environment Creation",
+        "Patient Development",
+        "Conflict Resolution",
+        "Supportive Presence"
       ]
     },
     "interactions": [

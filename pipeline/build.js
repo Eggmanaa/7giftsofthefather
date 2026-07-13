@@ -232,7 +232,7 @@ function giftPage(slug) {
   const interactions = g.interactions.map(i => `<li>${esc(i)}</li>`).join('\n');
   const words = g.descriptiveWords.map(w => `<b>${esc(w)}</b>`).join('<span class="sep">·</span>');
   const verses = g.foundationalVerses.map(v => {
-    const mm = v.match(/^([^-–]+?)\s*[-–]\s*(.*)$/);
+    const mm = v.match(/^(.+?)\s+[-–]\s+(.*)$/);
     return mm ? `<p>${esc(mm[2])} <strong>— ${esc(mm[1].trim()).toUpperCase()}</strong></p>` : `<p>${esc(v)}</p>`;
   }).join('\n');
   const relatedCards = related.map(r => {
@@ -403,12 +403,58 @@ function archetypesIndex() {
     </div>`;
   }).join('\n');
 
+  const CHIP_LABEL = { catalyst:'Catalyst', servant:'Servant', erudite:'Erudite', enthusiast:'Enthusiast', host:'Host', strategist:'Strategist', lover:'Lover' };
+  const chordChips = ORDER.map(s => `<button type="button" class="chord-chip" data-slug="${s}" style="--c:var(--${s});--cb:var(--${s}-bar)" aria-pressed="false"><span class="cc-dot"></span>${CHIP_LABEL[s]}</button>`).join('');
   const body = `
 <header class="page-hero">
   <img class="mark" src="../images/crown-thumb.webp" alt="">
   <h1>The 35 Archetypes of the Soul</h1>
   <p class="lede">The Motivational Symphony: when your three dominant gifts sound together, they strike a chord—one of thirty-five distinct personality archetypes.</p>
 </header>
+
+<style>
+.chord-finder .chord-panel{max-width:840px;margin:0 auto;background:var(--paper);border:1px solid var(--hairline-2);border-radius:var(--radius);padding:28px 26px;box-shadow:var(--shadow-hover)}
+.chord-finder .chord-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.chord-chip{display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border-radius:999px;border:1.5px solid var(--hairline-2);background:transparent;color:var(--ink-soft);font:600 .96rem var(--sans);cursor:pointer;transition:all .18s var(--ease)}
+.chord-chip .cc-dot{width:10px;height:10px;background:var(--cb);border-radius:2px;transform:rotate(45deg);transition:background .18s}
+.chord-chip:hover:not(:disabled){border-color:var(--c);color:var(--ink)}
+.chord-chip[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff;box-shadow:0 7px 20px -8px var(--c)}
+.chord-chip[aria-pressed="true"] .cc-dot{background:rgba(255,255,255,.92)}
+.chord-chip:disabled{opacity:.34;cursor:not-allowed}
+.chord-meta{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:18px;flex-wrap:wrap}
+.chord-count{font:600 .88rem var(--sans);color:var(--muted);letter-spacing:.02em}
+.chord-clear{background:none;border:none;color:var(--gold-ink);font:600 .88rem var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0}
+.chord-result{margin-top:24px;border-top:1px solid var(--hairline-2);padding-top:24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;animation:chordIn .4s var(--ease)}
+@keyframes chordIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.chord-result>img{width:66px;height:66px;flex:none}
+.chord-result .cr-body{flex:1;min-width:240px;text-align:left}
+.chord-result .cr-kick{font:700 .68rem var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:4px}
+.chord-result h3{font-family:var(--serif);font-size:1.55rem;margin:0 0 .35rem}
+.chord-result .cr-tags{display:flex;gap:12px;flex-wrap:wrap;margin:.1rem 0 .5rem}
+.chord-result .cr-essence{color:var(--ink-soft);font-size:.96rem;margin:0 0 .9rem;line-height:1.55}
+.chord-result .cr-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.arch-card.chord-hit{outline:3px solid var(--gold);outline-offset:3px;box-shadow:0 0 0 7px rgba(226,182,90,.20),var(--shadow-hover)!important}
+@media (max-width:560px){.chord-result{flex-direction:column;text-align:center}.chord-result .cr-body{text-align:center}.chord-result .cr-tags,.chord-result .cr-actions{justify-content:center}}
+</style>
+<section class="section chord-finder" id="chord-finder">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="kicker center">The Chord Finder</div>
+      <h2>Strike Your Chord</h2>
+      <p>Select your three dominant gifts. The instant all three sound together, your archetype appears, and you can jump straight to it.</p>
+    </div>
+    <div class="chord-panel rv">
+      <div class="chord-chips" role="group" aria-label="Select your three dominant gifts">
+        ${chordChips}
+      </div>
+      <div class="chord-meta">
+        <span class="chord-count" aria-live="polite">0 of 3 gifts selected</span>
+        <button type="button" class="chord-clear" hidden>Clear</button>
+      </div>
+      <div class="chord-result" hidden aria-live="polite"></div>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="wrap narrow prose rv">
@@ -490,6 +536,40 @@ document.querySelectorAll('.filter-bar button').forEach(b => b.addEventListener(
     sec.style.display = any ? '' : 'none';
   });
 }));
+</script>
+<script>
+(function(){
+  var chips=[].slice.call(document.querySelectorAll('.chord-chip'));
+  if(!chips.length) return;
+  var countEl=document.querySelector('.chord-count'), clearBtn=document.querySelector('.chord-clear'), resultEl=document.querySelector('.chord-result');
+  var cards=[].slice.call(document.querySelectorAll('.arch-card'));
+  var map={};
+  cards.forEach(function(c){ var k=(c.dataset.gifts||'').split(' ').filter(Boolean).sort().join(','); map[k]=c; });
+  var sel=[];
+  function clearHi(){ cards.forEach(function(c){ c.classList.remove('chord-hit'); }); }
+  function showAll(){
+    [].slice.call(document.querySelectorAll('.filter-bar button')).forEach(function(x){ x.classList.toggle('on', x.dataset.f==='all'); });
+    cards.forEach(function(c){ c.style.display=''; });
+    [].slice.call(document.querySelectorAll('[data-section]')).forEach(function(s){ s.style.display=''; });
+  }
+  function draw(){
+    chips.forEach(function(ch){ var on=sel.indexOf(ch.dataset.slug)>=0; ch.setAttribute('aria-pressed', on?'true':'false'); ch.disabled=(!on&&sel.length>=3); });
+    countEl.textContent=sel.length+' of 3 gifts selected';
+    clearBtn.hidden=sel.length===0;
+    clearHi();
+    if(sel.length!==3){ resultEl.hidden=true; return; }
+    var card=map[sel.slice().sort().join(',')];
+    if(!card){ resultEl.hidden=true; return; }
+    showAll(); card.classList.add('chord-hit');
+    var name=card.querySelector('h3').textContent, p=card.querySelector('p'), img=card.querySelector('img'), combo=card.querySelector('.combo');
+    resultEl.innerHTML='<img src="'+(img?img.getAttribute('src'):'')+'" alt="" width="66" height="66"><div class="cr-body"><div class="cr-kick">Your chord resolves to</div><h3>'+name+'</h3><div class="cr-tags">'+(combo?combo.innerHTML:'')+'</div><p class="cr-essence">'+(p?p.textContent:'')+'</p><div class="cr-actions"><a class="btn btn-primary" href="'+card.getAttribute('href')+'">Open this archetype &#8594;</a><button type="button" class="btn btn-quiet cr-scroll">Show it below &#8595;</button></div></div>';
+    resultEl.hidden=false;
+    var sc=resultEl.querySelector('.cr-scroll'); if(sc) sc.addEventListener('click', function(){ card.scrollIntoView({behavior:'smooth',block:'center'}); });
+  }
+  chips.forEach(function(ch){ ch.addEventListener('click', function(){ var s=ch.dataset.slug, i=sel.indexOf(s); if(i>=0) sel.splice(i,1); else if(sel.length<3) sel.push(s); draw(); }); });
+  clearBtn.addEventListener('click', function(){ sel=[]; draw(); });
+  [].slice.call(document.querySelectorAll('.filter-bar button')).forEach(function(b){ b.addEventListener('click', function(){ clearHi(); }); });
+})();
 </script>`;
 
   return layout({ title: 'The 35 Personality Archetypes of the Soul | 7 Gifts of the Father',
