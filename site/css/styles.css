@@ -678,3 +678,15 @@ ol.canon-list li::before{content:counter(cl);top:0;color:var(--gold-ink);font-fa
   .canon-sec{padding:12px 0 !important}
   .arch-emblem{width:90px;height:90px}
 }
+
+/* ---- results: explicit top-three ranking ---- */
+.top3-summary{text-align:center;max-width:660px;margin:0 auto}
+.top3-rank{list-style:none;display:flex;flex-direction:column;gap:10px;padding:0;margin:16px 0 0;text-align:left}
+.top3-rank li{display:flex;align-items:center;gap:14px;padding:13px 18px;border:1px solid var(--hairline-2);border-left:4px solid var(--gc,var(--gold));border-radius:12px;background:var(--paper);box-shadow:var(--shadow)}
+.top3-rank .t3-rank{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--gc,var(--gold-ink));width:22px;flex:none;text-align:center}
+.top3-rank .t3-info{display:flex;flex-direction:column;flex:1;min-width:0}
+.top3-rank .t3-name{font-family:var(--serif);font-size:1.14rem;color:var(--ink);font-weight:600;line-height:1.2}
+.top3-rank .t3-sub{color:var(--muted);font-size:.84rem}
+.top3-rank .t3-score{font-weight:800;color:var(--gc,var(--gold-ink));font-size:1.15rem;width:44px;text-align:right;flex:none}
+.t3-arch{margin-top:16px;color:var(--ink-soft)}
+@media (max-width:640px){.top3-rank li{padding:12px 14px;gap:10px}.top3-rank .t3-name{font-size:1.05rem}}

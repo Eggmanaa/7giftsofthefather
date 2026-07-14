@@ -152,8 +152,21 @@
   var topActions = '<div class="res-actions res-actions-top no-print">' +
     '<button class="btn btn-primary" onclick="window.print()">⤓ Save as PDF</button>' +
     '<a class="btn btn-quiet" href="/assessment">Retake</a></div>';
+  var topThreeHtml = '<div class="top3-summary rv">' +
+    '<div class="kicker center" style="justify-content:center">Your Top Three Gifts</div>' +
+    '<ol class="top3-rank">' + res.top3.map(function (slug, i) {
+      return '<li style="--gc:var(--' + slug + ')">' +
+        '<span class="t3-rank">' + (i + 1) + '</span>' +
+        '<span class="t3-info"><span class="t3-name">' + esc(GIFTS[slug].name) + '</span>' +
+        '<span class="t3-sub">' + esc(GIFTS[slug].subtitle) + '</span></span>' +
+        '<span class="t3-score">' + res.scores[slug] + '</span></li>';
+    }).join('') + '</ol>' +
+    (arch ? '<p class="t3-arch">Together, these three form your archetype: <a href="/archetypes/' + arch.slug + '"><strong>' + esc(arch.name) + '</strong></a></p>' : '') +
+    '</div>';
+  var topThreeSection = '<section class="section" style="padding-top:10px;padding-bottom:10px"><div class="wrap narrow">' + topThreeHtml + '</div></section>';
   app.innerHTML =
     '<section class="section res-top" style="padding-bottom:8px"><div class="wrap narrow">' + profileHtml + topActions + '</div></section>' +
+    topThreeSection +
     '<section class="section" style="padding-bottom:24px"><div class="wrap narrow">' +
     '<div class="section-head rv" style="margin-bottom:30px"><div class="kicker center">Completed ' + esc(dateStr) + '</div>' +
     '<h2>Your Intensity Profile</h2>' +
