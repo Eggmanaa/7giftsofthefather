@@ -41,11 +41,11 @@
       '<div class="combo">' + arch.gifts.map(function (s) {
         return '<a class="g-tag ' + s + '" href="/gifts/' + s + '">' + esc(GIFTS[s].name.replace('The ', '')) + '</a>';
       }).join('') + '</div>' +
-      '<p class="lead-prose big" style="max-width:720px;margin:0 auto">' + esc(arch.chord) + '</p>' +
-      '<div class="grid g2" style="max-width:780px;margin:22px auto 0;text-align:left">' +
-        '<div class="card"><div class="fw-k">At Their Best</div><p>' + esc(arch.atBest) + '</p></div>' +
-        '<div class="card"><div class="fw-k">Under Stress</div><p>' + esc(arch.shadow) + '</p></div></div>' +
-      '<div class="growth-callout" style="max-width:780px;margin:16px auto 0;text-align:left"><div class="fw-k">Growth Edge</div><p>' + esc(arch.growthEdge) + '</p></div>' +
+      '<p class="lead-prose big" style="max-width:740px;margin:0 auto">' + esc(arch.websiteSummary || arch.essence) + '</p>' +
+      '<div class="grid g2" style="max-width:820px;margin:24px auto 0;text-align:left">' +
+        '<div class="card"><div class="fw-k">Signature Strength</div><p class="canon-name">' + esc(arch.sigStrengthName) + '</p><p>' + esc(arch.sigStrengthDesc) + '</p></div>' +
+        '<div class="card"><div class="fw-k">Signature Paradox</div><p>' + esc(arch.sigParadox) + '</p></div></div>' +
+      ((arch.formationPractices && arch.formationPractices.length) ? '<div class="growth-callout" style="max-width:820px;margin:16px auto 0;text-align:left"><div class="fw-k">Formation Practices</div><ul class="canon-list">' + arch.formationPractices.slice(0, 5).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' : '') +
       '<p style="text-align:center;margin:22px 0 0" class="no-print"><a class="link-arrow" href="/archetypes/' + arch.slug + '">View the full archetype page <span class="ar">→</span></a></p>' +
       '</div></div></section>';
   }
@@ -138,7 +138,22 @@
 
   var tieNote = res.tieResolved ? '<p style="text-align:center;color:var(--muted);font-size:.87rem;max-width:600px;margin:16px auto 0">Two or more gifts tied at the edge of your top three; your tiebreaker answer decided the blend. If the alternate combination resonates more, explore it in the <a href="/archetypes/">archetype library</a>.</p>' : '';
 
+  var pf = res.profile || {};
+  var pfMeta = [];
+  if (pf.age) pfMeta.push('Age ' + esc(String(pf.age)));
+  if (pf.marital) pfMeta.push(esc(pf.marital));
+  if (pf.title) pfMeta.push(esc(pf.title));
+  if (pf.location) pfMeta.push(esc(pf.location));
+  var profileHtml = (pf.name || pfMeta.length) ?
+    '<div class="res-profile rv">' +
+    (pf.name ? '<div class="res-profile-name">' + esc(pf.name) + '</div>' : '') +
+    (pfMeta.length ? '<div class="res-profile-meta">' + pfMeta.join('  ·  ') + '</div>' : '') +
+    '</div>' : '';
+  var topActions = '<div class="res-actions res-actions-top no-print">' +
+    '<button class="btn btn-primary" onclick="window.print()">⤓ Save as PDF</button>' +
+    '<a class="btn btn-quiet" href="/assessment">Retake</a></div>';
   app.innerHTML =
+    '<section class="section res-top" style="padding-bottom:8px"><div class="wrap narrow">' + profileHtml + topActions + '</div></section>' +
     '<section class="section" style="padding-bottom:24px"><div class="wrap narrow">' +
     '<div class="section-head rv" style="margin-bottom:30px"><div class="kicker center">Completed ' + esc(dateStr) + '</div>' +
     '<h2>Your Intensity Profile</h2>' +
@@ -153,7 +168,6 @@
     '</div></section>' +
     quieterHtml +
     '<section class="section" style="padding:56px 0"><div class="res-actions no-print">' +
-    '<button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>' +
     '<a class="btn btn-quiet" href="/assessment">Retake the Assessment</a>' +
     '<a class="btn btn-quiet" href="/archetypes/">Browse All 35 Archetypes</a>' +
     '</div></section>';

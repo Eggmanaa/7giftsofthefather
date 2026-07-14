@@ -4,7 +4,8 @@
   var KEY_A = 'sg7_answers_v1', KEY_R = 'sg7_results_v1';
   var app = document.getElementById('quiz-app');
 
-  var state = load() || { likert: {}, fc: {}, sjt: {} };
+  var state = load() || { likert: {}, fc: {}, sjt: {}, profile: {} };
+  if (!state.profile) state.profile = {};
   var LIKERT_LABELS = ['Not at all like me', 'Rarely like me', 'Sometimes like me', 'Often like me', 'Very much like me'];
 
   /* ---- paging plan ---- */
@@ -169,6 +170,7 @@
   }
 
   function complete(res) {
+    res.profile = state.profile || {};
     try { localStorage.setItem(KEY_R, JSON.stringify(res)); } catch (e) {}
     location.href = '/results';
   }
@@ -220,6 +222,39 @@
   }
 
   /* ---------------- intro ---------------- */
+  function renderIntake() {
+    var p = state.profile || {};
+    function field(id, label, val, type, ph) {
+      return '<label class="pf-field"><span>' + label + '</span>' +
+        '<input id="' + id + '" type="' + (type || 'text') + '" value="' + (val ? String(val).replace(/"/g, '&quot;') : '') + '" placeholder="' + (ph || '') + '"></label>';
+    }
+    var opts = ['', 'Single', 'Married', 'Engaged', 'Divorced', 'Widowed', 'Prefer not to say'];
+    var msel = opts.map(function (o) { return '<option value="' + o + '"' + ((p.marital || '') === o ? ' selected' : '') + '>' + (o || 'Select…') + '</option>'; }).join('');
+    app.innerHTML =
+      '<div class="card sec-intro-card rv in">' +
+      '<div class="kicker center" style="justify-content:center">A Few Details First</div>' +
+      '<h2>Tell Us About Yourself</h2>' +
+      '<p style="max-width:560px;margin:0 auto 24px;color:var(--ink-soft)">These personalize your results and appear on the PDF you can save at the end. They stay in your browser and are never sent to a server.</p>' +
+      '<div class="intake-form">' +
+      field('pf-name', 'Full name', p.name, 'text', 'Your name') +
+      field('pf-age', 'Age', p.age, 'number', 'e.g. 34') +
+      '<label class="pf-field"><span>Marital status</span><select id="pf-marital">' + msel + '</select></label>' +
+      field('pf-title', 'Job title', p.title, 'text', 'e.g. Dean of Students') +
+      field('pf-location', 'Job location', p.location, 'text', 'e.g. Santa Barbara, CA') +
+      '</div>' +
+      '<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px">' +
+      '<button class="btn btn-quiet" id="pf-back">← Back</button>' +
+      '<button class="btn btn-primary" id="pf-continue">Continue to Section 1 →</button>' +
+      '</div></div>';
+    document.getElementById('pf-back').onclick = function () { page = -1; render(); };
+    document.getElementById('pf-continue').onclick = function () {
+      function v(id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; }
+      state.profile = { name: v('pf-name'), age: v('pf-age'), marital: v('pf-marital'), title: v('pf-title'), location: v('pf-location') };
+      save();
+      page = 0; render();
+    };
+  }
+
   function renderIntro() {
     var n = answeredCount();
     var hasProgress = n > 0 && n < TOTAL;
@@ -244,9 +279,9 @@
       '<p style="margin:22px 0 0;font-size:.8rem;color:var(--faint)">Your answers save automatically in this browser—nothing is sent to a server.</p>' +
       '</div>';
     var s = document.getElementById('qz-start'), r = document.getElementById('qz-resume'), f = document.getElementById('qz-fresh');
-    if (s) s.onclick = function () { page = 0; render(); };
+    if (s) s.onclick = function () { renderIntake(); };
     if (r) r.onclick = function () { page = firstIncomplete(); render(); };
-    if (f) f.onclick = function () { state = { likert: {}, fc: {}, sjt: {} }; save(); page = 0; render(); };
+    if (f) f.onclick = function () { state = { likert: {}, fc: {}, sjt: {}, profile: {} }; save(); renderIntake(); };
   }
 
   function firstIncomplete() {

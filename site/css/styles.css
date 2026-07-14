@@ -625,3 +625,56 @@ footer { background: var(--garnet-9); color: var(--on-dark-faint); padding: 56px
 .arch-verse cite{display:block;margin-top:12px;font-family:var(--sans);font-style:normal;font-size:.67rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-ink);font-weight:700}
 .arch-exemplar{color:var(--muted);max-width:640px;margin:0 auto}
 .arch-exemplar strong{color:var(--ink)}
+
+/* ---- Compendium canon archetype pages ---- */
+.section-head.left,.section-head.left .kicker{text-align:left}
+.section-head.left .kicker{justify-content:flex-start}
+.canon-sec .section-head{margin-bottom:16px}
+.canon-body{max-width:760px;margin:0 auto}
+.canon-body>p{color:var(--ink-soft);line-height:1.8;margin:0 0 14px}
+.canon-body .lead-prose{color:var(--ink);font-size:1.16rem;line-height:1.7}
+.canon-sub{font-family:var(--serif);font-size:1.2rem;color:var(--ink);margin:24px 0 8px}
+.canon-small{font-weight:700;color:var(--gold-ink);font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;margin:16px 0 4px}
+.canon-verse{border-left:2px solid var(--gold);margin:16px 0;padding:2px 0 2px 22px;font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--ink);line-height:1.55}
+.canon-list{margin:6px 0 16px;padding-left:0;list-style:none}
+.canon-list li{position:relative;padding-left:24px;margin-bottom:9px;color:var(--ink-soft);line-height:1.65}
+.canon-list li::before{content:"\25C6";position:absolute;left:0;top:2px;color:var(--gold);font-size:.58rem}
+ol.canon-list{counter-reset:cl}
+ol.canon-list li{counter-increment:cl}
+ol.canon-list li::before{content:counter(cl);top:0;color:var(--gold-ink);font-family:var(--sans);font-weight:700;font-size:.78rem}
+.canon-name{font-family:var(--serif);font-size:1.18rem;color:var(--ink);margin:0 0 6px}
+
+/* ---- intake form ---- */
+.intake-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;max-width:620px;margin:0 auto;text-align:left}
+.pf-field{display:flex;flex-direction:column;gap:6px}
+.pf-field span{font-size:.76rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-ink)}
+.pf-field input,.pf-field select{font:inherit;font-size:1rem;padding:11px 13px;border:1px solid var(--hairline-2);border-radius:10px;background:var(--paper);color:var(--ink);width:100%}
+.pf-field input:focus,.pf-field select:focus{outline:2px solid var(--gold-ink);outline-offset:1px;border-color:var(--gold-ink)}
+
+/* ---- results profile + top actions ---- */
+.res-profile{text-align:center;margin-bottom:18px}
+.res-profile-name{font-family:var(--serif);font-size:1.7rem;color:var(--ink);line-height:1.2}
+.res-profile-meta{color:var(--muted);font-size:.95rem;margin-top:6px}
+.res-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.res-actions-top{margin-bottom:4px}
+.res-actions .btn{min-height:44px;display:inline-flex;align-items:center}
+
+/* ---- responsive / mobile / tablet ---- */
+@media (max-width:900px){.canon-sec{padding-top:36px;padding-bottom:36px}}
+@media (max-width:640px){
+  .canon-body .lead-prose{font-size:1.04rem}
+  .canon-sub{font-size:1.1rem}
+  .res-profile-name{font-size:1.4rem}
+  .intake-form{grid-template-columns:1fr;max-width:420px}
+  .pf-field input,.pf-field select{font-size:16px}
+  .arch-emblem{width:120px;height:120px}
+  .btn{min-height:46px}
+}
+.nav-links{transition:opacity .2s var(--ease)}
+
+/* ---- print / PDF additions ---- */
+@media print{
+  .res-profile{page-break-after:avoid;margin-bottom:10px}
+  .canon-sec{padding:12px 0 !important}
+  .arch-emblem{width:90px;height:90px}
+}

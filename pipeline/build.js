@@ -578,6 +578,35 @@ document.querySelectorAll('.filter-bar button').forEach(b => b.addEventListener(
 }
 
 /* ---------------- individual archetype page ---------------- */
+function renderCanonSections(sections) {
+  const SKIP = { 'Website Summary': 1 };
+  return sections.map((sec, si) => {
+    if (SKIP[sec.label]) return '';
+    let items = sec.items.slice();
+    if (sec.label === 'Defining Contribution') {
+      const fi = items.findIndex(it => it.t === 'lead');
+      if (fi > -1) items.splice(fi, 1);
+    }
+    let inner = '', buf = [], bt = '';
+    const flush = () => { if (buf.length) { inner += '<' + bt + ' class="canon-list">' + buf.map(x => '<li>' + esc(x) + '</li>').join('') + '</' + bt + '>'; buf = []; bt = ''; } };
+    items.forEach(it => {
+      if (it.t === 'bullet') { if (bt !== 'ul') { flush(); bt = 'ul'; } buf.push(it.x); return; }
+      if (it.t === 'num') { if (bt !== 'ol') { flush(); bt = 'ol'; } buf.push(it.x); return; }
+      flush();
+      if (it.t === 'sub') inner += '<h3 class="canon-sub">' + esc(it.x) + '</h3>';
+      else if (it.t === 'small') inner += '<p class="canon-small">' + esc(it.x) + '</p>';
+      else if (it.t === 'verse') inner += '<blockquote class="canon-verse">' + esc(it.x) + '</blockquote>';
+      else if (it.t === 'lead') inner += '<p class="lead-prose">' + esc(it.x) + '</p>';
+      else inner += '<p>' + esc(it.x) + '</p>';
+    });
+    flush();
+    const alt = (si % 2) ? ' alt' : '';
+    return '<section class="section canon-sec' + alt + '"><div class="wrap narrow">' +
+      '<div class="section-head left rv"><div class="kicker">' + esc(sec.label) + '</div></div>' +
+      '<div class="canon-body rv">' + inner + '</div></div></section>';
+  }).join('\n');
+}
+
 function archetypePage(a) {
   const sect = archData.sections.find(s => a.section && a.section.startsWith(s.num));
   const siblings = archData.archetypes.filter(x => x.section === a.section && x.num !== a.num);
@@ -597,9 +626,6 @@ function archetypePage(a) {
       <div class="combo">${x.gifts.map(g => `<span class="g-tag ${NAME2SLUG[g]}">${g}</span>`).join('')}</div>
       <p>${esc(x.essence)}</p></a>`).join('\n');
 
-  const _sm = (a.scripture||"").match(/^(.*?)\s*\(([^)]+)\)\s*$/);
-  const scQuote = _sm ? _sm[1].trim() : (a.scripture||"");
-  const scRef = _sm ? _sm[2].trim() : "";
   const body = `
 <header class="page-hero">
   <img class="arch-emblem" src="../images/archetypes/${a.slug}.webp" alt="${esc(a.name)} emblem" fetchpriority="high" width="170" height="170">
@@ -610,48 +636,7 @@ function archetypePage(a) {
   <div class="axis-sig">Axis signature: <strong>${esc(a.axisSignature)}</strong></div>
 </header>
 
-<section class="section">
-  <div class="wrap narrow rv">
-    <p class="lead-prose big">${esc(a.chord)}</p>
-  </div>
-</section>
-
-<section class="section alt">
-  <div class="wrap">
-    <div class="grid g3 framework-grid" style="--g:var(--gold);--g-dark:var(--gold-ink)">
-      <div class="card rv"><div class="fw-k">At Their Best</div><p>${esc(a.atBest)}</p></div>
-      <div class="card rv"><div class="fw-k">Under Stress · The Shadow</div><p>${esc(a.shadow)}</p></div>
-      <div class="card rv"><div class="fw-k">The Core Tension</div><p>${esc(a.coreTension)}</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap narrow">
-    <div class="grid g2">
-      <div class="rv"><div class="kicker">Where They Thrive</div>
-        <ul class="arch-thrive">${a.thrive.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>
-      <div class="rv growth-callout"><div class="fw-k">Growth Edge</div><p>${esc(a.growthEdge)}</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section alt">
-  <div class="wrap narrow">
-    <div class="section-head rv"><div class="kicker center">In Relationship</div><h2>Playing Alongside the Seven Gifts</h2></div>
-    <div class="grid g2">
-      <div class="card rv"><div class="fw-k">Natural Harmony</div><p>${esc(a.harmonizes)}</p></div>
-      <div class="card rv"><div class="fw-k">Creative Friction</div><p>${esc(a.dissonance)}</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap narrow prose rv" style="text-align:center">
-    <blockquote class="arch-verse">${esc(scQuote)}<cite>${esc(scRef)}</cite></blockquote>
-    <p class="arch-exemplar"><strong>Embodied by</strong> · ${esc(a.exemplar)}</p>
-  </div>
-</section>
+${renderCanonSections(a.canonSections)}
 
 <section class="section alt">
   <div class="wrap">
@@ -868,9 +853,9 @@ function dataJs() {
   const clientArch = archData.archetypes.map(a => ({
     num: a.num, name: a.name, slug: a.slug, gifts: a.gifts.map(g => NAME2SLUG[g]),
     essence: a.essence, section: a.section, axisSignature: a.axisSignature,
-    chord: a.chord, atBest: a.atBest, shadow: a.shadow, coreTension: a.coreTension,
-    thrive: a.thrive, growthEdge: a.growthEdge, harmonizes: a.harmonizes,
-    dissonance: a.dissonance, scripture: a.scripture, exemplar: a.exemplar,
+    websiteSummary: a.websiteSummary, sigStrengthName: a.sigStrengthName,
+    sigStrengthDesc: a.sigStrengthDesc, sigParadox: a.sigParadox, devQuestion: a.devQuestion,
+    formationPractices: a.formationPractices, leadershipStyleName: a.leadershipStyleName,
   }));
   return `/* Generated data bundle */
 window.GIFT_ORDER = ${JSON.stringify(ORDER)};
@@ -933,6 +918,13 @@ const mainJs = `// shared: reveal-on-scroll
     es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: .08 }) : null;
   document.querySelectorAll('.rv').forEach(function(el){ io ? io.observe(el) : el.classList.add('in'); });
+})();
+// close mobile nav on link tap or outside click
+(function(){
+  var links = document.querySelector('.nav-links');
+  if (!links) return;
+  links.addEventListener('click', function(e){ if (e.target.closest('a')) links.classList.remove('open'); });
+  document.addEventListener('click', function(e){ if (links.classList.contains('open') && !e.target.closest('.nav')) links.classList.remove('open'); });
 })();
 `;
 
