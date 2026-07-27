@@ -1,7 +1,7 @@
 /* Tests the SHIPPED js/data.js computeScores against the official spec */
 const fs = require('fs');
 global.window = {};
-eval(fs.readFileSync(__dirname + '/../site/js/data.js', 'utf8'));
+eval(fs.readFileSync(__dirname + '/site/js/data.js', 'utf8'));
 const W = global.window, Q = W.QUESTIONS, ORDER = W.GIFT_ORDER;
 let fails = 0;
 const assert = (cond, msg) => { if (!cond) { console.error('FAIL:', msg); fails++; } };

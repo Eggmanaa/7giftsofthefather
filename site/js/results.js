@@ -13,7 +13,7 @@
   }
 
   var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
-  var rn = ['I', 'II', 'III'];
+  var rn = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
   var arch = window.ARCHETYPES.find(function (a) { return a.slug === res.archetype; });
   var dateStr = new Date(res.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
   var BAR = { catalyst: 'var(--catalyst-bar)', servant: 'var(--servant-bar)', erudite: 'var(--erudite-bar)', enthusiast: 'var(--enthusiast-bar)', host: 'var(--host-bar)', strategist: 'var(--strategist-bar)', lover: 'var(--lover-bar)' };
@@ -34,7 +34,6 @@
   if (arch) {
     archHtml = '<section class="section" style="padding-top:64px"><div class="wrap narrow">' +
       '<div class="arch-reveal rv">' +
-      '<div class="arch-medal lg"><img src="/images/archetypes/' + arch.slug + '.webp" alt="' + esc(arch.name) + ' emblem" width="150" height="150"></div>' +
       '<div class="kicker">Your Archetype of the Soul · No. ' + arch.num + ' of 35</div>' +
       '<h2>' + esc(arch.name) + '</h2>' +
       '<p class="essence">“' + esc(arch.essence) + '”</p>' +
@@ -50,52 +49,6 @@
       '</div></div></section>';
   }
 
-  /* ---- under pressure ---- */
-  var STAGE_TINT = { Strain: 'var(--servant-bar)', Distortion: 'var(--enthusiast-bar)', Captivity: 'var(--catalyst)' };
-  var STAGE_INK  = { Strain: 'var(--servant)', Distortion: 'var(--enthusiast)', Captivity: 'var(--catalyst)' };
-
-  function descentHtml(p, compact) {
-    return p.descent.map(function (d, i) {
-      return '<div class="descent" style="--stage:' + STAGE_TINT[d.stage] + ';--stage-ink:' + STAGE_INK[d.stage] + '">' +
-        '<div class="descent-rail"><span class="descent-num">' + (i + 1) + '</span></div>' +
-        '<div class="descent-body">' +
-        '<div class="descent-head"><span class="descent-stage">' + esc(d.stage) + '</span>' +
-        '<span class="descent-verb">' + esc(d.verb) + '</span></div>' +
-        '<p class="descent-tell">' + esc(d.tell) + '</p>' +
-        '<p>' + esc(d.body) + '</p>' +
-        (compact ? '' : '<p class="descent-cost"><span>What it costs</span> ' + esc(d.cost) + '</p>') +
-        '</div></div>';
-    }).join('');
-  }
-
-  function pressureBlock(slug) {
-    var g = GIFTS[slug], p = g.pressure;
-    if (!p) return '';
-    return '<div class="res-h">Your Gift Under Pressure</div>' +
-      '<div class="flare-strip" style="margin-bottom:30px">' +
-      '<div class="flare-k">Your Flare Signature</div>' +
-      '<div class="flare-verbs">' + p.flare.map(function (v) { return '<span>' + esc(v) + '</span>'; }).join('<i class="ar">→</i>') + '</div>' +
-      '<p class="flare-trigger"><span>What sets it off</span> ' + esc(p.trigger) + '</p></div>' +
-      '<div class="descent-list">' + descentHtml(p, false) + '</div>' +
-      '<div class="chronic" style="margin-top:32px"><div class="g-label">If It Settles In</div>' +
-      '<h3>' + esc(p.chronic.name) + '</h3><p>' + esc(p.chronic.body) + '</p></div>' +
-
-      '<div class="res-h">Your Way Back</div>' +
-      '<div class="grid g2 reentry-grid">' +
-      '<div class="card say-yes"><div class="fw-k">What Others Should Say</div>' +
-      '<blockquote class="say-line">“' + esc(p.sayThis) + '”</blockquote>' +
-      '<p class="say-need"><span>What you actually need</span> ' + esc(p.needs) + '</p></div>' +
-      '<div class="card say-no"><div class="fw-k">What Makes It Worse</div>' +
-      '<blockquote class="say-line">“' + esc(p.notThis) + '”</blockquote>' +
-      '<p class="say-need"><span>Why it escalates</span> ' + esc(p.notThisWhy) + '</p></div>' +
-      '</div>' +
-      '<div class="grid g2 reentry-grid" style="margin-top:0">' +
-      '<div class="card"><div class="fw-k">Your Own Move Back</div><p>' + esc(p.ownMove) + '</p></div>' +
-      '<div class="card restored"><div class="fw-k">What Returns</div>' +
-      '<div class="fw-q">' + esc(p.restored) + '</div><p>' + esc(p.restoredBody) + '</p></div>' +
-      '</div>';
-  }
-
   /* ---- top-3 deep dives ---- */
   function giftPanel(slug, i) {
     var g = GIFTS[slug], sc = res.scores[slug], band = INT(sc);
@@ -104,7 +57,7 @@
       var m = String(v).match(/^([^-–]+?)\s*[-–]\s*(.*)$/);
       return m ? '<p>' + esc(m[2]) + ' <strong>— ' + esc(m[1].trim()).toUpperCase() + '</strong></p>' : '<p>' + esc(v) + '</p>';
     }).join('');
-    return '<div class="tab-panel" data-p="' + slug + '" style="' + (i ? 'display:none;' : '') + '--g:' + bar + ';--g-dark:' + ink + '">' +
+    return '<div class="tab-panel" data-p="' + slug + '" style="' + (i ? 'display:none' : '') + '--g:' + bar + ';--g-dark:' + ink + '">' +
       '<div class="card" style="padding:44px">' +
 
       '<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:10px">' +
@@ -142,8 +95,6 @@
       '<div class="res-h">How Others Can Love You Well</div>' +
       '<ul class="interact-list">' + g.interactions.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
 
-      pressureBlock(slug) +
-
       '<div class="res-h">Foundational Verses</div>' +
       '<div class="verse-card">' + verses + '</div>' +
 
@@ -178,73 +129,6 @@
       '</div>';
   }
   var bottom2 = res.ranked.slice(-2).reverse();
-  /* ---- the collisions you carry: pair conflicts INSIDE your own top three ---- */
-  function internalCollisions() {
-    var pairs = window.PAIR_COLLISIONS || [], t3 = res.top3, out = [];
-    pairs.forEach(function (p) {
-      if (t3.indexOf(p.a) > -1 && t3.indexOf(p.b) > -1) out.push(p);
-    });
-    if (!out.length) return '';
-    var cards = out.map(function (p) {
-      var ga = GIFTS[p.a], gb = GIFTS[p.b];
-      return '<article class="pair" style="--ga:' + BAR[p.a] + ';--gb:' + BAR[p.b] + '">' +
-        '<div class="pair-top"><span class="g-tag ' + p.a + '">' + esc(ga.name.replace(/^The /, '')) + '</span>' +
-        '<i class="pair-x">×</i><span class="g-tag ' + p.b + '">' + esc(gb.name.replace(/^The /, '')) + '</span></div>' +
-        '<h3>' + esc(p.title) + '</h3>' +
-        '<div class="pair-sec"><span class="pg-k">The loop</span><p>' + esc(p.loop) + '</p></div>' +
-        '<div class="pair-break"><span class="pg-k">What breaks the loop</span><p>' + esc(p.breaker) + '</p></div>' +
-        '</article>';
-    }).join('');
-    return '<section class="section"><div class="wrap">' +
-      '<div class="section-head rv"><div class="kicker center">Inside Your Own Profile</div>' +
-      '<h2>The Collisions You Carry</h2>' +
-      '<p>These conflicts normally happen between two people. Because both gifts are in your top three, you run them internally—' +
-      'which is why certain decisions leave you divided against yourself for reasons that are hard to name. ' +
-      'The same move that resolves the conflict between two people resolves it inside one.</p></div>' +
-      '<div class="pair-list rv">' + cards + '</div>' +
-      '</div></section>';
-  }
-
-  /* ---- where you will be misread: your #1 vs their #7, and your #7 ---- */
-  function blindSection() {
-    var be = window.BLIND_EXCHANGE || [];
-    if (!be.length) return '';
-    var top = res.ranked[0], low = res.ranked[res.ranked.length - 1];
-    var bTop = be.find(function (x) { return x.gift === top; });
-    var bLow = be.find(function (x) { return x.gift === low; });
-    if (!bTop || !bLow) return '';
-    var gTop = GIFTS[top], gLow = GIFTS[low];
-    return '<section class="section alt"><div class="wrap">' +
-      '<div class="section-head rv"><div class="kicker center">The Blind Exchange</div>' +
-      '<h2>Where You Will Be Misread</h2>' +
-      '<p>The sharpest friction in any relationship sits where one person\'s first gift is the other\'s last. ' +
-      'You have one of each—here is what both edges feel like from the inside and the outside.</p></div>' +
-      '<div class="blind-list rv">' +
-
-      '<div class="blind" style="--g:' + BAR[top] + '">' +
-      '<h4><span class="g-tag ' + top + '">' + esc(gTop.name.replace(/^The /, '')) + '</span> is your strongest — meeting someone it is weakest in</h4>' +
-      '<div class="blind-grid">' +
-      '<div><span class="pg-k">You see</span><p>' + esc(bTop.youSee) + '</p></div>' +
-      '<div><span class="pg-k">They receive</span><p>' + esc(bTop.theyGet) + '</p></div>' +
-      '<div><span class="pg-k">You feel</span><p>' + esc(bTop.youFeel) + '</p></div>' +
-      '<div><span class="pg-k">They feel</span><p>' + esc(bTop.theyFeel) + '</p></div>' +
-      '</div></div>' +
-
-      '<div class="blind" style="--g:' + BAR[low] + '">' +
-      '<h4><span class="g-tag ' + low + '">' + esc(gLow.name.replace(/^The /, '')) + '</span> is your quietest — meeting someone who leads with it</h4>' +
-      '<div class="blind-grid">' +
-      '<div><span class="pg-k">They see</span><p>' + esc(bLow.youSee) + '</p></div>' +
-      '<div><span class="pg-k">You receive</span><p>' + esc(bLow.theyGet) + '</p></div>' +
-      '<div><span class="pg-k">They feel</span><p>' + esc(bLow.youFeel) + '</p></div>' +
-      '<div><span class="pg-k">You feel</span><p>' + esc(bLow.theyFeel) + '</p></div>' +
-      '</div></div>' +
-
-      '</div>' +
-      '<p style="text-align:center;margin-top:36px" class="no-print">' +
-      '<a class="link-arrow" href="/how-gifts-meet">Measure the Gap between you and someone else <span class="ar">→</span></a></p>' +
-      '</div></section>';
-  }
-
   var quieterHtml = '<section class="section"><div class="wrap narrow">' +
     '<div class="section-head rv"><div class="kicker center">Your Quieter Gifts</div><h2>Where Grace Must Be Borrowed</h2>' +
     '<p>Your two lowest gifts are not flaws—they are the places where you were designed to need other people. Knowing them prevents your blind spots from becoming wounds, and turns the people who carry these gifts from irritations into allies.</p></div>' +
@@ -289,13 +173,12 @@
     '<div class="chart-card rv">' + bars + '</div>' + tieNote +
     '</div></section>' +
     archHtml +
+    '<div id="archFull"></div>' +
     '<section class="section alt"><div class="wrap">' +
     '<div class="section-head rv"><div class="kicker center">Your Top Three</div><h2>Deep Dive into Your Leading Gifts</h2>' +
     '<p>These three gifts carry the highest intensity in your profile. Together they form your archetype; individually, each deserves deep exploration.</p></div>' +
     '<div class="top3-tabs no-print">' + tabs + '</div>' + panels +
     '</div></section>' +
-    internalCollisions() +
-    blindSection() +
     quieterHtml +
     '<section class="section" style="padding:56px 0"><div class="res-actions no-print">' +
     '<a class="btn btn-quiet" href="/assessment">Retake the Assessment</a>' +
@@ -328,4 +211,27 @@
       });
     }, 180);
   });
+
+  /* ---- full archetype description: reuse the archetype page (single source of truth) ---- */
+  (function () {
+    if (!arch || !arch.slug) return;
+    var host = document.getElementById('archFull');
+    if (!host) return;
+    fetch('/archetypes/' + arch.slug)
+      .then(function (resp) { return resp.ok ? resp.text() : null; })
+      .then(function (html) {
+        if (!html) return;
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var secs = doc.querySelectorAll('.canon-sec');
+        if (!secs.length) return;
+        var body = '';
+        Array.prototype.forEach.call(secs, function (s) { body += s.outerHTML; });
+        host.innerHTML =
+          '<section class="section"><div class="wrap narrow"><div class="section-head rv">' +
+          '<div class="kicker center">Your Archetype in Full</div><h2>' + esc(arch.name) + '</h2>' +
+          '<p>' + esc(arch.essence || '') + '</p></div></div></section>' + body;
+        host.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); });
+      })
+      .catch(function () {});
+  })();
 })();

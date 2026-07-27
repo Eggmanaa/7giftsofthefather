@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Connection Analyzer | 7 Gifts of the Father</title>
+<meta name="description" content="See how two or more motivational gift profiles meet — points of connection, natural flow, points of contention, and an ease-of-flow score.">
+<meta property="og:title" content="The Connection Analyzer | 7 Gifts of the Father">
+<meta property="og:description" content="See how two or more motivational gift profiles meet — points of connection, natural flow, points of contention, and an ease-of-flow score.">
+<meta property="og:image" content="https://7giftsofthefather.pages.dev/images/og.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=mrsnmb39">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img src="images/crown-thumb.webp" alt="Crown logo"><span>The 7 Gifts of the Father</span></a>
+    <button class="nav-burger" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="gifts/index.html">The 7 Gifts</a>
+      <a href="archetypes/index.html">The 35 Archetypes</a>
+      <a href="foundation.html">Foundation</a>
+      <a href="understanding.html">Your Profile</a>
+      <a href="connect.html" class="active">Connection</a>
+      <a class="btn-assess" href="assessment.html">Take the Assessment</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+.cx-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:26px}
+@media(max-width:720px){.cx-grid{grid-template-columns:1fr}}
+.cx-field label{display:block;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:7px}
+.cx-field select,.cx-field input{width:100%;padding:11px 13px;border:1px solid var(--hairline-2);border-radius:11px;background:var(--surface);font:inherit;color:var(--ink)}
+.cx-people{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.cx-people{grid-template-columns:1fr}}
+.pcard{border:1px solid var(--hairline);border-radius:var(--radius);background:var(--surface);padding:18px}
+.pc-head{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.pc-name{flex:1;font-family:var(--serif);font-size:1.12rem;font-weight:600;border:none;border-bottom:1px solid var(--hairline-2);background:none;padding:4px 2px;color:var(--ink)}
+.pc-name:focus{outline:none;border-bottom-color:var(--gold)}
+.pc-x{border:none;background:none;font-size:1.3rem;color:var(--faint);cursor:pointer;line-height:1}
+.seg{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.seg button{flex:1;min-width:92px;padding:7px 8px;border:1px solid var(--hairline-2);background:transparent;border-radius:9px;font-size:.82rem;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--gold-soft);border-color:var(--gold);color:var(--ink);font-weight:600}
+.sl-row{display:grid;grid-template-columns:88px 1fr 32px;align-items:center;gap:9px;margin-bottom:7px}
+.sl-row label{font-size:.82rem;font-weight:600}
+.sl-row input{width:100%}
+.sl-row output{font-size:.78rem;color:var(--muted);text-align:right}
+.pc-note{font-size:.86rem;color:var(--muted);line-height:1.5}
+.pc-note .ok{color:var(--host,#1E6F47);margin-top:7px;font-weight:600}
+.pc-note .hint,.hint{color:var(--faint);font-size:.84rem}
+.pc-foot{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:13px;padding-top:11px;border-top:1px solid var(--hairline)}
+.chip{font-size:.74rem;font-weight:700;padding:3px 9px;border-radius:999px}
+.arch{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:.9rem;margin-left:auto}
+.cx-actions{display:flex;gap:12px;justify-content:center;margin:26px 0 8px;flex-wrap:wrap}
+.cx-meters{display:grid;gap:16px;margin-top:20px}
+.meter{border:1px solid var(--hairline);border-radius:var(--radius);background:var(--paper-2);padding:18px}
+.m-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.m-who{font-family:var(--serif);font-size:1.05rem;font-weight:600}
+.m-who i{color:var(--faint);font-style:normal}
+.m-band{font-size:.82rem;font-weight:700;letter-spacing:.04em}
+.m-num{font-family:var(--serif);font-size:2.5rem;font-weight:700;line-height:1;margin:6px 0 10px}
+.m-num small{font-size:.72rem;color:var(--muted);font-weight:400;letter-spacing:.1em;text-transform:uppercase;margin-left:9px}
+.mtrack{height:7px;border-radius:99px;background:var(--hairline);overflow:hidden}
+.mtrack.big{height:11px;margin-bottom:14px}
+.mtrack i{display:block;height:100%;border-radius:99px}
+.mini{display:grid;grid-template-columns:132px 1fr 30px;gap:10px;align-items:center;margin-bottom:6px;font-size:.82rem;color:var(--muted)}
+.mini b{text-align:right;color:var(--ink)}
+.m-shared{margin-top:11px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:.84rem;color:var(--muted)}
+.cx-out{margin-top:22px}
+.analysis{border:1px solid var(--hairline);border-radius:var(--radius);background:var(--surface);padding:26px 28px}
+.analysis h3{font-family:var(--serif);font-size:1.25rem;color:var(--garnet-7,#47232C);margin:22px 0 9px}
+.analysis h3:first-child{margin-top:0}
+.analysis p{margin:0 0 11px;line-height:1.7}
+.analysis ul,.analysis ol{margin:0 0 13px;padding-left:20px}
+.analysis li{margin-bottom:6px;line-height:1.6}
+.loading{text-align:center;padding:34px;color:var(--muted);font-family:var(--serif);font-style:italic}
+.err{border:1px solid #C6512D55;background:#C6512D0d;color:#A62B0F;padding:14px 16px;border-radius:11px}
+.cx-fine{margin-top:20px;font-size:.8rem;color:var(--faint);text-align:center}
+</style>
+<header class="page-hero">
+  <div class="kicker center" style="justify-content:center">Relational Chemistry</div>
+  <h1>The Connection Analyzer</h1>
+  <p class="lede">Bring one profile or several. See where your gifts meet, where they grind, and how easily you flow together &mdash; grounded in the seven gifts and their documented points of contention.</p>
+</header>
+<section class="section"><div class="wrap narrow">
+  <div class="cx-grid">
+    <div class="cx-field"><label for="rel">What is the relationship?</label>
+      <select id="rel"><option value="spouse">Spouse / partner</option><option value="dating">Dating or engaged</option><option value="parentchild">Parent → child</option><option value="childparent">Adult child → parent</option><option value="sibling">Siblings</option><option value="friend">Close friends</option><option value="coworker">Coworkers / peers</option><option value="managing">I lead them</option><option value="reporting">They lead me</option><option value="ministry">Ministry / volunteer team</option><option value="coaching">Coach or counselor</option><option value="cofounder">Co-founders / partners</option><option value="other">Other</option></select></div>
+    <div class="cx-field"><label for="note">Anything else worth knowing? (optional)</label>
+      <input id="note" placeholder="e.g. we co-lead a team and keep stalling on decisions"></div>
+  </div>
+  <div id="people" class="cx-people"></div>
+  <div class="cx-actions">
+    <button id="addPerson" class="btn btn-quiet" type="button">+ Add another person</button>
+    <button id="run" class="btn btn-primary" type="button">Analyze the connection</button>
+  </div>
+  <div id="meters" class="cx-meters"></div>
+  <div id="out" class="cx-out"></div>
+  <p class="cx-fine">Nothing you enter is stored on our servers. An uploaded PDF is sent once for analysis and is not retained.</p>
+</div></section>
+<script src="js/canon.js?v=mrsnmb39"></script>
+<script src="js/connect.js?v=mrsnmb39"></script>
+<footer>
+  <div class="foot-inner">
+    <a class="brand" href="index.html"><img src="images/crown-thumb.webp" alt=""><span>The 7 Gifts of the Father</span></a>
+    <div class="foot-links">
+      <a href="gifts/catalyst.html">The Catalyst</a>
+      <a href="gifts/servant.html">The Servant of All</a>
+      <a href="gifts/erudite.html">The Erudite</a>
+      <a href="gifts/enthusiast.html">The Enthusiast</a>
+      <a href="gifts/host.html">The Host</a>
+      <a href="gifts/strategist.html">The Strategist</a>
+      <a href="gifts/lover.html">The Lover</a>
+    </div>
+    <div class="foot-links">
+      <a href="assessment.html">Assessment</a>
+      <a href="archetypes/index.html">Archetypes</a>
+      <a href="foundation.html">Foundation</a>
+      <a href="understanding.html">Your Profile</a>
+      <a href="connect.html">Connection</a>
+    </div>
+    <p class="foot-verse">“Having gifts that differ according to the grace given to us, let us use them.” — Romans 12:6</p>
+  </div>
+</footer>
+<script src="js/main.js?v=mrsnmb39"></script>
+</body>
+</html>

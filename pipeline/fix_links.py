@@ -3,25 +3,6 @@ Run from the repo root after `node pipeline/build.js`: python3 pipeline/fix_link
 """
 import re, glob, posixpath
 
-SITE = 'https://7giftsofthefather.pages.dev'
-
-def fix_canonical(path):
-    """Canonical URL derived from the file's own location, so it can never drift."""
-    rel = posixpath.relpath(path, 'site')
-    if rel == '404.html':
-        s = open(path, encoding='utf-8').read()
-        s = re.sub(r'\s*<link rel="canonical"[^>]*>', '', s)   # a 404 must not canonicalise
-        open(path, 'w', encoding='utf-8').write(s); return
-    if rel.endswith('/index.html'): target = rel[:-10]
-    elif rel == 'index.html':       target = ''
-    elif rel.endswith('.html'):     target = rel[:-5]
-    else:                           target = rel
-    s = open(path, encoding='utf-8').read()
-    s = re.sub(r'<link rel="canonical" href="[^"]*">',
-               f'<link rel="canonical" href="{SITE}/{target}">', s)
-    open(path, 'w', encoding='utf-8').write(s)
-
-
 def fix_html(path):
     base = posixpath.dirname(posixpath.relpath(path, 'site'))
     s = open(path, encoding='utf-8').read()
@@ -37,5 +18,4 @@ def fix_html(path):
 
 for f in glob.glob('site/**/*.html', recursive=True):
     fix_html(f)
-    fix_canonical(f)
 print('done')

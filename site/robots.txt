@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://7giftsofthefather.pages.dev/sitemap.xml
