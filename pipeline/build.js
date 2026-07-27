@@ -32,7 +32,8 @@ const firstSentence = s => { const m = s.match(/^.*?[.!?](?=\s|$)/); return m ? 
 archData.archetypes.forEach(a => { a.slug = slugify(a.name); });
 
 /* ---------------- layout ---------------- */
-function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
+const SITE = 'https://7giftsofthefather.pages.dev';
+function layout({ title, desc, body, root = '', active = '', bodyClass = '', canonical = '' }) {
   const nav = [
     ['index.html', 'Home', 'home'],
     ['gifts/index.html', 'The 7 Gifts', 'gifts'],
@@ -53,6 +54,7 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:image" content="https://7giftsofthefather.pages.dev/images/og.jpg">
 <meta property="og:type" content="website">
+<link rel="canonical" href="${SITE}/${canonical}">
 <link rel="icon" type="image/png" href="${root}images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +62,7 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
 <link rel="stylesheet" href="${root}css/styles.css?v=${V}">
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
+<a class="skip-link" href="#main">Skip to content</a>
 <nav class="nav">
   <div class="nav-inner">
     <a class="brand" href="${root}index.html"><img src="${root}images/crown-thumb.webp" alt="Crown logo"><span>The 7 Gifts of the Father</span></a>
@@ -70,7 +73,9 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
     </div>
   </div>
 </nav>
+<main id="main">
 ${body}
+</main>
 <footer>
   <div class="foot-inner">
     <a class="brand" href="${root}index.html"><img src="${root}images/crown-thumb.webp" alt=""><span>The 7 Gifts of the Father</span></a>
@@ -226,11 +231,12 @@ function giftsIndex() {
 /* ---------------- individual gift page ---------------- */
 /* ---------------- pressure (shared blocks) ---------------- */
 const STAGE_TINT = { Strain: 'var(--servant-bar)', Distortion: 'var(--enthusiast-bar)', Captivity: 'var(--catalyst)' };
+const STAGE_INK  = { Strain: 'var(--servant)',     Distortion: 'var(--enthusiast)',     Captivity: 'var(--catalyst)' };
 
 function descentLadder(slug, { compact = false } = {}) {
   const p = pressure.gifts[slug];
   return p.descent.map((d, i) => `
-    <div class="descent rv" style="--stage:${STAGE_TINT[d.stage]}">
+    <div class="descent rv" style="--stage:${STAGE_TINT[d.stage]};--stage-ink:${STAGE_INK[d.stage]}">
       <div class="descent-rail"><span class="descent-num">${i + 1}</span></div>
       <div class="descent-body">
         <div class="descent-head"><span class="descent-stage">${esc(d.stage)}</span><span class="descent-verb">${esc(d.verb)}</span></div>
@@ -713,7 +719,7 @@ function archetypePressureSection(a) {
         <span class="fc-verb">${esc(p.flare[i])}</span>
       </a>`;
     }).join('');
-    return `<div class="pstage rv" style="--stage:${STAGE_TINT[stage.name]}">
+    return `<div class="pstage rv" style="--stage:${STAGE_TINT[stage.name]};--stage-ink:${STAGE_INK[stage.name]}">
       <div class="pstage-head">
         <span class="pstage-n">${i + 1}</span>
         <div>
@@ -868,7 +874,7 @@ ${siblings.length ? `<section class="section">
 </section>`;
 
   return layout({ title: `${a.name} | The 35 Archetypes of the Soul`,
-    desc: a.essence, body, root: '../', active: 'archetypes' });
+    desc: a.essence, body, root: '../', active: 'archetypes', canonical: `archetypes/${a.slug}` });
 }
 
 /* ---------------- foundation ---------------- */
@@ -919,7 +925,7 @@ function foundationPage() {
 </section>
 
 <section class="cta-band"><div class="rv"><h2>Steward the grace you were given</h2><p>Discover your unique measure with the full assessment.</p><a class="btn btn-primary" href="assessment.html">Take the Assessment</a></div></section>`;
-  return layout({ title: 'The Biblical Foundation | 7 Gifts of the Father', desc: 'The scriptural basis for the Father\'s motivational gifts in Romans 12 — grace distributed by the Father who designed us.', body, root: '', active: 'foundation' });
+  return layout({ title: 'The Biblical Foundation | 7 Gifts of the Father', desc: 'The scriptural basis for the Father\'s motivational gifts in Romans 12 — grace distributed by the Father who designed us.', body, root: '', active: 'foundation', canonical: 'foundation' });
 }
 
 /* ---------------- understanding ---------------- */
@@ -999,7 +1005,7 @@ function understandingPage() {
     <a class="link-arrow" href="gifts/catalyst.html">Start with The Catalyst <span class="ar">→</span></a>
   </div></div>
 </section>`;
-  return layout({ title: 'Understanding Your Motivational Profile | 7 Gifts of the Father', desc: 'How the seven motivational gifts combine: intensity levels, the sound equalizer concept, core questions, and the communication default.', body, root: '', active: 'understanding' });
+  return layout({ title: 'Understanding Your Motivational Profile | 7 Gifts of the Father', desc: 'How the seven motivational gifts combine: intensity levels, the sound equalizer concept, core questions, and the communication default.', body, root: '', active: 'understanding', canonical: 'understanding' });
 }
 
 /* ---------------- assessment shell ---------------- */
@@ -1008,7 +1014,7 @@ function pressurePage() {
   const M = pressure.model;
 
   const stageCards = M.stages.map(s => `
-    <div class="card rv stage-card" style="--stage:${STAGE_TINT[s.name]}">
+    <div class="card rv stage-card" style="--stage:${STAGE_TINT[s.name]};--stage-ink:${STAGE_INK[s.name]}">
       <div class="stage-n">${s.n}</div>
       <h3>${esc(s.name)}</h3>
       <div class="stage-line">${esc(s.line)}</div>
@@ -1105,7 +1111,7 @@ function pressurePage() {
 
 <section class="cta-band"><div class="rv"><h2>Distress is a language too</h2><p>Knowing your own descent is the difference between catching it at Strain and explaining it at Captivity.</p><a class="btn btn-primary" href="assessment.html">Take the Assessment</a> <a class="btn btn-ghost" href="how-gifts-meet.html">See how gifts collide</a></div></section>`;
 
-  return layout({ title: 'Under Pressure: The Three Descents | 7 Gifts of the Father', desc: 'How each of the seven motivational gifts breaks down under pressure — the three-stage descent, the flare signature for each gift, and the specific path back.', body, root: '', active: 'pressure' });
+  return layout({ title: 'Under Pressure: The Three Descents | 7 Gifts of the Father', desc: 'How each of the seven motivational gifts breaks down under pressure — the three-stage descent, the flare signature for each gift, and the specific path back.', body, root: '', active: 'pressure', canonical: 'under-pressure' });
 }
 
 /* ---------------- how gifts meet ---------------- */
@@ -1311,7 +1317,7 @@ function interactionPage() {
 })();
 </script>`;
 
-  return layout({ title: 'How the Gifts Meet: The Gap | 7 Gifts of the Father', desc: 'A measurable model for how two motivational profiles interact — the Gap score, the four bands, the blind exchange, and all 21 pair collisions under pressure.', body, root: '', active: 'meet' });
+  return layout({ title: 'How the Gifts Meet: The Gap | 7 Gifts of the Father', desc: 'A measurable model for how two motivational profiles interact — the Gap score, the four bands, the blind exchange, and all 21 pair collisions under pressure.', body, root: '', active: 'meet', canonical: 'how-gifts-meet' });
 }
 
 function assessmentPage() {
@@ -1474,6 +1480,18 @@ fs.writeFileSync(path.join(OUT, 'results.html'), resultsPage());
 fs.writeFileSync(path.join(OUT, '404.html'), notFoundPage());
 fs.writeFileSync(path.join(OUT, 'js', 'data.js'), dataJs());
 fs.writeFileSync(path.join(OUT, 'js', 'main.js'), mainJs);
+// sitemap + robots
+{
+  const urls = ['', 'gifts/', 'archetypes/', 'under-pressure', 'how-gifts-meet', 'foundation', 'understanding', 'assessment']
+    .concat(ORDER.map(s => `gifts/${s}`))
+    .concat(archData.archetypes.map(a => `archetypes/${a.slug}`));
+  const today = new Date().toISOString().slice(0, 10);
+  fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.map(u => `  <url><loc>${SITE}/${u}</loc><lastmod>${today}</lastmod></url>`).join('\n') +
+    `\n</urlset>\n`);
+  fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+}
 fs.writeFileSync(path.join(OUT, '_headers'), `/*\n  X-Content-Type-Options: nosniff\n/images/*\n  Cache-Control: public, max-age=604800\n/css/*\n  Cache-Control: public, max-age=86400\n/js/*\n  Cache-Control: public, max-age=86400\n`);
 
 console.log('Built pages:', fs.readdirSync(OUT).filter(f => f.endsWith('.html')).length, 'root,',

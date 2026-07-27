@@ -17,7 +17,7 @@
   /* candlelight gold */
   --gold: #E2B65A;
   --gold-bright: #F0CE82;
-  --gold-ink: #8A6A22;
+  --gold-ink: #74581B;
 
   /* parchment reading surfaces (light) */
   --paper: #FBF7EC;
@@ -129,6 +129,10 @@ button { font-family: inherit; cursor: pointer; }
   .nav-links a { padding: 12px 4px; font-size: .95rem; }
   .nav-links a.btn-assess { margin: 12px 0 0; text-align: center; }
 }
+
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 200; }
+.skip-link:focus { left: 12px; top: 12px; background: var(--gold-bright); color: #38200a;
+  padding: 10px 16px; border-radius: 8px; font-weight: 700; }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -722,7 +726,7 @@ ol.canon-list li::before{content:counter(cl);top:0;color:var(--gold-ink);font-fa
 .descent-num { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
   background: var(--stage); color: #fff; font-family: var(--serif); font-weight: 700; font-size: 1.02rem; flex: none; }
 .descent-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
-.descent-stage { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--stage); }
+.descent-stage { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--stage-ink, var(--stage)); }
 .descent-verb { font-family: var(--serif); font-size: 1.45rem; color: var(--ink); font-weight: 600; }
 .descent-tell { font-family: var(--serif); font-style: italic; font-size: 1.08rem; color: var(--ink-soft); margin: 0 0 10px; }
 .descent-body p { margin: 0 0 12px; color: var(--ink-soft); line-height: 1.72; }
@@ -775,7 +779,7 @@ ol.canon-list li::before{content:counter(cl);top:0;color:var(--gold-ink);font-fa
   border-left: 2px solid var(--g); padding-left: 14px; }
 .pg-foot { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px;
   border-top: 1px solid var(--hairline); padding-top: 22px; margin-top: 6px; }
-.pg-k { display: block; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-ink); font-weight: 700; margin-bottom: 6px; }
+.pg-k { display: block; font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-ink); font-weight: 700; margin-bottom: 6px; }
 .pg-foot b { display: block; font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: 6px; }
 .pg-foot b.quote { color: var(--host); font-style: italic; font-weight: 500; }
 .pg-foot b.quote.no { color: var(--catalyst); }
@@ -806,7 +810,7 @@ ol.canon-list li::before{content:counter(cl);top:0;color:var(--gold-ink);font-fa
 .rank-chip.strategist.picked { background: var(--strategist); }
 .rank-chip.lover.picked { background: var(--lover); }
 .calc-out { margin-top: 28px; border-top: 1px solid var(--hairline); padding-top: 24px; }
-.calc-empty { text-align: center; color: var(--faint); font-size: .95rem; padding: 18px 0; }
+.calc-empty { text-align: center; color: var(--muted); font-size: .95rem; padding: 18px 0; }
 .calc-score { display: flex; align-items: center; gap: 22px; margin-bottom: 16px; }
 .calc-num { font-family: var(--serif); font-size: 3.4rem; line-height: 1; color: var(--gold-ink); font-weight: 700; }
 .calc-band { font-family: var(--serif); font-size: 1.5rem; color: var(--ink); }
@@ -908,7 +912,7 @@ ol.canon-list li::before{content:counter(cl);top:0;color:var(--gold-ink);font-fa
 .pstage-head { display: flex; align-items: center; gap: 15px; margin-bottom: 18px; }
 .pstage-n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex: none;
   background: var(--stage); color: #fff; font-family: var(--serif); font-weight: 700; font-size: 1rem; }
-.pstage-name { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--stage); }
+.pstage-name { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--stage-ink, var(--stage)); }
 .pstage-line { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--ink); }
 .flare-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
 .flare-chip { display: flex; flex-direction: column; gap: 2px; padding: 10px 13px; border-radius: 10px;

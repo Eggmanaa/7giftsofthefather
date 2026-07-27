@@ -52,10 +52,11 @@
 
   /* ---- under pressure ---- */
   var STAGE_TINT = { Strain: 'var(--servant-bar)', Distortion: 'var(--enthusiast-bar)', Captivity: 'var(--catalyst)' };
+  var STAGE_INK  = { Strain: 'var(--servant)', Distortion: 'var(--enthusiast)', Captivity: 'var(--catalyst)' };
 
   function descentHtml(p, compact) {
     return p.descent.map(function (d, i) {
-      return '<div class="descent" style="--stage:' + STAGE_TINT[d.stage] + '">' +
+      return '<div class="descent" style="--stage:' + STAGE_TINT[d.stage] + ';--stage-ink:' + STAGE_INK[d.stage] + '">' +
         '<div class="descent-rail"><span class="descent-num">' + (i + 1) + '</span></div>' +
         '<div class="descent-body">' +
         '<div class="descent-head"><span class="descent-stage">' + esc(d.stage) + '</span>' +
@@ -190,7 +191,7 @@
           '<span class="fc-gift">' + esc(g.name.replace(/^The /, '')) + '</span>' +
           '<span class="fc-verb">' + esc(g.pressure.flare[i]) + '</span></a>';
       }).join('');
-      return '<div class="pstage" style="--stage:' + STAGE_TINT[stage.name] + '">' +
+      return '<div class="pstage" style="--stage:' + STAGE_TINT[stage.name] + ';--stage-ink:' + STAGE_INK[stage.name] + '">' +
         '<div class="pstage-head"><span class="pstage-n">' + (i + 1) + '</span>' +
         '<div><div class="pstage-name">' + esc(stage.name) + '</div>' +
         '<div class="pstage-line">' + esc(stage.line) + '</div></div></div>' +
