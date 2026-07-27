@@ -701,21 +701,28 @@ function archetypePressureSection(a) {
   const e = archPressure.archetypes[a.slug];
   if (!e) return '';
   const M = archPressure.model;
+  const pat = archPressure.patterns[e.pattern];
   const slugs = a.gifts.map(g => NAME2SLUG[g]);
 
-  const steps = e.cascade.map((c, i) => {
-    const p = pressure.gifts[c.gift], g = gifts[c.gift], m = META[c.gift];
-    const stage = pressure.model.stages[i];
-    return `<div class="descent rv" style="--stage:${STAGE_TINT[stage.name]}">
-      <div class="descent-rail"><span class="descent-num">${i + 1}</span></div>
-      <div class="descent-body">
-        <div class="descent-head">
-          <span class="descent-stage">${esc(stage.name)}</span>
-          <span class="descent-verb">${esc(p.flare[i])}</span>
-          <a class="g-tag ${c.gift}" href="../gifts/${c.gift}.html" style="margin-left:auto">${esc(g.name.replace(/^The /, ''))}</a>
+  // Three parallel descents: at each stage, all three gifts flare at once.
+  const stages = pressure.model.stages.map((stage, i) => {
+    const chips = slugs.map(sl => {
+      const p = pressure.gifts[sl], g = gifts[sl];
+      return `<a class="flare-chip ${sl}" href="../gifts/${sl}.html">
+        <span class="fc-gift">${esc(g.name.replace(/^The /, ''))}</span>
+        <span class="fc-verb">${esc(p.flare[i])}</span>
+      </a>`;
+    }).join('');
+    return `<div class="pstage rv" style="--stage:${STAGE_TINT[stage.name]}">
+      <div class="pstage-head">
+        <span class="pstage-n">${i + 1}</span>
+        <div>
+          <div class="pstage-name">${esc(stage.name)}</div>
+          <div class="pstage-line">${esc(stage.line)}</div>
         </div>
-        <p>${esc(c.text)}</p>
       </div>
+      <div class="flare-row">${chips}</div>
+      <p class="pstage-text">${esc(e.stages[i].text)}</p>
     </div>`;
   }).join('\n');
 
@@ -750,9 +757,28 @@ function archetypePressureSection(a) {
       <p class="lead-prose">${esc(M.premise)}</p>
     </div>
 
-    <div class="descent-list" style="margin-top:44px">${steps}</div>
+    <div class="pstage-list">${stages}</div>
+
+    <div class="tell-card rv">
+      <div class="pg-k">The earliest tell</div>
+      <p>${esc(e.tell)}</p>
+    </div>
 
     <p class="cascade-note rv">${esc(M.note)}</p>
+
+    <div class="section-head rv" style="margin-top:76px">
+      <div class="kicker center">How the Three Synchronise</div>
+      <h2>${esc(pat.name)}</h2>
+      <p>${esc(M.patternPremise)}</p>
+    </div>
+    <div class="sync-card rv">
+      <div class="sync-mix">${esc(pat.mix)}</div>
+      <p>${esc(pat.body)}</p>
+      <div class="sync-grid">
+        <div><span class="pg-k">From the outside</span><p>${esc(pat.visibility)}</p></div>
+        <div><span class="pg-k">How to catch it</span><p>${esc(pat.catch)}</p></div>
+      </div>
+    </div>
 
     <div class="section-head rv" style="margin-top:76px">
       <div class="kicker center">The Missing Brake</div>
@@ -1359,6 +1385,7 @@ window.ARCHETYPES = ${JSON.stringify(clientArch)};
 window.QUESTIONS = ${JSON.stringify(questions)};
 window.PRESSURE_MODEL = ${JSON.stringify(pressure.model)};
 window.ARCH_PRESSURE_MODEL = ${JSON.stringify(archPressure.model)};
+window.ARCH_PATTERNS = ${JSON.stringify(archPressure.patterns)};
 window.GAP_BANDS = ${JSON.stringify(interaction.gap.bands)};
 window.BLIND_EXCHANGE = ${JSON.stringify(interaction.blindExchange.items)};
 window.PAIR_COLLISIONS = ${JSON.stringify(interaction.pairs)};

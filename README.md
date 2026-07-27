@@ -13,7 +13,7 @@ Static site for **7giftsofthefather.pages.dev** — the 7 Motivational Giftings 
   - `content/*.json` — structured content (7 gifts, 35 archetypes, 77 questions + scoring maps, distress model, interaction model)
     - `pressure.json` — the Three Descents model (Strain / Distortion / Captivity), per-gift flare signature, chronic pattern, and re-entry path
     - `interaction.json` — the Gap model (0–24 score, four bands), the Blind Exchange, all 21 pair collisions, and the 7 same-gift mirrors
-    - `archetype-pressure.json` — the Cascade for all 35 archetypes: composite pattern name, the three-gift descent, and the primary missing brake
+    - `archetype-pressure.json` — all 35 archetypes under pressure: composite pattern name, the three parallel descents, the earliest tell, the synchronisation pattern, and the primary missing brake
   - `build.js` — generates all HTML from the JSON
   - `fix_links.py` — post-build link rewrite for Cloudflare pretty URLs
   - `test_scoring.js` — scoring test-suite (max profiles, spec arithmetic, 500 random runs)
@@ -38,7 +38,7 @@ npx wrangler pages deploy site --project-name=7giftsofthefather --branch=main
 
 Each gift carries a three-stage descent — **Strain** (the gift intensified), **Distortion** (the gift weaponized), **Captivity** (the gift inverted) — with one flare verb per stage, a chronic pattern if it settles in, and a named way back. Rendered on `/under-pressure`, on every gift page, and into the top-three deep dives on `/results`.
 
-Archetypes descend differently from single gifts. A gift runs Strain → Distortion → Captivity *inside itself*; an archetype runs the same three stages *across its three gifts* — lead gift strains, second distorts, third goes captive. Each of the 35 carries a composite pattern name, that cascade, its three internal collisions, and the **missing brake**: which of the four quiet gifts would have caught it.
+Archetypes descend differently from single gifts. A gift runs Strain → Distortion → Captivity inside itself. An archetype runs **three descents in parallel** — all three gifts strain together, distort together, go captive together. The top three are a set, not a sequence, so nothing depends on gift order. Each of the 35 carries a composite pattern name, an authored synthesis of what its particular three flares produce at each stage, the earliest externally visible tell, a synchronisation pattern (how the three interact: Amplifying, Hardening, Rotating, Oscillating, Silent Drift, Vanishing, Sealing), its three internal collisions, and the **missing brake** — which of the four quiet gifts would have caught it.
 
 The **Gap** measures how two profiles interact: sum the rank difference for all seven gifts (0–24), read the band, then check the inversion count. `/how-gifts-meet` carries the interactive calculator, the 21 pair collisions, and the same-gift mirrors. `/results` surfaces the collisions that live *inside* a person's own top three.
 
