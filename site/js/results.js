@@ -1,4 +1,4 @@
-/* Results v2: bar chart, archetype reveal, top-3 deep dives — light editorial */
+/* Results v2: bar chart, archetype reveal, top-3 deep dives, light editorial */
 (function () {
   var app = document.getElementById('results-app');
   var GIFTS = window.GIFTS, INT = window.INTENSITY;
@@ -93,7 +93,7 @@
     var ink = INKC[slug], bar = BAR[slug];
     var verses = g.foundationalVerses.map(function (v) {
       var m = String(v).match(/^([^-–]+?)\s*[-–]\s*(.*)$/);
-      return m ? '<p>' + esc(m[2]) + ' <strong>— ' + esc(m[1].trim()).toUpperCase() + '</strong></p>' : '<p>' + esc(v) + '</p>';
+return m ? '<p>' + esc(m[2]) + '<strong class="verse-ref">' + esc(m[1].trim()).toUpperCase() + '</strong></p>': '<p>' + esc(v) + '</p>';
     }).join('');
     return '<div class="tab-panel" data-p="' + slug + '" style="' + (i ? 'display:none;' : '') + '--g:' + bar + ';--g-dark:' + ink + '">' +
       '<div class="card" style="padding:44px">' +
@@ -171,7 +171,7 @@
   var bottom2 = res.ranked.slice(-2).reverse();
   var quieterHtml = '<section class="section"><div class="wrap narrow">' +
     '<div class="section-head rv"><div class="kicker center">Your Quieter Gifts</div><h2>Where Grace Must Be Borrowed</h2>' +
-    '<p>Your two lowest gifts are not flaws—they are the places where you were designed to need other people. Knowing them prevents your blind spots from becoming wounds, and turns the people who carry these gifts from irritations into allies.</p></div>' +
+'<p>Your two lowest gifts are not flaws. They are the places where you were designed to need other people. Knowing them prevents your blind spots from becoming wounds, and turns the people who carry these gifts from irritations into allies.</p></div>' +
     '<div class="grid" style="gap:26px">' + bottom2.map(lowPanel).join('') + '</div>' +
     '</div></section>';
 
@@ -209,7 +209,7 @@
     '<section class="section" style="padding-bottom:24px"><div class="wrap narrow">' +
     '<div class="section-head rv" style="margin-bottom:30px"><div class="kicker center">Completed ' + esc(dateStr) + '</div>' +
     '<h2>Your Intensity Profile</h2>' +
-    '<p>You possess a unique blend of all seven gifts—like a sound equalizer with seven sliders set at different levels. Here is your motivational fingerprint, scored 0–100.</p></div>' +
+'<p>You possess a unique blend of all seven gifts, like a sound equalizer with seven sliders set at different levels. Here is your motivational fingerprint, scored 0–100.</p></div>' +
     '<div class="chart-card rv">' + bars + '</div>' + tieNote +
     '</div></section>' +
     archHtml +

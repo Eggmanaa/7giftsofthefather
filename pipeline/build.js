@@ -1,4 +1,4 @@
-/* Build script v2: generates the static site from content JSON — light editorial design */
+/* Build script v2: generates the static site from content JSON, light editorial design */
 const fs = require('fs');
 const path = require('path');
 
@@ -36,7 +36,8 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
     ['gifts/index.html', 'The 7 Gifts', 'gifts'],
     ['archetypes/index.html', 'The 35 Archetypes', 'archetypes'],
     ['foundation.html', 'Foundation', 'foundation'],
-    ['understanding.html', 'Your Profile', 'understanding'],
+    ['understanding.html', 'Scoring', 'understanding'],
+    ['results.html', 'Your Results', 'results'],
     ['connect.html', 'Connection', 'connect'],
   ];
   return `<!DOCTYPE html>
@@ -57,6 +58,7 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
 <link rel="stylesheet" href="${root}css/styles.css?v=${V}">
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
+<a class="skip-link" href="#main">Skip to content</a>
 <nav class="nav">
   <div class="nav-inner">
     <a class="brand" href="${root}index.html"><img src="${root}images/crown-thumb.webp" alt="Crown logo"><span>The 7 Gifts of the Father</span></a>
@@ -67,7 +69,9 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
     </div>
   </div>
 </nav>
+<main id="main">
 ${body}
+</main>
 <footer>
   <div class="foot-inner">
     <a class="brand" href="${root}index.html"><img src="${root}images/crown-thumb.webp" alt=""><span>The 7 Gifts of the Father</span></a>
@@ -78,10 +82,11 @@ ${body}
       <a href="${root}assessment.html">Assessment</a>
       <a href="${root}archetypes/index.html">Archetypes</a>
       <a href="${root}foundation.html">Foundation</a>
-      <a href="${root}understanding.html">Your Profile</a>
+      <a href="${root}understanding.html">How Scoring Works</a>
+      <a href="${root}results.html">Your Results</a>
       <a href="${root}connect.html">Connection</a>
     </div>
-    <p class="foot-verse">“Having gifts that differ according to the grace given to us, let us use them.” — Romans 12:6</p>
+<p class="foot-verse">“Having gifts that differ according to the grace given to us, let us use them.”, Romans 12:6</p>
   </div>
 </footer>
 <script src="${root}js/main.js?v=${V}"></script>
@@ -104,9 +109,9 @@ const IC = {
 /* ---------------- home ---------------- */
 const trinity = [
   { title: 'The Gifts of the Holy Spirit', ref: '1 Corinthians 12:4–11', icon: IC.flame,
-    text: 'Supernatural, power-based manifestations that operate through believers for miraculous works, divine revelation, and spiritual warfare. These include gifts like tongues, prophecy, healing, and words of knowledge—supernatural abilities that transcend natural human capacity.' },
+text: 'Supernatural, power-based manifestations that operate through believers for miraculous works, divine revelation, and spiritual warfare. These include gifts like tongues, prophecy, healing, and words of knowledge, supernatural abilities that transcend natural human capacity.' },
   { title: 'The Gifts of Jesus', ref: 'Ephesians 4:11–16', icon: IC.cross,
-    text: 'Ministry orientations and callings that equip the church for service and maturity. These include apostles, prophets, evangelists, pastors, and teachers—specific roles designed to build up the body of Christ and prepare believers for works of service.' },
+text: 'Ministry orientations and callings that equip the church for service and maturity. These include apostles, prophets, evangelists, pastors, and teachers, specific roles designed to build up the body of Christ and prepare believers for works of service.' },
   { title: 'The Gifts of the Father', ref: 'Romans 12:6–8', icon: IC.crown,
     text: 'Personality-based motivational drives that come wired into us at birth, forming the core of who we are and how we naturally operate in the world and the Church. These seven gifts shape our personalities, drive our decisions, and determine how we naturally approach life and relationships.' },
 ];
@@ -131,8 +136,8 @@ function homePage() {
 <header class="hero">
   <img class="crown" src="images/crown.webp" alt="The 7 Gifts of the Father crown with seven gemstones" fetchpriority="high">
   <div class="kicker center">Romans 12 · A Motivational Design</div>
-  <h1>The Seven Motivational<br><em>Giftings of the Father</em></h1>
-  <p class="lede">Discover the personality-based motivational drives that God the Father has wired into you from birth—and how your unique blend of all seven shapes your decisions, relationships, and calling in His kingdom.</p>
+  <h1>The 7 Gifts <br><em>of the Father</em></h1>
+<p class="lede">The Father wired seven motivations into you before you were born. You carry all seven, in your own proportions. Learning which ones lead in you changes how you work, how you love, and what you are for.</p>
   <div class="cta-row">
     <a class="btn btn-primary" href="assessment.html">Take the Assessment</a>
     <a class="link-arrow" href="gifts/index.html">Explore the 7 Gifts <span class="ar">→</span></a>
@@ -147,7 +152,7 @@ function homePage() {
     <div class="section-head rv">
       <div class="kicker center">Three Streams of Grace</div>
       <h2>The Gifts of the Trinity</h2>
-      <p>Scripture reveals a beautiful triad of divine gifts operating in the life of every believer—each originating from a different person of the Trinity and serving a distinct purpose in God's kingdom.</p>
+<p>Scripture describes three kinds of gift, one from each person of the Trinity. Each does a different work in a believer's life. These seven come from the Father.</p>
     </div>
     <div class="grid g3">
       ${trinityCards('')}
@@ -159,8 +164,8 @@ function homePage() {
   <div class="wrap">
     <div class="section-head rv">
       <div class="kicker center">Seven Jewels in the Crown</div>
-      <h2>Meet the Seven Gifts</h2>
-      <p>Each gift is a foundational motivational drive—a lens through which you see the world, a question you are always asking, and a grace you are called to steward.</p>
+      <h2>Meet the 7 Gifts</h2>
+<p>Each gift is a drive you did not choose. It shapes what you notice first, the question you keep asking, and the particular good you were given to steward.</p>
     </div>
     <div class="grid g3">${ORDER.map(s => giftCard(s, '')).join('\n')}</div>
   </div>
@@ -171,7 +176,7 @@ function homePage() {
     <div class="rv">
       <div class="kicker center">Beyond a Single Gift</div>
       <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem)">Your Top Three Form Your <em style="color:var(--gold-ink)">Archetype of the Soul</em></h2>
-      <p style="color:var(--muted);font-size:1.05rem;max-width:640px;margin:0 auto 30px">You are not just a single gifting. Each of us carries varying intensities of all seven motivations, and the unique chord struck by your <strong style="color:var(--ink)">top three</strong> gifts forms one of <strong style="color:var(--ink)">35 distinct personality archetypes</strong>—from the Apex Visionary to the Shepherd-King.</p>
+<p style="color:var(--muted);font-size:1.05rem;max-width:640px;margin:0 auto 30px">No one is a single gift. You carry all seven at different strengths, and your <strong style="color:var(--ink)">top three</strong> sound together like a chord. That chord is one of <strong style="color:var(--ink)">35 archetypes</strong>, from the Apex Visionary to the Shepherd-King.</p>
       ${gemDivider}
       <div style="margin-top:30px;display:flex;gap:22px;justify-content:center;align-items:center;flex-wrap:wrap">
         <a class="btn btn-quiet" href="archetypes/index.html">Browse the 35 Archetypes</a>
@@ -185,14 +190,14 @@ function homePage() {
   <div class="rv">
     <div class="kicker center">The Comprehensive Integrated Assessment</div>
     <h2>Discover Your Motivational Design</h2>
-    <p>${QCOUNT} questions measuring the intensity of all seven gifts—revealing your top three, your soul's archetype, and a personalized profile of your God-given design.</p>
+<p>${QCOUNT} questions measuring the intensity of all seven gifts, revealing your top three, your soul's archetype, and a personalized profile of your God-given design.</p>
     <a class="btn btn-primary" href="assessment.html">Begin the Assessment</a>
     <p class="fine">About 15 minutes · Your results stay on your device</p>
   </div>
 </section>`;
 
-  return layout({ title: 'The 7 Motivational Giftings of the Father | Discover Your God-Given Design',
-    desc: 'Discover the seven motivational gifts of Romans 12 — Prophecy, Service, Teaching, Encouragement, Giving, Leadership, and Mercy — and the 35 personality archetypes of the soul. Take the free assessment.',
+  return layout({ title: 'The The 7 Gifts of the Father | Discover Your God-Given Design',
+desc: 'Discover the seven motivational gifts of Romans 12 (Prophecy, Service, Teaching, Encouragement, Giving, Leadership, and Mercy) and the 35 personality archetypes of the soul. Take the free assessment.',
     body, root: '', active: 'home' });
 }
 
@@ -211,12 +216,12 @@ function giftsIndex() {
   const body = `
 <header class="page-hero">
   <img class="mark" src="../images/crown-thumb.webp" alt="">
-  <h1>The Seven Gifts</h1>
-  <p class="lede">Seven motivational drives, distributed by the Father's grace. Each carries its own core question, energizer, and drive—its own strengths, shadows, and leadership style.</p>
+  <h1>The 7 Gifts</h1>
+<p class="lede">Seven motivational drives, distributed by the Father's grace. Each carries its own core question, energizer, and drive. Its own strengths, shadows, and leadership style.</p>
 </header>
 <section class="section"><div class="wrap"><div class="grid g3">${cards}</div></div></section>
 <section class="cta-band"><div class="rv"><h2>Which gifts lead in you?</h2><p>Take the assessment to measure your intensity in all seven and unlock your archetype.</p><a class="btn btn-primary" href="../assessment.html">Take the Assessment</a></div></section>`;
-  return layout({ title: 'The Seven Gifts | 7 Gifts of the Father', desc: 'Explore all seven motivational gifts of Romans 12: The Catalyst, The Servant of All, The Erudite, The Enthusiast, The Host, The Strategist, and The Lover.', body, root: '../', active: 'gifts' });
+  return layout({ title: 'The 7 Gifts | The 7 Gifts of the Father', desc: 'Explore all seven motivational gifts of Romans 12: The Catalyst, The Servant of All, The Erudite, The Enthusiast, The Host, The Strategist, and The Lover.', body, root: '../', active: 'gifts' });
 }
 
 /* ---------------- individual gift page ---------------- */
@@ -245,12 +250,12 @@ function pressureSection(slug, m) {
   <div class="wrap">
     <div class="section-head rv">
       <div class="kicker center">When the Gift Is Under Pressure</div>
-      <h2>The Three Descents</h2>
+      <h2 id="pressure">The Three Descents</h2>
       <p>A gift under pressure does not switch off. It works harder in the wrong direction. Here is what that looks like for ${esc(g.name.replace(/^The /, 'the '))}, stage by stage.</p>
     </div>
 
     <div class="flare-strip rv">
-      <div class="flare-k">Flare Signature</div>
+      <h3 class="flare-k">Flare Signature</h3>
       <div class="flare-verbs">${p.flare.map(v => `<span>${esc(v)}</span>`).join('<i class="ar">→</i>')}</div>
       <p class="flare-trigger"><span>What sets it off</span> ${esc(p.trigger)}</p>
     </div>
@@ -258,34 +263,34 @@ function pressureSection(slug, m) {
     <div class="descent-list">${descentLadder(slug)}</div>
 
     <div class="chronic rv">
-      <div class="g-label">If It Settles In</div>
+      <h3 class="g-label">If It Settles In</h3>
       <h3>${esc(p.chronic.name)}</h3>
       <p>${esc(p.chronic.body)}</p>
     </div>
 
     <div class="section-head rv" style="margin-top:72px">
-      <div class="kicker center">The Way Back</div>
-      <h2>Re-Entry</h2>
+      <div class="kicker center">Coming Back</div>
+      <h2>The Way Home</h2>
     </div>
     <div class="grid g2 reentry-grid">
       <div class="card rv say-yes">
-        <div class="fw-k">Say This</div>
+        <h3 class="fw-k">Say This</h3>
         <blockquote class="say-line">“${esc(p.sayThis)}”</blockquote>
         <p class="say-need"><span>What they actually need</span> ${esc(p.needs)}</p>
       </div>
       <div class="card rv say-no">
-        <div class="fw-k">Not This</div>
+        <h3 class="fw-k">Not This</h3>
         <blockquote class="say-line">“${esc(p.notThis)}”</blockquote>
         <p class="say-need"><span>Why it escalates</span> ${esc(p.notThisWhy)}</p>
       </div>
     </div>
     <div class="grid g2 reentry-grid" style="margin-top:0">
       <div class="card rv">
-        <div class="fw-k">Their Own Move Back</div>
+        <h3 class="fw-k">Their Own Move Back</h3>
         <p>${esc(p.ownMove)}</p>
       </div>
       <div class="card rv restored">
-        <div class="fw-k">What Returns</div>
+        <h3 class="fw-k">What Returns</h3>
         <div class="fw-q">${esc(p.restored)}</div>
         <p>${esc(p.restoredBody)}</p>
       </div>
@@ -299,18 +304,18 @@ function giftPage(slug) {
   const idx = ORDER.indexOf(slug);
   const related = g.archetypes || [];
 
-  const strengths = g.strengths.map(s => `<div class="s-item rv"><span class="dot"></span><div><h4>${esc(s.title)}</h4><p>${esc(s.description)}</p></div></div>`).join('\n');
-  const challenges = g.challenges.map(s => `<div class="s-item rv"><span class="dot" style="background:var(--strategist-bar)"></span><div><h4>${esc(s.title)}</h4><p>${esc(s.description)}</p></div></div>`).join('\n');
+  const strengths = g.strengths.map(s => `<div class="s-item rv"><span class="dot"></span><div><h3>${esc(s.title)}</h3><p>${esc(s.description)}</p></div></div>`).join('\n');
+  const challenges = g.challenges.map(s => `<div class="s-item rv"><span class="dot" style="background:var(--strategist-bar)"></span><div><h3>${esc(s.title)}</h3><p>${esc(s.description)}</p></div></div>`).join('\n');
   const contentions = g.contentions.map(c => {
     const os = NAME2SLUG[c.gift.replace('Servant of All', 'Servant').replace(/^The /, '')] || null;
     const chip = os ? `<a class="g-tag ${os}" href="${os}.html">${esc(c.gift)}</a>` : esc(c.gift);
-    return `<div class="contention rv"><div class="vs"><span>with</span> ${chip}</div><h4>${esc(c.conflict)}</h4><p>${esc(c.description)}</p></div>`;
+    return `<div class="contention rv"><div class="vs"><span>with</span> ${chip}</div><h3>${esc(c.conflict)}</h3><p>${esc(c.description)}</p></div>`;
   }).join('\n');
   const interactions = g.interactions.map(i => `<li>${esc(i)}</li>`).join('\n');
   const words = g.descriptiveWords.map(w => `<b>${esc(w)}</b>`).join('<span class="sep">·</span>');
   const verses = g.foundationalVerses.map(v => {
     const mm = v.match(/^(.+?)\s+[-–]\s+(.*)$/);
-    return mm ? `<p>${esc(mm[2])} <strong>— ${esc(mm[1].trim()).toUpperCase()}</strong></p>` : `<p>${esc(v)}</p>`;
+return mm ? `<p>${esc(mm[2])}<strong class="verse-ref">${esc(mm[1].trim()).toUpperCase()}</strong></p>`: `<p>${esc(v)}</p>`;
   }).join('\n');
   const relatedCards = related.map(r => {
     const cleanName = r.name.replace(/\s*\(.*\)\s*$/, '').trim();
@@ -334,16 +339,29 @@ function giftPage(slug) {
 
   const body = `
 <header class="gift-hero" style="--g:${m.bar};--g-dark:${m.ink};--g-glow:${m.glow};--g-on-dark:${m.bar};--hero-9:${m.hero9};--hero-8:${m.hero8}">
-  <img src="../images/${slug}.webp" alt="${esc(g.name)} — ${esc(g.metaphor.title)} logo" fetchpriority="high" width="168" height="168">
+<img src="../images/${slug}.webp" alt="${esc(g.name)}: ${esc(g.metaphor.title)} logo" fetchpriority="high" width="168" height="168">
   <div class="kicker">Gift ${idx + 1} of 7 · ${m.metaphorColor}</div>
   <h1>${esc(g.name)}</h1>
   <div class="sub">${esc(g.subtitle)}</div>
   <p class="words-line">${words}</p>
 </header>
 
+
+<nav class="gift-jump" aria-label="Sections of this page">
+  <div class="wrap">
+    <span class="gj-label">On this page</span>
+    <a href="#summary">Summary</a>
+    <a href="#drives">What Drives It</a>
+    <a href="#gives">Strengths</a>
+    <a href="#leads">Leading</a>
+    <a href="#pressure">Under Pressure</a>
+    <a href="#friction">Friction</a>
+    <a href="#archetypes">Archetypes</a>
+  </div>
+</nav>
 <section class="g-section" style="--g:${m.bar};--g-dark:${m.ink}">
   <div class="wrap narrow rv">
-    <div class="g-label">Profile Summary</div>
+    <h2 id="summary" class="g-label">Profile Summary</h2>
     <p class="lead-prose big">${esc(g.profileSummary)}</p>
   </div>
 </section>
@@ -352,12 +370,12 @@ function giftPage(slug) {
   <div class="wrap">
     <div class="grid g2" style="gap:48px">
       <div class="metaphor-card rv">
-        <div class="g-label">Core Metaphor</div>
+        <h2 id="metaphor" class="g-label">Core Metaphor</h2>
         <h3>${esc(g.metaphor.title)}</h3>
         <p>${esc(g.metaphor.description)}</p>
       </div>
       <div class="verse-card rv">
-        <div class="g-label">Foundational Verses</div>
+        <h2 class="g-label">Scripture Behind This Gift</h2>
         ${verses}
       </div>
     </div>
@@ -366,11 +384,11 @@ function giftPage(slug) {
 
 <section class="g-section" style="--g:${m.bar};--g-dark:${m.ink}">
   <div class="wrap">
-    <div class="section-head rv"><div class="kicker center">What Fuels This Gift</div><h2>Core Motivational Framework</h2></div>
+    <div class="section-head rv"><div class="kicker center">What Fuels It</div><h2 id="drives">What Drives This Gift</h2></div>
     <div class="grid g3 framework-grid">
-      <div class="card rv"><div class="fw-k">Core Question</div><div class="fw-q">“${esc(g.coreFramework.question)}”</div><p>${esc(g.coreFramework.questionDescription)}</p></div>
-      <div class="card rv"><div class="fw-k">Core Energizer</div><div class="fw-q">${esc(g.coreFramework.energizer)}</div><p>${esc(g.coreFramework.energizerDescription)}</p></div>
-      <div class="card rv"><div class="fw-k">Core Drive</div><div class="fw-q">${esc(g.coreFramework.drive)}</div><p>${esc(g.coreFramework.driveDescription)}</p></div>
+      <div class="card rv"><h3 class="fw-k">Core Question</h3><div class="fw-q">“${esc(g.coreFramework.question)}”</div><p>${esc(g.coreFramework.questionDescription)}</p></div>
+      <div class="card rv"><h3 class="fw-k">Core Energizer</h3><div class="fw-q">${esc(g.coreFramework.energizer)}</div><p>${esc(g.coreFramework.energizerDescription)}</p></div>
+      <div class="card rv"><h3 class="fw-k">Core Drive</h3><div class="fw-q">${esc(g.coreFramework.drive)}</div><p>${esc(g.coreFramework.driveDescription)}</p></div>
     </div>
   </div>
 </section>
@@ -379,11 +397,11 @@ function giftPage(slug) {
   <div class="wrap">
     <div class="grid g2" style="gap:56px;align-items:start">
       <div>
-        <div class="g-label rv">God-Given Strengths</div>
+        <h2 id="gives" class="g-label rv">What This Gift Gives</h2>
         <div class="s-list">${strengths}</div>
       </div>
       <div>
-        <div class="g-label rv" style="color:var(--strategist)">Characterological Challenges</div>
+        <h2 class="g-label rv" style="color:var(--strategist)">Where This Gift Gets Hard</h2>
         <div class="s-list">${challenges}</div>
       </div>
     </div>
@@ -394,13 +412,13 @@ function giftPage(slug) {
   <div class="wrap">
     <div class="grid g2" style="gap:56px;align-items:start">
       <div class="lead-style rv">
-        <div class="g-label">Leadership Style</div>
+        <h2 id="leads" class="g-label">How This Gift Leads</h2>
         <h3>${esc(g.leadershipStyle.title)}</h3>
         <p>${esc(g.leadershipStyle.description)}</p>
         <p class="traits">${g.leadershipStyle.characteristics.map(esc).join('<span class="sep">·</span>')}</p>
       </div>
       <div class="rv">
-        <div class="g-label">How to Interact with ${esc(g.name.replace(/^The /, 'a '))}</div>
+        <h2 class="g-label">How to Love ${esc(g.name.replace(/^The /, 'a '))} Well</h2>
         <ul class="interact-list">${interactions}</ul>
       </div>
     </div>
@@ -411,15 +429,15 @@ ${pressureSection(slug, m)}
 
 <section class="g-section alt" style="--g:${m.bar};--g-dark:${m.ink}">
   <div class="wrap">
-    <div class="section-head rv"><div class="kicker center">Where Friction Lives</div><h2>Points of Contention with Other Gifts</h2>
-    <p>Every gift carries a holy conviction—and every conviction can collide with another's. Naming the clash is the first step toward honoring it.</p></div>
+    <div class="section-head rv"><div class="kicker center">Where Friction Lives</div><h2 id="friction">Where This Gift Rubs Against the Others</h2>
+<p>Every gift carries a holy conviction, and every conviction can collide with another's. Naming the clash is the first step toward honoring it.</p></div>
     <div class="grid g2" style="gap:0 56px">${contentions}</div>
   </div>
 </section>
 
 <section class="g-section" style="--g:${m.bar};--g-dark:${m.ink}">
   <div class="wrap">
-    <div class="section-head rv"><div class="kicker center">Your Gift in Combination</div><h2>Archetypes Featuring ${esc(g.name)}</h2>
+    <div class="section-head rv"><div class="kicker center">Your Gift in Combination</div><h2 id="archetypes">Archetypes Featuring ${esc(g.name)}</h2>
     <p>${esc(g.name)} appears in 15 of the 35 archetypes of the soul. When it joins two other dominant gifts, it takes on a distinct expression.</p></div>
     <div class="grid g3">${relatedCards}</div>
   </div>
@@ -427,9 +445,18 @@ ${pressureSection(slug, m)}
 
 <section class="commission" style="--g-glow:${m.glow};--hero-9:${m.hero9};--hero-8:${m.hero8}">
   <div class="rv">
-    <div class="g-label" style="color:var(--gold-ink)">${esc(g.name)}'s Commission</div>
+    <h2 class="g-label" style="color:var(--gold-ink)">${esc(g.name)}'s Commission</h2>
     <blockquote>“${esc(commissionText)}”</blockquote>
     <cite>${esc(commissionRef)}</cite>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="rv">
+    <h2>Is this one of your three?</h2>
+    <p>The assessment scores all seven gifts and shows you which three lead in you.</p>
+    <a class="btn btn-primary" href="../assessment.html">Take the Assessment</a>
+    <a class="btn btn-ghost" href="../results.html">See My Results</a>
   </div>
 </section>
 
@@ -442,7 +469,7 @@ ${pressureSection(slug, m)}
 </section>`;
 
   return layout({
-    title: `${g.name}: ${g.subtitle} | 7 Gifts of the Father`,
+    title: `${g.name}: ${g.subtitle} | The 7 Gifts of the Father`,
     desc: firstSentence(g.profileSummary),
     body, root: '../', active: 'gifts'
   });
@@ -486,7 +513,7 @@ function archetypesIndex() {
 <header class="page-hero">
   <img class="mark" src="../images/crown-thumb.webp" alt="">
   <h1>The 35 Archetypes of the Soul</h1>
-  <p class="lede">The Motivational Symphony: when your three dominant gifts sound together, they strike a chord—one of thirty-five distinct personality archetypes.</p>
+<p class="lede">The Motivational Symphony: when your three dominant gifts sound together, they strike a chord, one of thirty-five distinct personality archetypes.</p>
 </header>
 
 <style>
@@ -541,14 +568,14 @@ function archetypesIndex() {
     <h3>From Single Gifts to a Motivational Chord</h3>
     <p>${esc(o.chord)}</p>
     <h3>The Three Axes of Contribution: Why, How, and Who</h3>
-    <p>The seven gifts align along three axes of contribution—each answering a question every community must answer. Reading an archetype across these axes reveals its natural orientation, its strengths, and its likely blind spots at a glance.</p>
+<p>The seven gifts align along three axes of contribution. Each answering a question every community must answer. Reading an archetype across these axes reveals its natural orientation, its strengths, and its likely blind spots at a glance.</p>
     <div class="axis-block rv">
       <div class="axis-head"><span class="axis-word">Why</span><span class="axis-sub">Vision &amp; Truth</span></div>
       <p class="axis-role">The visionary compass: purpose, principle, and direction.</p>
       <ul class="axis-gifts">
         <li><a class="g-tag catalyst" href="../gifts/catalyst.html">Catalyst</a><em>“What is the truth that will unlock transformation here?”</em></li>
         <li><a class="g-tag erudite" href="../gifts/erudite.html">Erudite</a><em>“Is this worthy of deep and careful study?”</em></li>
-        <li><a class="g-tag strategist" href="../gifts/strategist.html">Strategist</a><em>“Where are we going—and what is the best way to get there?”</em></li>
+<li><a class="g-tag strategist" href="../gifts/strategist.html">Strategist</a><em>“Where are we going, and what is the best way to get there?”</em></li>
       </ul>
     </div>
     <div class="axis-block rv">
@@ -649,8 +676,8 @@ document.querySelectorAll('.filter-bar button').forEach(b => b.addEventListener(
 })();
 </script>`;
 
-  return layout({ title: 'The 35 Personality Archetypes of the Soul | 7 Gifts of the Father',
-    desc: 'A guide to the 35 personality archetypes formed by every combination of three dominant motivational gifts — from the Apex Visionary to the Shepherd-King.',
+  return layout({ title: 'The 35 Personality Archetypes of the Soul | The 7 Gifts of the Father',
+desc: 'A guide to the 35 personality archetypes formed by every combination of three dominant motivational gifts, from the Apex Visionary to the Shepherd-King.',
     body, root: '../', active: 'archetypes' });
 }
 
@@ -679,7 +706,7 @@ function renderCanonSections(sections) {
     flush();
     const alt = (si % 2) ? ' alt' : '';
     return '<section class="section canon-sec' + alt + '"><div class="wrap narrow">' +
-      '<div class="section-head left rv"><div class="kicker">' + esc(sec.label) + '</div></div>' +
+      '<div class="section-head left rv"><h2 class="kicker">' + esc(sec.label) + '</h2></div>' +
       '<div class="canon-body rv">' + inner + '</div></div></section>';
   }).join('\n');
 }
@@ -744,18 +771,18 @@ function foundationPage() {
 <header class="page-hero">
   <img class="mark" src="images/crown-thumb.webp" alt="">
   <h1>The Biblical Foundation</h1>
-  <p class="lede">Understanding the scriptural basis for the Father's motivational gifts—and how they fit within the broader framework of divine gifts in the Trinity.</p>
+<p class="lede">Understanding the scriptural basis for the Father's motivational gifts, and how they fit within the broader framework of divine gifts in the Trinity.</p>
 </header>
 
 <section class="section">
   <div class="wrap narrow prose rv">
-    <h3 style="margin-top:0">The Father, the Giver of Our Design</h3>
-    <p>While other passages attribute spiritual gifts to the Holy Spirit (1 Corinthians 12) or to Jesus Christ (Ephesians 4), Romans 12 points uniquely to <strong>God the Father</strong> as the source of our motivational design—the One who wove these drives into us before we took our first breath.</p>
+    <h2 style="margin-top:0">The Father, the Giver of Our Design</h2>
+<p>While other passages attribute spiritual gifts to the Holy Spirit (1 Corinthians 12) or to Jesus Christ (Ephesians 4), Romans 12 points uniquely to <strong>God the Father</strong> as the source of our motivational design. The One who wove these drives into us before we took our first breath.</p>
     <blockquote>“For by the grace given me I say to every one of you: Do not think of yourself more highly than you ought, but rather think of yourself with sober judgment, in accordance with the <strong>faith God has distributed</strong> to each of you.”<cite>Romans 12:3</cite></blockquote>
     <p>The passage begins not with a list of gifts, but with a call to humility rooted in how we were made. In this context, the “faith God has distributed” can be understood as the specific measure of motivational grace apportioned to each of us.</p>
     <p>This is the key to “sober judgment.” Our motivational wiring is not an achievement we earned, but a portion of grace we were given by the Father. It is the foundational, operational style He hardwired into our being before we took our first breath.</p>
 
-    <h3>The Body Metaphor: Beautiful Interdependence</h3>
+    <h2>The Body Metaphor: Beautiful Interdependence</h2>
     <p>This understanding leads directly to Paul's metaphor of the body. Because we each have a different measure and function, we are beautifully incomplete on our own.</p>
     <blockquote>“For just as each of us has one body with many members, and these members do not all have the same function, so in Christ we, though many, form one body, and each member belongs to all the others.”<cite>Romans 12:4–5</cite></blockquote>
     <p>Our gifts are not for us alone; they belong to the whole community, creating a necessary and beautiful interdependence. There is no room for pride in having one gift or insecurity in having another; we simply steward the portion we were given.</p>
@@ -774,7 +801,7 @@ function foundationPage() {
 
 <section class="section">
   <div class="wrap narrow rv" style="text-align:center">
-    <h2>The Seven Gifts of Romans 12:6–8</h2>
+    <h2>The 7 Gifts of Romans 12:6–8</h2>
     <p style="color:var(--muted)">Prophecy · Service · Teaching · Encouragement · Giving · Leadership · Mercy</p>
     ${gemDivider}
     <p style="color:var(--muted);margin-top:24px;max-width:620px;margin-left:auto;margin-right:auto">Understanding the Father's gifts provides a biblical foundation for deeper relationships, more effective service, and greater unity in the body of Christ. These motivational frameworks help us understand not just what we do, but who we are at our core.</p>
@@ -786,7 +813,7 @@ function foundationPage() {
 </section>
 
 <section class="cta-band"><div class="rv"><h2>Steward the grace you were given</h2><p>Discover your unique measure with the full assessment.</p><a class="btn btn-primary" href="assessment.html">Take the Assessment</a></div></section>`;
-  return layout({ title: 'The Biblical Foundation | 7 Gifts of the Father', desc: 'The scriptural basis for the Father\'s motivational gifts in Romans 12 — grace distributed by the Father who designed us.', body, root: '', active: 'foundation' });
+return layout({ title: 'The Biblical Foundation | The 7 Gifts of the Father', desc: 'The scriptural basis for the Father\'s motivational gifts in Romans 12, grace distributed by the Father who designed us.', body, root: '', active: 'foundation' });
 }
 
 /* ---------------- understanding ---------------- */
@@ -796,13 +823,13 @@ function understandingPage() {
     ['61–84', 'High', 'h', 'A dominant motivation you reach for daily; a core part of your contribution.'],
     ['41–60', 'Medium', 'm', 'A supportive strength you can draw on with intention.'],
     ['16–40', 'Low', 'l', 'Present but quiet; usually expressed through your stronger gifts.'],
-    ['0–15', 'Very Low', 'vl', 'Rarely your native language—an invitation to appreciate it in others.'],
+['0–15', 'Very Low', 'vl', 'Rarely your native language. An invitation to appreciate it in others.'],
   ];
   const body = `
 <header class="page-hero">
   <img class="mark" src="images/crown-thumb.webp" alt="">
-  <h1>Understanding Your Motivational Profile</h1>
-  <p class="lede">You are not just a single gifting. Each of us carries varying intensity levels of all seven motivational languages, creating a unique blend that forms our overall personality.</p>
+  <h1>How Scoring Works</h1>
+  <p class="lede">No one is a single gift. You carry all seven at different strengths, and that particular mix is what makes you recognisable.</p>
 </header>
 
 <section class="section">
@@ -810,15 +837,15 @@ function understandingPage() {
     <div class="grid g2">
       <div class="card rv">
         <div class="kicker">The Sound Equalizer</div>
-        <h3>One Design, Seven Sliders</h3>
-        <p style="color:var(--ink-soft)">Think of it like a sound equalizer with seven sliders—some set high, others moderate, and some lower. This combination creates your distinctive motivational fingerprint.</p>
+        <h2>One Design, Seven Sliders</h2>
+<p style="color:var(--ink-soft)">Think of it like a sound equalizer with seven sliders, some set high, others moderate, and some lower. This combination creates your distinctive motivational fingerprint.</p>
         <p style="color:var(--ink-soft);margin:0">Any gift that you have a very high or high intensity level in, as well as the gifts you have low or very low in, significantly affects how you will show up in the world and relate with others.</p>
       </div>
       <div class="card rv">
         <div class="kicker">The Core Framework</div>
-        <h3>Questions Beneath the Words</h3>
+        <h2>Questions Beneath the Words</h2>
         <p style="color:var(--ink-soft)">Each gift carries a core question that must be answered for that person to feel truly understood and valued. When we communicate with others, we unconsciously seek to have our highest-intensity core questions answered.</p>
-        <p style="color:var(--ink-soft);margin:0">When these questions remain unanswered, relational strain occurs—not because of bad intentions, but because of unmet motivational needs.</p>
+<p style="color:var(--ink-soft);margin:0">When these questions remain unanswered, relational strain occurs, not because of bad intentions, but because of unmet motivational needs.</p>
       </div>
     </div>
   </div>
@@ -853,20 +880,20 @@ function understandingPage() {
     <div class="card rv" style="border-left:2px solid var(--gold);border-radius:0 16px 16px 0">
       <h3>The Communication Default</h3>
       <p style="color:var(--ink-soft)">In our interactions with others, we often unconsciously default to communicating through the motivational gift that represents the highest collective intensity between us and the other person.</p>
-      <p style="color:var(--ink-soft);margin:0">For example, if you're high in Teaching and speaking with someone high in Mercy, you might find yourselves naturally gravitating toward the gift you both share at moderate levels—perhaps Service or Encouragement.</p>
+<p style="color:var(--ink-soft);margin:0">For example, if you're high in Teaching and speaking with someone high in Mercy, you might find yourselves naturally gravitating toward the gift you both share at moderate levels, perhaps Service or Encouragement.</p>
     </div>
   </div>
 </section>
 
 <section class="cta-band">
   <div class="rv"><h2>Ready to explore the 7 gifts?</h2>
-  <p>Now that you understand how the gifts work together, dive into each of the seven motivational giftings—or measure your own profile.</p>
+<p>Now that you understand how the gifts work together, dive into each of the seven motivational gifts, or measure your own profile.</p>
   <div style="display:flex;gap:22px;justify-content:center;align-items:center;flex-wrap:wrap">
     <a class="btn btn-primary" href="assessment.html">Take the Assessment</a>
     <a class="link-arrow" href="gifts/catalyst.html">Start with The Catalyst <span class="ar">→</span></a>
   </div></div>
 </section>`;
-  return layout({ title: 'Understanding Your Motivational Profile | 7 Gifts of the Father', desc: 'How the seven motivational gifts combine: intensity levels, the sound equalizer concept, core questions, and the communication default.', body, root: '', active: 'understanding' });
+  return layout({ title: 'How Scoring Works | The 7 Gifts of the Father', desc: 'How the seven motivational gifts combine: intensity levels, the sound equalizer concept, core questions, and the communication default.', body, root: '', active: 'understanding' });
 }
 
 /* ---------------- assessment shell ---------------- */
@@ -875,14 +902,14 @@ function assessmentPage() {
 <header class="page-hero no-print">
   <img class="mark" src="images/crown-thumb.webp" alt="">
   <h1>The Comprehensive Integrated Assessment</h1>
-  <p class="lede">A complete measure of your motivational design—${QCOUNT} questions across three sections, revealing the intensity of all seven gifts, your top three, and your archetype of the soul.</p>
+<p class="lede">A complete measure of your motivational design. ${QCOUNT} questions across three sections, scoring the intensity of all seven gifts, naming your top three, and revealing your archetype of the soul.</p>
 </header>
 <div class="quiz-shell">
   <div id="quiz-app"></div>
 </div>
 <script src="js/data.js?v=${V}"></script>
 <script src="js/assessment.js?v=${V}"></script>`;
-  return layout({ title: 'Take the Assessment | 7 Gifts of the Father', desc: `The Comprehensive Integrated Assessment: ${QCOUNT} questions measuring your intensity in all seven motivational gifts of the Father, plus your personality archetype of the soul.`, body, root: '', active: '' });
+  return layout({ title: 'Take the Assessment | The 7 Gifts of the Father', desc: `The Comprehensive Integrated Assessment: ${QCOUNT} questions measuring your intensity in all seven motivational gifts of the Father, plus your personality archetype of the soul.`, body, root: '', active: '' });
 }
 
 /* ---------------- results shell ---------------- */
@@ -891,12 +918,12 @@ function resultsPage() {
 <header class="res-hero">
   <img src="images/crown-thumb.webp" alt="" style="width:58px;margin:0 auto 14px">
   <h1>Your Motivational Design</h1>
-  <p class="lede">Welcome to your personalized profile of the 7 Motivational Giftings of the Father—a portrait of the unique motivational design God has woven into the core of your being.</p>
+<p class="lede">Welcome to your personalized profile of the The 7 Gifts of the Father. A portrait of the unique motivational design God has woven into the core of your being.</p>
 </header>
 <div id="results-app"></div>
 <script src="js/data.js?v=${V}"></script>
 <script src="js/results.js?v=${V}"></script>`;
-  return layout({ title: 'Your Results | 7 Gifts of the Father', desc: 'Your personal intensity profile across the seven motivational gifts, your top three, and your archetype of the soul.', body, root: '', active: '' });
+  return layout({ title: 'Your Results | The 7 Gifts of the Father', desc: 'Your personal intensity profile across the seven motivational gifts, your top three, and your archetype of the soul.', body, root: '', active: 'results' });
 }
 
 /* ---------------- 404 ---------------- */
@@ -904,12 +931,12 @@ function notFoundPage() {
   const body = `<section class="empty-state"><div class="wrap narrow">
     <img src="/images/crown-thumb.webp" alt="" style="width:64px;margin:0 auto 20px">
     <h2>Page not found</h2>
-    <p style="color:var(--muted)">The page you're looking for isn't here—but your gifts are.</p>
+<p style="color:var(--muted)">The page you're looking for isn't here, but your gifts are.</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px">
       <a class="btn btn-quiet" href="/index.html">Go Home</a>
       <a class="btn btn-primary" href="/assessment.html">Take the Assessment</a>
     </div></div></section>`;
-  return layout({ title: 'Page Not Found | 7 Gifts of the Father', desc: 'Page not found.', body, root: '/', active: '' });
+  return layout({ title: 'Page Not Found | The 7 Gifts of the Father', desc: 'Page not found.', body, root: '/', active: '' });
 }
 
 /* ---------------- js/data.js (client data bundle) ---------------- */
@@ -938,7 +965,7 @@ window.GIFT_ORDER = ${JSON.stringify(ORDER)};
 window.GIFTS = ${JSON.stringify(clientGifts)};
 window.ARCHETYPES = ${JSON.stringify(clientArch)};
 window.QUESTIONS = ${JSON.stringify(questions)};
-window.LOW_GIFTS = {"catalyst": {"struggle": "With the Catalyst's fire burning low, you rarely feel an inner demand to confront what is broken. You may tolerate dysfunctional systems and unspoken problems far longer than is healthy, keep the peace when the moment calls for holy disruption, and feel blindsided when change finally forces itself on you. Necessary conflict can feel like failure rather than faithfulness, so hard conversations get postponed until they become harder ones.", "friction": "People who lead with Prophecy can feel overwhelming to you. Their directness lands like an attack and their urgency like recklessness, and you may quietly write them off as harsh—while they read your patience as complicity with what is broken. When they press for the truth behind a problem, you may hear accusation where they intend rescue.", "bridges": ["When a Catalyst confronts, listen for the love of truth underneath the heat—ask “What are you seeing that I’m not?” before defending.", "Practice naming one broken thing out loud each week; borrowed courage grows.", "Don’t ask a Catalyst to soften the message—ask them to help you build what should replace the broken thing."]}, "servant": {"struggle": "With Service running quiet, practical needs don’t call out to you the way they do to others. Tasks pile up or drift to whoever seems willing, the logistics beneath every good idea get underestimated, and the invisible labor that keeps your home, team, or church running can go unnoticed until it stops. You may carry a reputation for being above the mundane that quietly costs you trust.", "friction": "People who lead with Service often feel unseen around you. Your talk-first instinct frustrates their do-first nature; they feel used when their help is assumed and unthanked, while you may find their focus on tasks small when bigger things are on the table. Your unfinished commitments read to them as broken promises.", "bridges": ["Thank the Servant specifically—name the task, not just the person.", "Before casting the next vision, finish one tangible thing you said you’d do.", "Ask “What needs doing?” and take a visible piece of it yourself."]}, "erudite": {"struggle": "With the Erudite’s hunger dimmed, deep study rarely feels worth the time. You may build strong opinions on thin foundations, decide from intuition alone, and grow impatient with the slow work of truly understanding something. That leaves you vulnerable to shallow answers and confident errors—and prone to repeating problems that an evening of honest study would have prevented.", "friction": "People who lead with Teaching can exhaust you. Their questions feel like doubt, their precision like pedantry, their “let me research it” like delay. Meanwhile they experience your speed as carelessness and your certainty as unearned. Conversations stall when nuance—their native language—gets waved away.", "bridges": ["Bring an Erudite into decisions early, not for rubber-stamping afterward.", "Let them fully vet one significant choice each season—and notice what it saves you.", "Ask “What am I missing?” and genuinely wait for the answer."]}, "enthusiast": {"struggle": "With Encouragement running low, affirmation isn’t your reflex. Relationships can run on function rather than celebration, wins slip past unmarked, and the people closest to you may quietly wonder whether you notice them at all. Without a native supply of hope, setbacks weigh heavier and vision is harder to sustain—for you and for anyone following you.", "friction": "People who lead with Encouragement may strike you as noisy or excessive, and their need for affirmation can feel needy. But your reserve reads to them as disapproval, and they wilt in ways you don’t intend. When they celebrate you, you may deflect—which lands as rejection of the very gift they most love to give.", "bridges": ["Name one strength out loud, per person, per gathering. It will feel like too much; it isn’t.", "Receive an Enthusiast’s praise with a simple thank-you instead of a deflection.", "Let celebration count as real work—it is how belonging gets built."]}, "host": {"struggle": "With Giving quiet in you, resources feel like background details rather than ministry. Generosity happens in bursts instead of rhythms, margins and provision go unplanned, and hospitality can feel like a chore—so gathering people defaults to somebody else. Opportunities that needed seed money, a meal, or an open home pass by unclaimed.", "friction": "People who lead with Giving can seem preoccupied with money, logistics, and stewardship, and their carefulness may read to you as stinginess. But your improvidence genuinely stresses them, and when their quiet provision goes unnoticed they feel taken for granted. Asking them to “just trust” without a plan asks them to violate their design.", "bridges": ["Honor stewardship as a spiritual gift, not accounting—thank the Host for what their planning made possible.", "Schedule one act of intentional generosity each month so giving doesn’t depend on mood.", "Invite a Host to build your budget or event plan with you—and watch the anxiety drop."]}, "strategist": {"struggle": "With Leadership’s long view dimmed, the horizon blurs. Seasons turn busy but directionless, goals drift, and you can wake up wondering how you ended up here. Other people’s plans feel confining, so you improvise—and some of those improvisations become messes a simple map would have prevented. Follow-through on multi-step commitments is the quiet casualty.", "friction": "People who lead with Leadership can feel controlling to you—their structures like cages, their questions about “the plan” like tests you didn’t study for. Meanwhile your spontaneity registers to them as a threat to the mission, and your last-minute pivots undo work they invested in. They don’t need you to become them; they need warning before you swerve.", "bridges": ["Give Strategists the courtesy of a heads-up before changing course.", "Borrow their gift: set one 90-day goal and let them help you sequence it.", "Ask “Where is this going?” before you start—then actually aim."]}, "lover": {"struggle": "With Mercy running quiet, the emotional current of a room flows beneath your notice. You reach for solutions when people need presence, miss the wound behind the behavior, and can leave vulnerable people guarded around you without knowing why. Your own feelings, left unprocessed, tend to leak out sideways as irritation or withdrawal.", "friction": "People who lead with Mercy may seem inefficient to you—slow to decide, quick to feel, forever circling back to how everyone is doing. But your fixes land on them as dismissal, and your pace tramples places that needed gentleness. They need safety before solutions; you lead with solutions.", "bridges": ["Ask “Do you want comfort or counsel?” before offering either.", "Sit with someone’s pain for five full minutes before solving anything.", "Let a Lover teach you what listening without fixing looks like—then practice on them."]}};
+window.LOW_GIFTS = {"catalyst": {"struggle": "With the Catalyst's fire burning low, you rarely feel an inner demand to confront what is broken. You may tolerate dysfunctional systems and unspoken problems far longer than is healthy, keep the peace when the moment calls for holy disruption, and feel blindsided when change finally forces itself on you. Necessary conflict can feel like failure rather than faithfulness, so hard conversations get postponed until they become harder ones.", "friction": "People who lead with Prophecy can feel overwhelming to you. Their directness lands like an attack and their urgency like recklessness, and you may quietly write them off as harsh (while they read your patience as complicity with what is broken. When they press for the truth behind a problem, you may hear accusation where they intend rescue.", "bridges": ["When a Catalyst confronts, listen for the love of truth underneath the heat) ask “What are you seeing that I’m not?” before defending.", "Practice naming one broken thing out loud each week; borrowed courage grows.", "Don’t ask a Catalyst to soften the message (ask them to help you build what should replace the broken thing."]}, "servant": {"struggle": "With Service running quiet, practical needs don’t call out to you the way they do to others. Tasks pile up or drift to whoever seems willing, the logistics beneath every good idea get underestimated, and the invisible labor that keeps your home, team, or church running can go unnoticed until it stops. You may carry a reputation for being above the mundane that quietly costs you trust.", "friction": "People who lead with Service often feel unseen around you. Your talk-first instinct frustrates their do-first nature; they feel used when their help is assumed and unthanked, while you may find their focus on tasks small when bigger things are on the table. Your unfinished commitments read to them as broken promises.", "bridges": ["Thank the Servant specifically) name the task, not just the person.", "Before casting the next vision, finish one tangible thing you said you’d do.", "Ask “What needs doing?” and take a visible piece of it yourself."]}, "erudite": {"struggle": "With the Erudite’s hunger dimmed, deep study rarely feels worth the time. You may build strong opinions on thin foundations, decide from intuition alone, and grow impatient with the slow work of truly understanding something. That leaves you vulnerable to shallow answers and confident errors (and prone to repeating problems that an evening of honest study would have prevented.", "friction": "People who lead with Teaching can exhaust you. Their questions feel like doubt, their precision like pedantry, their “let me research it” like delay. Meanwhile they experience your speed as carelessness and your certainty as unearned. Conversations stall when nuance) their native language (gets waved away.", "bridges": ["Bring an Erudite into decisions early, not for rubber-stamping afterward.", "Let them fully vet one significant choice each season) and notice what it saves you.", "Ask “What am I missing?” and genuinely wait for the answer."]}, "enthusiast": {"struggle": "With Encouragement running low, affirmation isn’t your reflex. Relationships can run on function rather than celebration, wins slip past unmarked, and the people closest to you may quietly wonder whether you notice them at all. Without a native supply of hope, setbacks weigh heavier and vision is harder to sustain (for you and for anyone following you.", "friction": "People who lead with Encouragement may strike you as noisy or excessive, and their need for affirmation can feel needy. But your reserve reads to them as disapproval, and they wilt in ways you don’t intend. When they celebrate you, you may deflect) which lands as rejection of the very gift they most love to give.", "bridges": ["Name one strength out loud, per person, per gathering. It will feel like too much; it isn’t.", "Receive an Enthusiast’s praise with a simple thank-you instead of a deflection.", "Let celebration count as real work (it is how belonging gets built."]}, "host": {"struggle": "With Giving quiet in you, resources feel like background details rather than ministry. Generosity happens in bursts instead of rhythms, margins and provision go unplanned, and hospitality can feel like a chore) so gathering people defaults to somebody else. Opportunities that needed seed money, a meal, or an open home pass by unclaimed.", "friction": "People who lead with Giving can seem preoccupied with money, logistics, and stewardship, and their carefulness may read to you as stinginess. But your improvidence genuinely stresses them, and when their quiet provision goes unnoticed they feel taken for granted. Asking them to “just trust” without a plan asks them to violate their design.", "bridges": ["Honor stewardship as a spiritual gift, not accounting (thank the Host for what their planning made possible.", "Schedule one act of intentional generosity each month so giving doesn’t depend on mood.", "Invite a Host to build your budget or event plan with you) and watch the anxiety drop."]}, "strategist": {"struggle": "With Leadership’s long view dimmed, the horizon blurs. Seasons turn busy but directionless, goals drift, and you can wake up wondering how you ended up here. Other people’s plans feel confining, so you improvise (and some of those improvisations become messes a simple map would have prevented. Follow-through on multi-step commitments is the quiet casualty.", "friction": "People who lead with Leadership can feel controlling to you) their structures like cages, their questions about “the plan” like tests you didn’t study for. Meanwhile your spontaneity registers to them as a threat to the mission, and your last-minute pivots undo work they invested in. They don’t need you to become them; they need warning before you swerve.", "bridges": ["Give Strategists the courtesy of a heads-up before changing course.", "Borrow their gift: set one 90-day goal and let them help you sequence it.", "Ask “Where is this going?” before you start (then actually aim."]}, "lover": {"struggle": "With Mercy running quiet, the emotional current of a room flows beneath your notice. You reach for solutions when people need presence, miss the wound behind the behavior, and can leave vulnerable people guarded around you without knowing why. Your own feelings, left unprocessed, tend to leak out sideways as irritation or withdrawal.", "friction": "People who lead with Mercy may seem inefficient to you) slow to decide, quick to feel, forever circling back to how everyone is doing. But your fixes land on them as dismissal, and your pace tramples places that needed gentleness. They need safety before solutions; you lead with solutions.", "bridges": ["Ask “Do you want comfort or counsel?” before offering either.", "Sit with someone’s pain for five full minutes before solving anything.", "Let a Lover teach you what listening without fixing looks like, then practice on them."]}};
 window.INTENSITY = function(score){
   if (score >= 85) return { label: 'Very High', cls: 'vh' };
   if (score >= 61) return { label: 'High', cls: 'h' };
@@ -988,7 +1015,19 @@ window.computeScores = function(state){
 }
 
 /* ---------------- js/main.js ---------------- */
-const mainJs = `// shared: reveal-on-scroll
+const mainJs = `/* gift-page jump bar: highlight the section you are in */
+(function(){
+  var bar=document.querySelector('.gift-jump'); if(!bar) return;
+  var links=[].slice.call(bar.querySelectorAll('a'));
+  var targets=links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function sync(){
+    var y=window.scrollY+160, cur=0;
+    targets.forEach(function(t,i){ if(t && t.getBoundingClientRect().top+window.scrollY<=y) cur=i; });
+    links.forEach(function(a,i){ a.classList.toggle('here', i===cur); });
+  }
+  window.addEventListener('scroll', sync, {passive:true}); sync();
+})();
+// shared: reveal-on-scroll
 (function(){
   var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){
     es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -1091,8 +1130,8 @@ function connectPage() {
 <script src="js/canon.js?v=${V}"></script>
 <script src="js/connect.js?v=${V}"></script>`;
   return layout({
-    title: 'The Connection Analyzer | 7 Gifts of the Father',
-    desc: 'See how two or more motivational gift profiles meet — points of connection, natural flow, points of contention, and an ease-of-flow score.',
+    title: 'The Connection Analyzer | The 7 Gifts of the Father',
+desc: 'See how two or more motivational gift profiles meet, points of connection, natural flow, points of contention, and an ease-of-flow score.',
     body, root: '', active: 'connect'
   });
 }

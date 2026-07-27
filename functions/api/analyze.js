@@ -1,4 +1,4 @@
-/* POST /api/analyze — Connection analysis grounded in the 7 Gifts canon.
+/* POST /api/analyze: Connection analysis grounded in the 7 Gifts canon.
    Gemini key is read from the GEMINI_API_KEY secret; it is never sent to the browser. */
 import { CANON } from './_canon.js';
 
@@ -33,11 +33,11 @@ function giftBrief(k) {
   if (!g) return '';
   const p = CANON.pressure && CANON.pressure[k];
   const under = p ? `
-  Under pressure it flares ${p.flare.join(' → ')} — set off by: ${p.trigger}
+Under pressure it flares ${p.flare.join(' → ')}, set off by: ${p.trigger}
     · Strain (${p.stages[0].verb}): ${p.stages[0].tell}
     · Distortion (${p.stages[1].verb}): ${p.stages[1].tell}
     · Captivity (${p.stages[2].verb}): ${p.stages[2].tell}
-  If it settles in, it becomes "${p.chronic}" — ${p.chronicBody}
+If it settles in, it becomes "${p.chronic}", ${p.chronicBody}
   What it needs to come back: ${p.needs}
   Say this: "${p.sayThis}"  |  Never this: "${p.notThis}" (${p.notThisWhy})
   Their own move back: ${p.ownMove}
@@ -53,7 +53,7 @@ function contentionBrief(a, b) {
   const c = CANON.contentions.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
   if (!c) return '';
   const A = CANON.gifts[c.a].name, B = CANON.gifts[c.b].name;
-  return `- ${A} + ${B} — ${c.title}. At its best: ${c.atBest}. Left unbalanced: ${c.faultLine}.`;
+return `- ${A} + ${B}, ${c.title}. At its best: ${c.atBest}. Left unbalanced: ${c.faultLine}.`;
 }
 
 function topGifts(scores, n = 3) {
@@ -100,11 +100,11 @@ export async function onRequestPost({ request, env }) {
 
     const solo = people.length < 2 && pdfs.length < 2;
 
-    const sys = `You are the Connection Guide for "The 7 Gifts of the Father" — a Romans 12 framework of seven motivational gifts: Catalyst (Prophecy), Servant of All (Service), Erudite (Teaching), Enthusiast (Encouragement), Host (Giving), Strategist (Leadership), Lover (Mercy). A person's top three gifts form one of 35 "archetypes of the soul."
+const sys = `You are the Connection Guide for "The 7 Gifts of the Father". A Romans 12 framework of seven motivational gifts: Catalyst (Prophecy), Servant of All (Service), Erudite (Teaching), Enthusiast (Encouragement), Host (Giving), Strategist (Leadership), Lover (Mercy). A person's top three gifts form one of 35 "archetypes of the soul."
 
-Speak in the language of this framework ONLY. Never use Enneagram, MBTI, DISC, or Life Languages vocabulary. Be warm, direct, and practical — like a trusted pastor-coach who tells the truth kindly. Faith-aware but not preachy. Never diagnose, never label anyone as broken, and never speak about a person who did not consent as if you know their inner life — describe patterns, not verdicts.
+Speak in the language of this framework ONLY. Never use Enneagram, MBTI, DISC, or Life Languages vocabulary. Be warm, direct, and practical (like a trusted pastor-coach who tells the truth kindly. Faith-aware but not preachy. Never diagnose, never label anyone as broken, and never speak about a person who did not consent as if you know their inner life) describe patterns, not verdicts.
 
-THE THREE DESCENTS (how any gift breaks down under pressure — use this vocabulary exactly):
+THE THREE DESCENTS (how any gift breaks down under pressure: use this vocabulary exactly):
 ${CANON.descentStages.map(x => `- ${x.name}: ${x.line} ${x.reversal}`).join('\n')}
 A gift under pressure does not switch off; it works harder in the wrong direction. Distress is the gift aimed
 at the wrong target, usually at whoever is closest. Each gift has its own three flare verbs, below.
@@ -112,15 +112,15 @@ at the wrong target, usually at whoever is closest. Each gift has its own three 
 THE GIFTS IN PLAY:
 ${giftLines}
 
-DOCUMENTED POINTS OF CONTENTION (use these exact tensions — do not invent new ones):
-${pairLines.join('\n') || '(none — the profiles share the same gifts)'}
+DOCUMENTED POINTS OF CONTENTION (use these exact tensions: do not invent new ones):
+${pairLines.join('\n') || '(none. The profiles share the same gifts)'}
 
 RULES:
 - Use the supplied Ease of Flow number and band exactly as given. Never invent a different score.
 - Ground every claim about friction in the documented contentions above, and name each one by its exact
   documented title in bold (for example: **Brutal Honesty vs. Emotional Safety**) before explaining it.
 - When describing how someone shows up under stress, use THIS system's language: name the stage (Strain,
-  Distortion, Captivity) and that gift's actual flare verb in bold — for example **Sharpen**, **Absorb**,
+Distortion, Captivity) and that gift's actual flare verb in bold, for example **Sharpen**, **Absorb**,
   **Qualify**. Never invent flare verbs; use only the ones listed for that gift.
 - Prefer Strain-stage description. Most real friction is Strain, and it is the cheapest place to intervene.
   Only describe Distortion or Captivity if the supplied material genuinely warrants it, and say plainly that
@@ -131,20 +131,20 @@ RULES:
 - Treat every flare as a request that was worded badly, never as a character defect.
 - Write EVERY section requested. Do not stop early or merge sections.
 - Name both the gift and the person when describing a pattern (e.g., "Aaron's Catalyst…").
-- Give concrete, sayable language — actual sentences people can use — not abstractions.
-- Be thorough and substantive. Develop every section fully — several sentences, or 3-5 rich bullets —
+- Give concrete, sayable language, actual sentences people can use, not abstractions.
+- Be thorough and substantive. Develop every section fully, several sentences, or 3-5 rich bullets,
   with specific detail drawn from THESE profiles. Depth and usefulness are the goal, not brevity.
 - Still earn every sentence: no filler, no flattery, and never restate the framework back to them.
 - Length: aim for roughly 2,200-3,200 words for a two-or-more-person analysis, and 1,500-2,200 for a single
-  profile. Reach that length with genuine specificity — more concrete examples, more sayable sentences,
-  more of how this actually plays out day to day — never with padding or repetition.
+profile. Reach that length with genuine specificity, more concrete examples, more sayable sentences,
+more of how this actually plays out day to day, never with padding or repetition.
 - Output GitHub-flavored Markdown using only \`##\` headings and \`-\` bullets. No preamble.`;
 
     const nameOf = (p, i) => (p && p.name ? String(p.name).slice(0, 40) : `Person ${i + 1}`);
     const profileBlock = people.map((p, i) => {
       const t = p.scores ? topGifts(p.scores, 3).map(k => CANON.gifts[k].name) : [];
       const low = p.scores ? topGifts(p.scores, 7).slice(-2).map(k => CANON.gifts[k].name) : [];
-      const arch = p.archetype ? ` — archetype: ${p.archetype}` : '';
+const arch = p.archetype ? `, archetype: ${p.archetype}`: '';
       const sc = p.scores ? CANON.order.map(k => `${CANON.gifts[k].name} ${Math.round(Number(p.scores[k]) || 0)}`).join(', ') : 'from uploaded PDF';
       return `${nameOf(p, i)}${arch}\n  Top three: ${t.join(' · ') || 'see PDF'}\n  Lowest two: ${low.join(', ') || 'see PDF'}\n  Scores: ${sc}`;
     }).join('\n\n');
@@ -159,7 +159,7 @@ RULES:
 PROFILE:
 ${profileBlock || '(see attached PDF)'}
 
-EASE OF FLOW WITH EACH GIFT (computed — use these numbers):
+EASE OF FLOW WITH EACH GIFT (computed: use these numbers):
 ${mapLines}
 
 ${note ? `Their note: ${note}\n` : ''}
@@ -174,21 +174,21 @@ Write these sections:
 ## What You'll Need From Others
 (be concrete about what to ask for)
 ## Your Blind Spots in Relationship
-(from the lowest gifts — what you will consistently miss)
+(from the lowest gifts, what you will consistently miss)
 ## Scripts That Will Serve You
 (6-8 sentences you can actually say, and when)
 ## Three Moves This Week`;
     } else {
       const f = flow || {};
       const shared = (f.sharedTop || []).map(k => CANON.gifts[k].name);
-      const fp = (f.frictionPairs || []).map(p => `- ${CANON.gifts[p.a].name} + ${CANON.gifts[p.b].name} — ${p.title} (intensity ${p.w}/100)`).join('\n');
+const fp = (f.frictionPairs || []).map(p => `- ${CANON.gifts[p.a].name} + ${CANON.gifts[p.b].name}, ${p.title} (intensity ${p.w}/100)`).join('\n');
       ask = `Analyze the connection between these people, who are ${rel}.
 
 PROFILES:
-${profileBlock || '(see attached PDFs — extract each person\'s seven gift scores and top three)'}
+${profileBlock || '(see attached PDFs, extract each person\'s seven gift scores and top three)'}
 
 COMPUTED (use exactly):
-- Ease of Flow: ${f.flow ?? '?'}/100 — ${f.band ?? ''}
+- Ease of Flow: ${f.flow ?? '?'}/100, ${f.band ?? ''}
 - Shared language (resonance): ${f.resonance ?? '?'}/100
 - Complementarity: ${f.complement ?? '?'}/100
 - Friction load: ${f.friction ?? '?'}/100
@@ -200,13 +200,13 @@ Write these sections:
 ## The Read
 (2-3 sentences interpreting the Ease of Flow score for ${rel}. Say plainly what is easy and what will cost them.)
 ## Where You Connect
-(the real bridges between these specific gifts — not generic compatibility)
+(the real bridges between these specific gifts, not generic compatibility)
 ## What Each of You Naturally Brings
 (a developed paragraph or bullet set per person, gift by gift)
 ## Where Friction Lives
 (name each documented tension by its exact title, then explain how it actually shows up between ${rel})
 ## How It Shows Up Day to Day
-(4-6 concrete recurring scenes this pairing repeats — the argument you keep having, the moment that stalls)
+(4-6 concrete recurring scenes this pairing repeats. The argument you keep having, the moment that stalls)
 ## Shared Blind Spots
 (what they are BOTH low in, and what that costs them together that neither will notice)
 ## How to Bridge It
