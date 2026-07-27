@@ -1,0 +1,28 @@
+name: Deploy to Cloudflare Pages
+
+# Auto-deploys the site + Connection analyzer functions to production
+# on every push to main. Requires two repo secrets:
+#   CLOUDFLARE_API_TOKEN  – a Cloudflare API token with Pages:Edit
+#   CLOUDFLARE_ACCOUNT_ID – 838ae1600750d8a565b3e354e775d773
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy site + functions (production branch = main)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy site --project-name=7giftsofthefather --branch=main
