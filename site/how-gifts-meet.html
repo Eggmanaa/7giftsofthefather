@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How the Gifts Meet: The Gap | 7 Gifts of the Father</title>
+<meta name="description" content="A measurable model for how two motivational profiles interact — the Gap score, the four bands, the blind exchange, and all 21 pair collisions under pressure.">
+<meta property="og:title" content="How the Gifts Meet: The Gap | 7 Gifts of the Father">
+<meta property="og:description" content="A measurable model for how two motivational profiles interact — the Gap score, the four bands, the blind exchange, and all 21 pair collisions under pressure.">
+<meta property="og:image" content="https://7giftsofthefather.pages.dev/images/og.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=ms3fi7zw">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/"><img src="images/crown-thumb.webp" alt="Crown logo"><span>The 7 Gifts of the Father</span></a>
+    <button class="nav-burger" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/gifts/">The 7 Gifts</a>
+      <a href="/archetypes/">The 35 Archetypes</a>
+      <a href="/under-pressure">Pressure</a>
+      <a href="/how-gifts-meet" class="active">Pairings</a>
+      <a href="/foundation">Foundation</a>
+      <a href="/understanding">Your Profile</a>
+      <a class="btn-assess" href="/assessment">Take the Assessment</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <img class="mark" src="images/crown-thumb.webp" alt="">
+  <div class="kicker">How the Gifts Meet</div>
+  <h1>The Gap</h1>
+  <p class="lede">Every person carries all seven gifts, ranked from most to least dominant. Put two people's rankings side by side and the differences can be measured. That measurement is the Gap — and it predicts, with uncomfortable accuracy, how much translation a relationship is going to require.</p>
+</header>
+
+<section class="section">
+  <div class="wrap narrow prose rv">
+    <h3 style="margin-top:0">How it is measured</h3>
+    <p>For each of the seven gifts, take the difference between where it sits in your ranking and where it sits in theirs. Add the seven differences together. The result runs from 0 (identical profiles) to 24 (perfect inversion).</p>
+    <p class="muted-note">A worked example: if Prophecy sits first for you and fifth for them, that is a difference of four. Do that for all seven gifts and add the results. Two identical profiles score zero. Two perfect inversions score twenty-four.</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">Calculate It</div><h2>The Gap Between Two People</h2>
+    <p>Rank each person's gifts by clicking them in order, strongest first. Click a chip again to remove it.</p></div>
+    <div class="calc rv">
+      <div class="calc-cols">
+        <div class="calc-col"><div class="calc-name">Person A</div><div class="rank-set" data-side="a"><button type="button" class="rank-chip catalyst" data-side="a" data-gift="catalyst"><span class="rank-n"></span>Catalyst</button>
+<button type="button" class="rank-chip servant" data-side="a" data-gift="servant"><span class="rank-n"></span>Servant of All</button>
+<button type="button" class="rank-chip erudite" data-side="a" data-gift="erudite"><span class="rank-n"></span>Erudite</button>
+<button type="button" class="rank-chip enthusiast" data-side="a" data-gift="enthusiast"><span class="rank-n"></span>Enthusiast</button>
+<button type="button" class="rank-chip host" data-side="a" data-gift="host"><span class="rank-n"></span>Host</button>
+<button type="button" class="rank-chip strategist" data-side="a" data-gift="strategist"><span class="rank-n"></span>Strategist</button>
+<button type="button" class="rank-chip lover" data-side="a" data-gift="lover"><span class="rank-n"></span>Lover</button></div></div>
+        <div class="calc-col"><div class="calc-name">Person B</div><div class="rank-set" data-side="b"><button type="button" class="rank-chip catalyst" data-side="b" data-gift="catalyst"><span class="rank-n"></span>Catalyst</button>
+<button type="button" class="rank-chip servant" data-side="b" data-gift="servant"><span class="rank-n"></span>Servant of All</button>
+<button type="button" class="rank-chip erudite" data-side="b" data-gift="erudite"><span class="rank-n"></span>Erudite</button>
+<button type="button" class="rank-chip enthusiast" data-side="b" data-gift="enthusiast"><span class="rank-n"></span>Enthusiast</button>
+<button type="button" class="rank-chip host" data-side="b" data-gift="host"><span class="rank-n"></span>Host</button>
+<button type="button" class="rank-chip strategist" data-side="b" data-gift="strategist"><span class="rank-n"></span>Strategist</button>
+<button type="button" class="rank-chip lover" data-side="b" data-gift="lover"><span class="rank-n"></span>Lover</button></div></div>
+      </div>
+      <div class="calc-out" id="calcOut" aria-live="polite">
+        <div class="calc-empty">Rank all seven gifts for both people to see the Gap.</div>
+      </div>
+      <button type="button" class="btn btn-quiet calc-reset" id="calcReset">Reset</button>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">Reading the Number</div><h2>Four Bands</h2></div>
+    <div class="grid g2 band-grid">
+    <div class="card rv band-card">
+      <div class="band-range">0 – 5</div>
+      <h3>Same Grain</h3>
+      <div class="band-line">You understand each other without translating.</div>
+      <p>Communication is nearly effortless and agreement comes fast. The risk is not friction; it is agreement. You share the same blind spot, the same trigger, and the same flare — so under pressure you will not check each other, you will amplify each other. This band needs an outsider more than any other.</p>
+      <p class="band-watch"><span>Watch for</span> Confirmation. When you agree instantly, ask who is missing from the conversation.</p>
+    </div>
+
+    <div class="card rv band-card">
+      <div class="band-range">6 – 11</div>
+      <h3>Working Gap</h3>
+      <div class="band-line">Enough overlap to feel natural, enough difference to cover each other.</div>
+      <p>The most productive band on the scale, and the most frequently taken for granted. You have real complementarity and enough shared instinct to access it without effort. Because it works without maintenance in ordinary conditions, most pairs here never build the protocol they will need in hard ones.</p>
+      <p class="band-watch"><span>Watch for</span> Complacency. This band holds until the first genuine crisis, then discovers it has no agreed process.</p>
+    </div>
+
+    <div class="card rv band-card">
+      <div class="band-range">12 – 17</div>
+      <h3>Wide Gap</h3>
+      <div class="band-line">Misreading each other is the default, not the exception.</div>
+      <p>Nearly every conflict here is a translation failure before it is a values failure. You are usually not disagreeing about what matters; you are disagreeing about what the other person just said. Handled deliberately, this is the range with the widest coverage — between you, very little is invisible.</p>
+      <p class="band-watch"><span>Watch for</span> Attribution. Before you conclude what they meant, ask. You will be wrong more often than your confidence suggests.</p>
+    </div>
+
+    <div class="card rv band-card">
+      <div class="band-range">18 – 24</div>
+      <h3>Inverted</h3>
+      <div class="band-line">What you lead with is what they can barely see.</div>
+      <p>Your first gift is at or near the bottom of their ranking, and theirs is at the bottom of yours. The highest friction and the highest complementarity in the same relationship. These pairs either become the strongest partnerships in an organization or the ones that end badly — the variable is whether the differences were made explicit early.</p>
+      <p class="band-watch"><span>Watch for</span> Goodwill as a strategy. Inverted pairs do not run on affection. They run on protocol: who decides what, in what order, by when.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap narrow">
+    <div class="section-head rv"><div class="kicker center">Before You Trust the Score</div><h2>Four Rules That Matter More Than the Number</h2></div>
+    <div class="s-list"><div class="s-item rv"><span class="dot"></span><div><h4>A low Gap is not a good score</h4><p>Two Catalysts will agree on the diagnosis in ninety seconds and burn the room down together. Two Lovers will agree to a decision neither of them actually wanted. The Gap measures distance, not health. What predicts a good relationship is not similarity — it is whether the difference is known and named.</p></div></div>
+<div class="s-item rv"><span class="dot"></span><div><h4>Pressure widens the Gap</h4><p>In a normal week people operate across several gifts. Under pressure, everyone collapses back to their first gift and runs its flare. A Working Gap on a Tuesday becomes a Wide Gap in a crisis. Score your relationships for the hard week, not the easy one — the hard week is functionally a different relationship.</p></div></div>
+<div class="s-item rv"><span class="dot"></span><div><h4>The shape matters more than the number</h4><p>A Gap of 14 spread evenly across seven gifts is a very different relationship from a Gap of 14 concentrated in two. The figure that predicts conflict best is not the total — it is the inversion count: how many gifts sit in your top three and their bottom three. Each one is a place where something obvious to you is genuinely invisible to them.</p></div></div>
+<div class="s-item rv"><span class="dot"></span><div><h4>Distance is coverage</h4><p>Every gift you rank low is a category of reality you do not process well. Someone whose ranking inverts yours is not your opposite; they are your instrumentation. The cost of that coverage is that you will find them exhausting, and the cost of avoiding them is that you will keep missing the same things.</p></div></div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">The Blind Exchange</div><h2>When Your First Is Their Last</h2>
+    <p>The sharpest friction in any pair sits where one person's first gift is the other's last. Not disagreement — invisibility. Here is what that specific mismatch feels like from both sides.</p></div>
+    <div class="blind-list"><div class="blind rv" style="--g:var(--catalyst-bar)">
+      <h4><span class="g-tag catalyst">Catalyst</span> first, meeting Catalyst last</h4>
+      <div class="blind-grid">
+        <div><span class="pg-k">You see</span><p>A system that is plainly broken and a room that will not say so.</p></div>
+        <div><span class="pg-k">They receive</span><p>Nothing. The urgency does not register as information; it registers as instability.</p></div>
+        <div><span class="pg-k">You feel</span><p>Surrounded by complicity.</p></div>
+        <div><span class="pg-k">They feel</span><p>Destabilized by someone who cannot leave things alone.</p></div>
+      </div>
+    </div>
+<div class="blind rv" style="--g:var(--servant-bar)">
+      <h4><span class="g-tag servant">Servant of All</span> first, meeting Servant of All last</h4>
+      <div class="blind-grid">
+        <div><span class="pg-k">You see</span><p>Undone work everywhere, and who is going to end up doing it.</p></div>
+        <div><span class="pg-k">They receive</span><p>No signal at all. The undone thing is not on their map as a thing.</p></div>
+        <div><span class="pg-k">You feel</span><p>Used, and quietly angry about a task they never knew existed.</p></div>
+        <div><span class="pg-k">They feel</span><p>Blamed for a failure they cannot locate.</p></div>
+      </div>
+    </div>
+<div class="blind rv" style="--g:var(--erudite-bar)">
+      <h4><span class="g-tag erudite">Erudite</span> first, meeting Erudite last</h4>
+      <div class="blind-grid">
+        <div><span class="pg-k">You see</span><p>Ground that has not been tested yet, and the cost of stepping on it anyway.</p></div>
+        <div><span class="pg-k">They receive</span><p>Delay. They are three moves ahead and cannot see what is being checked.</p></div>
+        <div><span class="pg-k">You feel</span><p>Rushed into a decision you will be blamed for.</p></div>
+        <div><span class="pg-k">They feel</span><p>Held up by someone who will not commit.</p></div>
+      </div>
+    </div>
+<div class="blind rv" style="--g:var(--enthusiast-bar)">
+      <h4><span class="g-tag enthusiast">Enthusiast</span> first, meeting Enthusiast last</h4>
+      <div class="blind-grid">
+        <div><span class="pg-k">You see</span><p>A room going cold and the relationships cooling with it.</p></div>
+        <div><span class="pg-k">They receive</span><p>Noise. The emotional temperature is not a variable they track.</p></div>
+        <div><span class="pg-k">You feel</span><p>Like you are the only one keeping this alive.</p></div>
+        <div><span class="pg-k">They feel</span><p>Distracted from the actual subject.</p></div>
+      </div>
+    </div>
+<div class="blind rv" style="--g:var(--host-bar)">
+      <h4><span class="g-tag host">Host</span> first, meeting Host last</h4>
+      <div class="blind-grid">
+        <div><span class="pg-k">You see</span><p>What this costs, where it came from, and who is carrying it.</p></div>
+        <div><span class="pg-k">They receive</span><p>Resources as ambient and roughly infinite.</p></div>
+        <div><span class="pg-k">You feel</span><p>Taken from.</p></div>
+        <div><span class="pg-k">They feel</span><p>Audited.</p></div>
+      </div>
+    </div>
+<div class="blind rv" style="--g:var(--strategist-bar)">
+      <h4><span class="g-tag strategist">Strategist</span> first, meeting Strategist last</h4>
+      <div class="blind-grid">
+        <div><span class="pg-k">You see</span><p>The sequence, the owner, and the date the whole thing fails without them.</p></div>
+        <div><span class="pg-k">They receive</span><p>The plan as optional background context.</p></div>
+        <div><span class="pg-k">You feel</span><p>Alone with the outcome.</p></div>
+        <div><span class="pg-k">They feel</span><p>Managed.</p></div>
+      </div>
+    </div>
+<div class="blind rv" style="--g:var(--lover-bar)">
+      <h4><span class="g-tag lover">Lover</span> first, meeting Lover last</h4>
+      <div class="blind-grid">
+        <div><span class="pg-k">You see</span><p>Exactly how everyone in the room is actually doing.</p></div>
+        <div><span class="pg-k">They receive</span><p>A channel they do not receive. It is not that they dismiss it — they cannot detect it.</p></div>
+        <div><span class="pg-k">You feel</span><p>Unseen, in a room you are reading perfectly.</p></div>
+        <div><span class="pg-k">They feel</span><p>Accused of a coldness they have no evidence of.</p></div>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">Twenty-One Collisions</div><h2>Every Pair Under Pressure</h2>
+    <p>Each gift has a flare. Put two flares in a room and they interlock into a predictable loop. Find yours, and find the move that breaks it.</p></div>
+    <div class="pair-filter rv">
+      <button type="button" class="pf active" data-f="all">All pairs</button>
+      <button type="button" class="pf catalyst" data-f="catalyst">Catalyst</button>
+      <button type="button" class="pf servant" data-f="servant">Servant of All</button>
+      <button type="button" class="pf erudite" data-f="erudite">Erudite</button>
+      <button type="button" class="pf enthusiast" data-f="enthusiast">Enthusiast</button>
+      <button type="button" class="pf host" data-f="host">Host</button>
+      <button type="button" class="pf strategist" data-f="strategist">Strategist</button>
+      <button type="button" class="pf lover" data-f="lover">Lover</button>
+    </div>
+    <div class="pair-list" id="pairList"><article class="pair rv" data-a="catalyst" data-b="servant" style="--ga:var(--catalyst-bar);--gb:var(--servant-bar)">
+      <div class="pair-top">
+        <span class="g-tag catalyst">Catalyst</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag servant">Servant of All</span>
+      </div>
+      <h3>The Uprooting and the Groundwork</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Catalyst sharpens and announces the change. The Servant absorbs the extra work it creates without mentioning it. The Catalyst reads the silence as agreement and pushes further. The Servant begins to tally. The Catalyst names the Servant's process as the obstacle and indicts it. The Servant collapses — and the collapse is the first the Catalyst has heard about any of it.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Catalyst sees</span><p>Obstruction dressed up as diligence.</p></div>
+        <div><span class="pg-k">Servant of All sees</span><p>Someone destroying work that was functioning, who will not be there for the rebuild.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Catalyst names the cost of the change out loud before announcing the change. The Servant states the cost as a number before absorbing it. Both moves are small; neither happens by accident.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="catalyst" data-b="erudite" style="--ga:var(--catalyst-bar);--gb:var(--erudite-bar)">
+      <div class="pair-top">
+        <span class="g-tag catalyst">Catalyst</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag erudite">Erudite</span>
+      </div>
+      <h3>Conviction and Corroboration</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Catalyst sharpens, needing validation now. The Erudite qualifies, because the case is not yet sound. The Catalyst reads the hedging as cowardice and indicts. The Erudite corrects — precisely, and with the receipts — then seals. Both are now certain, and neither is available.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Catalyst sees</span><p>Analysis paralysis protecting someone who does not want to be accountable.</p></div>
+        <div><span class="pg-k">Erudite sees</span><p>Someone acting on a hunch and calling it revelation.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>Agree a deadline for the answer before the argument starts. The Catalyst gets a date; the Erudite gets a runway. Most of this conflict is a scheduling problem wearing a moral costume.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="catalyst" data-b="enthusiast" style="--ga:var(--catalyst-bar);--gb:var(--enthusiast-bar)">
+      <div class="pair-top">
+        <span class="g-tag catalyst">Catalyst</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag enthusiast">Enthusiast</span>
+      </div>
+      <h3>The Wound and the Warmth</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Catalyst sharpens and the room's temperature drops. The Enthusiast performs harder to bring it back. The Catalyst reads the warmth as evasion and indicts. The Enthusiast spins. The Catalyst scorches. The Enthusiast vanishes, and tells the story later as an escape.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Catalyst sees</span><p>Someone who will sacrifice the truth to keep a room comfortable.</p></div>
+        <div><span class="pg-k">Enthusiast sees</span><p>Someone who will sacrifice people to make a point.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Catalyst delivers the hard thing and then stays for the repair. The Enthusiast hears the whole sentence before beginning to smooth it. Truth needs the warmth to be receivable; warmth needs the truth to be worth anything.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="catalyst" data-b="host" style="--ga:var(--catalyst-bar);--gb:var(--host-bar)">
+      <div class="pair-top">
+        <span class="g-tag catalyst">Catalyst</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag host">Host</span>
+      </div>
+      <h3>The Leap and the Ledger</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Catalyst sharpens: this has to happen, and it has to be resourced. The Host rations. The Catalyst indicts the caution as faithlessness. The Host funds it, but now with conditions attached. The Catalyst scorches. The Host closes the hand for good.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Catalyst sees</span><p>Someone protecting a balance sheet while the thing that matters dies.</p></div>
+        <div><span class="pg-k">Host sees</span><p>Someone spending other people's resources on their own certainty.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Catalyst brings a number and a failure case, not only a conviction. The Host names the actual condition instead of slow-walking the decision. Ambiguity is what turns this into a character fight.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="catalyst" data-b="strategist" style="--ga:var(--catalyst-bar);--gb:var(--strategist-bar)">
+      <div class="pair-top">
+        <span class="g-tag catalyst">Catalyst</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag strategist">Strategist</span>
+      </div>
+      <h3>The Pivot and the Plan</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Catalyst sharpens: new truth, change course. The Strategist tightens. The Catalyst indicts the plan as an idol. The Strategist overrides. The Catalyst scorches. The Strategist freezes them out and finishes alone.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Catalyst sees</span><p>Someone defending a plan that reality has already invalidated.</p></div>
+        <div><span class="pg-k">Strategist sees</span><p>Someone who mistakes every new idea for a revelation and has never finished anything.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>Separate 'is this true' from 'does this change the plan.' They are two different meetings. Run the first without deciding anything. Run the second with a decision rule agreed in advance, while everyone is calm.</p></div>
+      <p class="pair-note">The highest-heat pair on the list. Both are certain, both are aimed at the outcome, and each experiences the other as the primary threat to it.</p>
+    </article>
+<article class="pair rv" data-a="catalyst" data-b="lover" style="--ga:var(--catalyst-bar);--gb:var(--lover-bar)">
+      <div class="pair-top">
+        <span class="g-tag catalyst">Catalyst</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag lover">Lover</span>
+      </div>
+      <h3>The Blade and the Safety</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Catalyst sharpens. The Lover soothes and absorbs the impact. The Catalyst mistakes the smoothing for agreement and escalates. The Lover pleads — sideways, and days later. The Catalyst reads the emotion as manipulation and indicts. The Lover shuts down.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Catalyst sees</span><p>Someone who cannot handle reality.</p></div>
+        <div><span class="pg-k">Lover sees</span><p>Someone for whom being right matters more than the person in front of them.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Catalyst asks a question and waits through the entire silence for the answer. The Lover says the true thing in the moment rather than absorbing it.</p></div>
+      <p class="pair-note">This pair does the most damage fastest, because the Lover's distress is silent and the Catalyst reads silence as consent. The Lover's real response arrives days after the Catalyst has moved on.</p>
+    </article>
+<article class="pair rv" data-a="servant" data-b="erudite" style="--ga:var(--servant-bar);--gb:var(--erudite-bar)">
+      <div class="pair-top">
+        <span class="g-tag servant">Servant of All</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag erudite">Erudite</span>
+      </div>
+      <h3>The Doing and the Deliberating</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Servant absorbs and starts the work. The Erudite qualifies, unwilling to endorse the approach yet. The Servant tallies — carrying this alone again. The Erudite corrects the work after it is finished. The Servant collapses.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Servant of All sees</span><p>Someone thinking about the problem while other people solve it.</p></div>
+        <div><span class="pg-k">Erudite sees</span><p>Motion mistaken for progress, and work that will now have to be redone.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Erudite gives a provisional green light with a named review point. The Servant asks for the review before doing the work rather than after.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="servant" data-b="enthusiast" style="--ga:var(--servant-bar);--gb:var(--enthusiast-bar)">
+      <div class="pair-top">
+        <span class="g-tag servant">Servant of All</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag enthusiast">Enthusiast</span>
+      </div>
+      <h3>The Load and the Lift</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Servant absorbs. The Enthusiast performs — celebrates the team, generates the energy, picks nothing up. The Servant tallies. The Enthusiast turns the tally into a joke. The Servant collapses. The Enthusiast vanishes, hurt and genuinely bewildered.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Servant of All sees</span><p>Someone who takes credit for the atmosphere while other people produce the results.</p></div>
+        <div><span class="pg-k">Enthusiast sees</span><p>Someone whose martyrdom makes the entire room heavy.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Enthusiast takes one concrete, unglamorous task and finishes it visibly. The Servant converts the resentment into a request within forty-eight hours instead of banking it.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="servant" data-b="host" style="--ga:var(--servant-bar);--gb:var(--host-bar)">
+      <div class="pair-top">
+        <span class="g-tag servant">Servant of All</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag host">Host</span>
+      </div>
+      <h3>Two Kinds of Giving</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>Both give. Both keep score. Under pressure each discounts the other's currency. The Servant absorbs labor; the Host rations resource. The Servant tallies — they wrote a check, I did the work. The Host leverages. Both withdraw, each privately certain they gave more.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Servant of All sees</span><p>Generosity that costs nothing personal.</p></div>
+        <div><span class="pg-k">Host sees</span><p>Someone who does the visible task and calls it sacrifice while ignoring who paid for it.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>Each names the other's contribution in the other's own currency, specifically and out loud. 'That check meant this.' 'Those hours meant that.' The entire conflict is two ledgers that were never reconciled.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="servant" data-b="strategist" style="--ga:var(--servant-bar);--gb:var(--strategist-bar)">
+      <div class="pair-top">
+        <span class="g-tag servant">Servant of All</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag strategist">Strategist</span>
+      </div>
+      <h3>The Hands and the Plan</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Strategist tightens and assigns. The Servant absorbs. The Strategist reads capacity as availability and assigns more. The Servant tallies. The Strategist overrides the complaint as noise. The Servant collapses — with no warning that either of them would recognize as one.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Servant of All sees</span><p>Someone who spends people and calls it leadership.</p></div>
+        <div><span class="pg-k">Strategist sees</span><p>Someone who never raised a hand and then broke.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Strategist asks for the number rather than the willingness: what would have to come off for this to fit? The Servant answers with a real limit instead of a yes.</p></div>
+      <p class="pair-note">The most common burnout pair in any organization: a leader who assigns and a worker who has never once said no.</p>
+    </article>
+<article class="pair rv" data-a="servant" data-b="lover" style="--ga:var(--servant-bar);--gb:var(--lover-bar)">
+      <div class="pair-top">
+        <span class="g-tag servant">Servant of All</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag lover">Lover</span>
+      </div>
+      <h3>The Quiet Pair</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>Both absorb. Both go silent. Neither asks. The Servant does more; the Lover insists nothing is wrong. Resentment accumulates on both sides with no visible surface. The Servant tallies through sighs; the Lover pleads through hints. Neither is answered, because neither asked. Both shut down.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Servant of All sees</span><p>Someone who is upset about something and will not say what.</p></div>
+        <div><span class="pg-k">Lover sees</span><p>Someone who is doing everything and will not say what they need.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>One of them has to ask a direct question and then wait through the silence. Nothing here resolves by escalation, because neither of them escalates.</p></div>
+      <p class="pair-note">The least visible and most durable resentment on the list. This pair can run for a decade without a single raised voice and without a single honest sentence.</p>
+    </article>
+<article class="pair rv" data-a="erudite" data-b="enthusiast" style="--ga:var(--erudite-bar);--gb:var(--enthusiast-bar)">
+      <div class="pair-top">
+        <span class="g-tag erudite">Erudite</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag enthusiast">Enthusiast</span>
+      </div>
+      <h3>Depth and Delivery</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Erudite qualifies. The Enthusiast simplifies it for the room. The Erudite corrects the simplification, publicly. The Enthusiast spins away from the correction. The Erudite seals. The Enthusiast vanishes.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Erudite sees</span><p>Someone flattening the truth for applause.</p></div>
+        <div><span class="pg-k">Enthusiast sees</span><p>Someone who would rather be precise than be understood.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>Build the message together with clear domains: the Erudite owns accuracy, the Enthusiast owns receivability, and neither overrides the other's territory.</p></div>
+      <p class="pair-note">A genuine complement, wasted more often than any other pair on this list. Almost every idea that changed anything needed both of these people.</p>
+    </article>
+<article class="pair rv" data-a="erudite" data-b="host" style="--ga:var(--erudite-bar);--gb:var(--host-bar)">
+      <div class="pair-top">
+        <span class="g-tag erudite">Erudite</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag host">Host</span>
+      </div>
+      <h3>The Study and the Spend</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Erudite qualifies. The Host reads it as an inability to commit and rations. The Erudite corrects the Host's reasoning. The Host attaches conditions. Both withdraw, each certain the other is the unserious one.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Erudite sees</span><p>Decisions made on instinct and cash flow rather than evidence.</p></div>
+        <div><span class="pg-k">Host sees</span><p>An inquiry with no end date that never produces anything to act on.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>Put a decision date and a decision rule on the calendar. The Erudite gets the interval; the Host gets the guarantee that it terminates.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="erudite" data-b="strategist" style="--ga:var(--erudite-bar);--gb:var(--strategist-bar)">
+      <div class="pair-top">
+        <span class="g-tag erudite">Erudite</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag strategist">Strategist</span>
+      </div>
+      <h3>The Question and the Order</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Strategist tightens — the call has to be made now. The Erudite qualifies. The Strategist overrides and decides without them. The Erudite corrects afterward, from the record. The Strategist freezes them out of the next decision. The Erudite seals.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Erudite sees</span><p>An advisor who will not advise, and then critiques.</p></div>
+        <div><span class="pg-k">Strategist sees</span><p>A leader who wanted agreement rather than counsel.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Strategist asks for the best answer available by a stated time and commits to acting on it. The Erudite commits to producing one, clearly flagged as provisional. Both have to accept that a decision made on incomplete information is not a failure of process.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="erudite" data-b="lover" style="--ga:var(--erudite-bar);--gb:var(--lover-bar)">
+      <div class="pair-top">
+        <span class="g-tag erudite">Erudite</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag lover">Lover</span>
+      </div>
+      <h3>The Head and the Heart</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Lover soothes and does not say what is wrong. The Erudite answers the words and misses the signal entirely. The Lover pleads. The Erudite analyzes the feeling instead of receiving it. The Lover shuts down. The Erudite seals, having concluded the exchange was irrational.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Erudite sees</span><p>An emotional response with no argument inside it.</p></div>
+        <div><span class="pg-k">Lover sees</span><p>Someone who treated their pain as a proposition to be evaluated.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Erudite says: tell me the feeling first, and I will not try to solve it yet. The Lover leads with the need instead of the story.</p></div>
+      <p class="pair-note">Their information is genuinely in different formats. Both formats are real, and neither converts without effort.</p>
+    </article>
+<article class="pair rv" data-a="enthusiast" data-b="host" style="--ga:var(--enthusiast-bar);--gb:var(--host-bar)">
+      <div class="pair-top">
+        <span class="g-tag enthusiast">Enthusiast</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag host">Host</span>
+      </div>
+      <h3>The Vision and the Cost</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Enthusiast performs and sells the possibility. The Host rations. The Enthusiast spins past the objection. The Host funds it with strings attached. The Enthusiast vanishes the moment the strings pull.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Enthusiast sees</span><p>Someone who kills momentum with a spreadsheet.</p></div>
+        <div><span class="pg-k">Host sees</span><p>Someone selling enthusiasm as though it were a plan, with someone else's money.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Enthusiast brings the cost alongside the vision, unprompted. The Host states the actual number and the actual condition instead of stalling.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="enthusiast" data-b="strategist" style="--ga:var(--enthusiast-bar);--gb:var(--strategist-bar)">
+      <div class="pair-top">
+        <span class="g-tag enthusiast">Enthusiast</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag strategist">Strategist</span>
+      </div>
+      <h3>The Room and the Result</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Strategist tightens. The Enthusiast performs to restore morale. The Strategist reads it as noise and overrides. The Enthusiast spins. The Strategist freezes them out of the decision. The Enthusiast vanishes.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Enthusiast sees</span><p>Energy substituting for execution.</p></div>
+        <div><span class="pg-k">Strategist sees</span><p>A plan that will be executed flawlessly by people who have stopped caring.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Strategist gives the Enthusiast ownership of a real deliverable rather than of the atmosphere. The Enthusiast reports the number before reporting the mood.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="enthusiast" data-b="lover" style="--ga:var(--enthusiast-bar);--gb:var(--lover-bar)">
+      <div class="pair-top">
+        <span class="g-tag enthusiast">Enthusiast</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag lover">Lover</span>
+      </div>
+      <h3>Two Ways of Loving People</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Enthusiast performs and keeps it light. The Lover soothes and does not say the hard thing. The real issue is never raised. The Lover pleads sideways. The Enthusiast spins. The Lover shuts down. The Enthusiast vanishes, genuinely surprised that anything was wrong.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Enthusiast sees</span><p>A mood that changed without warning.</p></div>
+        <div><span class="pg-k">Lover sees</span><p>Someone who was never actually present for the depth of it.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>Schedule the hard conversation, because neither of them will start it spontaneously. This pair does not need more warmth. It needs a calendar.</p></div>
+      <p class="pair-note">Warm, easy, and quietly dangerous. Both are relational, both are conflict-averse, and both need to be wanted — which means nothing difficult ever gets said until it is too late to say it well.</p>
+    </article>
+<article class="pair rv" data-a="host" data-b="strategist" style="--ga:var(--host-bar);--gb:var(--strategist-bar)">
+      <div class="pair-top">
+        <span class="g-tag host">Host</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag strategist">Strategist</span>
+      </div>
+      <h3>Stewardship and Command</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Strategist tightens — the plan requires the resource. The Host rations — the resource requires a return. The Strategist overrides the condition. The Host attaches a heavier one. The Strategist freezes. The Host withholds.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Host sees</span><p>Someone treating the mission as a portfolio.</p></div>
+        <div><span class="pg-k">Strategist sees</span><p>Someone treating their provision as an entitlement.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>Agree in advance what the resource is for and what evidence closes the loop. This conflict is almost always the absence of a stated return condition, not a disagreement about the mission.</p></div>
+      
+    </article>
+<article class="pair rv" data-a="host" data-b="lover" style="--ga:var(--host-bar);--gb:var(--lover-bar)">
+      <div class="pair-top">
+        <span class="g-tag host">Host</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag lover">Lover</span>
+      </div>
+      <h3>The Gift and the Gesture</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Host rations. The Lover reads the withdrawal of provision as a withdrawal of love. The Lover soothes and asks for nothing. The Host reads the silence as not being needed. The Host withholds. The Lover shuts down.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Host sees</span><p>Someone who never says what they need and then seems wounded.</p></div>
+        <div><span class="pg-k">Lover sees</span><p>Someone who gives things instead of presence.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Host gives ten minutes of undivided attention instead of a thing. The Lover names one concrete need out loud.</p></div>
+      <p class="pair-note">These two are spending different currencies, both sincerely. Neither has ever been told the other's is legal tender.</p>
+    </article>
+<article class="pair rv" data-a="strategist" data-b="lover" style="--ga:var(--strategist-bar);--gb:var(--lover-bar)">
+      <div class="pair-top">
+        <span class="g-tag strategist">Strategist</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag lover">Lover</span>
+      </div>
+      <h3>The Mission and the Person</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>The Strategist tightens. The Lover soothes, complies, and says nothing about the cost. The Strategist reads compliance as agreement and pushes further. The Lover pleads. The Strategist overrides it as emotional. The Lover shuts down. The Strategist freezes, concluding they cannot be relied on.</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">Strategist sees</span><p>Someone who agreed and then quietly did not.</p></div>
+        <div><span class="pg-k">Lover sees</span><p>Someone for whom people are line items.</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>The Strategist asks what this will cost you, and treats the answer as data rather than as resistance. The Lover says no out loud, once, and discovers that the relationship survives it.</p></div>
+      
+    </article></div>
+    <p class="pair-none" id="pairNone" hidden>No pairs match that filter.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">When the Gift Meets Itself</div><h2>The Same-Gift Trap</h2>
+    <p>Two people with the same first gift have a Gap near zero, and almost everyone reads that as compatibility. It is not. It is a doubled strength with a doubled blind spot and no one in the room who can see around it. Same-gift pairs do not fail from friction. They fail from agreement.</p></div>
+    <div class="mirror-list">
+    <div class="mirror rv" style="--g:var(--catalyst-bar)">
+      <span class="g-tag catalyst">Catalyst × Catalyst</span>
+      <h4>Two prosecutors, no jury.</h4>
+      <p>They reach the diagnosis in ninety seconds and escalate each other past every off-ramp. Nothing gets built. Something gets burned, and both of them will describe it afterward as necessary.</p>
+      <p class="mirror-needs"><span>What it needs</span> A third gift in the room with actual veto power.</p>
+    </div>
+
+    <div class="mirror rv" style="--g:var(--servant-bar)">
+      <span class="g-tag servant">Servant of All × Servant of All</span>
+      <h4>Two ledgers, neither one read aloud.</h4>
+      <p>Both do more. Neither asks. The debt compounds silently for years while the relationship looks, from outside and from inside, entirely healthy.</p>
+      <p class="mirror-needs"><span>What it needs</span> A standing question, asked on a schedule: what did this cost you this week?</p>
+    </div>
+
+    <div class="mirror rv" style="--g:var(--erudite-bar)">
+      <span class="g-tag erudite">Erudite × Erudite</span>
+      <h4>Two citadels with excellent sightlines.</h4>
+      <p>The conversation is genuinely superb. The decision never comes. Each provides the other with a perfectly respectable reason for one more round of investigation.</p>
+      <p class="mirror-needs"><span>What it needs</span> An external deadline, imposed by someone who is not in the room.</p>
+    </div>
+
+    <div class="mirror rv" style="--g:var(--enthusiast-bar)">
+      <span class="g-tag enthusiast">Enthusiast × Enthusiast</span>
+      <h4>Two performances, one audience, no substance.</h4>
+      <p>The room is fantastic. Nothing hard is ever said. Both leave energized and neither leaves known, and the friendship holds beautifully until the first thing that cannot be charmed.</p>
+      <p class="mirror-needs"><span>What it needs</span> A scheduled, structured conflict, with the topic named in advance.</p>
+    </div>
+
+    <div class="mirror rv" style="--g:var(--host-bar)">
+      <span class="g-tag host">Host × Host</span>
+      <h4>Two vaults, each waiting for the other to open first.</h4>
+      <p>Generosity becomes a standoff conducted with immaculate manners. Both are keeping score of who offered last, and both are certain it was them.</p>
+      <p class="mirror-needs"><span>What it needs</span> One of them gives first, without conditions, and says so out loud.</p>
+    </div>
+
+    <div class="mirror rv" style="--g:var(--strategist-bar)">
+      <span class="g-tag strategist">Strategist × Strategist</span>
+      <h4>Two commands, one mission.</h4>
+      <p>They either split the territory cleanly or they fight until one of them leaves. Ambiguity about who decides is fatal in this pair specifically — far more than in any other combination.</p>
+      <p class="mirror-needs"><span>What it needs</span> An explicit decision-rights map, in writing, before it is needed.</p>
+    </div>
+
+    <div class="mirror rv" style="--g:var(--lover-bar)">
+      <span class="g-tag lover">Lover × Lover</span>
+      <h4>Two people absorbing everything, both waiting to be asked.</h4>
+      <p>The gentlest and least honest relationship on the list. Every hard thing gets swallowed to protect the other person, who is doing exactly the same thing, for exactly the same reason.</p>
+      <p class="mirror-needs"><span>What it needs</span> A rule: the hard thing gets said within twenty-four hours. Badly, if necessary.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="cta-band"><div class="rv"><h2>Know the gap before the hard week</h2><p>Every relationship is easier to translate when both people know what they are translating from.</p><a class="btn btn-primary" href="/assessment">Take the Assessment</a> <a class="btn btn-ghost" href="/under-pressure">Read the three descents</a></div></section>
+
+<script>
+(function(){
+  var ORDER = ["catalyst","servant","erudite","enthusiast","host","strategist","lover"];
+  var NAMES = {"catalyst":"Catalyst","servant":"Servant of All","erudite":"Erudite","enthusiast":"Enthusiast","host":"Host","strategist":"Strategist","lover":"Lover"};
+  var BANDS = [{"name":"Same Grain","line":"You understand each other without translating.","watch":"Confirmation. When you agree instantly, ask who is missing from the conversation."},{"name":"Working Gap","line":"Enough overlap to feel natural, enough difference to cover each other.","watch":"Complacency. This band holds until the first genuine crisis, then discovers it has no agreed process."},{"name":"Wide Gap","line":"Misreading each other is the default, not the exception.","watch":"Attribution. Before you conclude what they meant, ask. You will be wrong more often than your confidence suggests."},{"name":"Inverted","line":"What you lead with is what they can barely see.","watch":"Goodwill as a strategy. Inverted pairs do not run on affection. They run on protocol: who decides what, in what order, by when."}];
+  var picks = { a: [], b: [] };
+
+  function bandFor(n){ if(n<=5) return 0; if(n<=11) return 1; if(n<=17) return 2; return 3; }
+
+  function paint(){
+    ['a','b'].forEach(function(side){
+      var list = picks[side];
+      document.querySelectorAll('.rank-chip[data-side="'+side+'"]').forEach(function(el){
+        var i = list.indexOf(el.dataset.gift);
+        el.classList.toggle('picked', i > -1);
+        el.querySelector('.rank-n').textContent = i > -1 ? (i+1) : '';
+      });
+    });
+    render();
+  }
+
+  function render(){
+    var out = document.getElementById('calcOut');
+    if(picks.a.length < 7 || picks.b.length < 7){
+      var need = (7 - picks.a.length) + (7 - picks.b.length);
+      out.innerHTML = '<div class="calc-empty">' + need + ' more to place. Rank all seven for both people to see the Gap.</div>';
+      return;
+    }
+    var total = 0, rows = '', inversions = 0;
+    ORDER.forEach(function(g){
+      var ra = picks.a.indexOf(g) + 1, rb = picks.b.indexOf(g) + 1, d = Math.abs(ra - rb);
+      total += d;
+      if((ra <= 3 && rb >= 5) || (rb <= 3 && ra >= 5)) inversions++;
+      rows += '<tr><td><span class="g-tag '+g+'">'+NAMES[g]+'</span></td><td>'+ra+'</td><td>'+rb+'</td><td class="d'+(d>=4?' hi':'')+'">'+d+'</td></tr>';
+    });
+    var b = BANDS[bandFor(total)];
+    out.innerHTML =
+      '<div class="calc-score"><div class="calc-num">'+total+'</div><div><div class="calc-band">'+b.name+'</div><div class="calc-band-line">'+b.line+'</div></div></div>' +
+      '<p class="calc-watch"><span>Watch for</span> '+b.watch+'</p>' +
+      '<p class="calc-inv"><span>Inversions</span> '+inversions+' of 7 — gifts sitting in one person\'s top three and the other\'s bottom three. Each one is a place where something obvious to one of you is invisible to the other.</p>' +
+      '<table class="band-table calc-table"><thead><tr><th>Gift</th><th>A</th><th>B</th><th>Diff</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+
+  document.querySelectorAll('.rank-chip').forEach(function(el){
+    el.addEventListener('click', function(){
+      var side = el.dataset.side, g = el.dataset.gift, i = picks[side].indexOf(g);
+      if(i > -1) picks[side].splice(i,1); else if(picks[side].length < 7) picks[side].push(g);
+      paint();
+    });
+  });
+  var rst = document.getElementById('calcReset');
+  if(rst) rst.addEventListener('click', function(){ picks = { a: [], b: [] }; paint(); });
+
+  document.querySelectorAll('.pair-filter .pf').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.pair-filter .pf').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.f, shown = 0;
+      document.querySelectorAll('.pair').forEach(function(c){
+        var ok = f === 'all' || c.dataset.a === f || c.dataset.b === f;
+        c.hidden = !ok; if(ok) shown++;
+      });
+      document.getElementById('pairNone').hidden = shown > 0;
+    });
+  });
+})();
+</script>
+<footer>
+  <div class="foot-inner">
+    <a class="brand" href="/"><img src="images/crown-thumb.webp" alt=""><span>The 7 Gifts of the Father</span></a>
+    <div class="foot-links">
+      <a href="/gifts/catalyst">The Catalyst</a>
+      <a href="/gifts/servant">The Servant of All</a>
+      <a href="/gifts/erudite">The Erudite</a>
+      <a href="/gifts/enthusiast">The Enthusiast</a>
+      <a href="/gifts/host">The Host</a>
+      <a href="/gifts/strategist">The Strategist</a>
+      <a href="/gifts/lover">The Lover</a>
+    </div>
+    <div class="foot-links">
+      <a href="/assessment">Assessment</a>
+      <a href="/archetypes/">Archetypes</a>
+      <a href="/under-pressure">Under Pressure</a>
+      <a href="/how-gifts-meet">How Gifts Meet</a>
+      <a href="/foundation">Foundation</a>
+      <a href="/understanding">Your Profile</a>
+    </div>
+    <p class="foot-verse">“Having gifts that differ according to the grace given to us, let us use them.” — Romans 12:6</p>
+  </div>
+</footer>
+<script src="js/main.js?v=ms3fi7zw"></script>
+</body>
+</html>

@@ -2,10 +2,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const OUT = path.join(__dirname, 'site');
+const OUT = path.join(__dirname, '..', 'site');
 const gifts = JSON.parse(fs.readFileSync(__dirname + '/content/gifts.json', 'utf8'));
 const archData = JSON.parse(fs.readFileSync(__dirname + '/content/archetypes.json', 'utf8'));
 const questions = JSON.parse(fs.readFileSync(__dirname + '/content/questions.json', 'utf8'));
+const pressure = JSON.parse(fs.readFileSync(__dirname + '/content/pressure.json', 'utf8'));
+const interaction = JSON.parse(fs.readFileSync(__dirname + '/content/interaction.json', 'utf8'));
 
 const V = Date.now().toString(36);
 const QCOUNT = questions.likert.length + questions.forcedChoice.length + questions.scenarios.length;
@@ -34,6 +36,8 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
     ['index.html', 'Home', 'home'],
     ['gifts/index.html', 'The 7 Gifts', 'gifts'],
     ['archetypes/index.html', 'The 35 Archetypes', 'archetypes'],
+    ['under-pressure.html', 'Pressure', 'pressure'],
+    ['how-gifts-meet.html', 'Pairings', 'meet'],
     ['foundation.html', 'Foundation', 'foundation'],
     ['understanding.html', 'Your Profile', 'understanding'],
   ];
@@ -75,6 +79,8 @@ ${body}
     <div class="foot-links">
       <a href="${root}assessment.html">Assessment</a>
       <a href="${root}archetypes/index.html">Archetypes</a>
+      <a href="${root}under-pressure.html">Under Pressure</a>
+      <a href="${root}how-gifts-meet.html">How Gifts Meet</a>
       <a href="${root}foundation.html">Foundation</a>
       <a href="${root}understanding.html">Your Profile</a>
     </div>
@@ -217,6 +223,82 @@ function giftsIndex() {
 }
 
 /* ---------------- individual gift page ---------------- */
+/* ---------------- pressure (shared blocks) ---------------- */
+const STAGE_TINT = { Strain: 'var(--servant-bar)', Distortion: 'var(--enthusiast-bar)', Captivity: 'var(--catalyst)' };
+
+function descentLadder(slug, { compact = false } = {}) {
+  const p = pressure.gifts[slug];
+  return p.descent.map((d, i) => `
+    <div class="descent rv" style="--stage:${STAGE_TINT[d.stage]}">
+      <div class="descent-rail"><span class="descent-num">${i + 1}</span></div>
+      <div class="descent-body">
+        <div class="descent-head"><span class="descent-stage">${esc(d.stage)}</span><span class="descent-verb">${esc(d.verb)}</span></div>
+        <p class="descent-tell">${esc(d.tell)}</p>
+        <p>${esc(d.body)}</p>
+        ${compact ? '' : `<p class="descent-cost"><span>What it costs</span> ${esc(d.cost)}</p>`}
+      </div>
+    </div>`).join('\n');
+}
+
+function pressureSection(slug, m) {
+  const p = pressure.gifts[slug];
+  const g = gifts[slug];
+  return `
+<section class="g-section pressure-band" style="--g:${m.bar};--g-dark:${m.ink}">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="kicker center">When the Gift Is Under Pressure</div>
+      <h2>The Descent of ${esc(g.name.replace(/^The /, 'the '))}</h2>
+      <p>A gift under pressure does not switch off. It works harder in the wrong direction. Here is what that looks like, stage by stage.</p>
+    </div>
+
+    <div class="flare-strip rv">
+      <div class="flare-k">Flare Signature</div>
+      <div class="flare-verbs">${p.flare.map(v => `<span>${esc(v)}</span>`).join('<i class="ar">→</i>')}</div>
+      <p class="flare-trigger"><span>What sets it off</span> ${esc(p.trigger)}</p>
+    </div>
+
+    <div class="descent-list">${descentLadder(slug)}</div>
+
+    <div class="chronic rv">
+      <div class="g-label">If It Settles In</div>
+      <h3>${esc(p.chronic.name)}</h3>
+      <p>${esc(p.chronic.body)}</p>
+    </div>
+
+    <div class="section-head rv" style="margin-top:72px">
+      <div class="kicker center">The Way Back</div>
+      <h2>Re-Entry</h2>
+    </div>
+    <div class="grid g2 reentry-grid">
+      <div class="card rv say-yes">
+        <div class="fw-k">Say This</div>
+        <blockquote class="say-line">“${esc(p.sayThis)}”</blockquote>
+        <p class="say-need"><span>What they actually need</span> ${esc(p.needs)}</p>
+      </div>
+      <div class="card rv say-no">
+        <div class="fw-k">Not This</div>
+        <blockquote class="say-line">“${esc(p.notThis)}”</blockquote>
+        <p class="say-need"><span>Why it escalates</span> ${esc(p.notThisWhy)}</p>
+      </div>
+    </div>
+    <div class="grid g2 reentry-grid" style="margin-top:0">
+      <div class="card rv">
+        <div class="fw-k">Their Own Move Back</div>
+        <p>${esc(p.ownMove)}</p>
+      </div>
+      <div class="card rv restored">
+        <div class="fw-k">What Returns</div>
+        <div class="fw-q">${esc(p.restored)}</div>
+        <p>${esc(p.restoredBody)}</p>
+      </div>
+    </div>
+
+    <p class="pressure-more rv"><a class="link-arrow" href="../under-pressure.html">See all seven gifts under pressure <span class="ar">→</span></a></p>
+  </div>
+</section>`;
+}
+
 function giftPage(slug) {
   const g = gifts[slug], m = META[slug];
   const idx = ORDER.indexOf(slug);
@@ -330,6 +412,8 @@ function giftPage(slug) {
     </div>
   </div>
 </section>
+
+${pressureSection(slug, m)}
 
 <section class="g-section alt" style="--g:${m.bar};--g-dark:${m.ink}">
   <div class="wrap">
@@ -795,6 +879,317 @@ function understandingPage() {
 }
 
 /* ---------------- assessment shell ---------------- */
+/* ---------------- under pressure ---------------- */
+function pressurePage() {
+  const M = pressure.model;
+
+  const stageCards = M.stages.map(s => `
+    <div class="card rv stage-card" style="--stage:${STAGE_TINT[s.name]}">
+      <div class="stage-n">${s.n}</div>
+      <h3>${esc(s.name)}</h3>
+      <div class="stage-line">${esc(s.line)}</div>
+      <p>${esc(s.description)}</p>
+      <p class="stage-rev"><span>Coming back</span> ${esc(s.reversal)}</p>
+    </div>`).join('\n');
+
+  const laws = M.laws.map(l => `<div class="s-item rv"><span class="dot"></span><div><h4>${esc(l.title)}</h4><p>${esc(l.body)}</p></div></div>`).join('\n');
+
+  const quickTable = ORDER.map(s => {
+    const p = pressure.gifts[s], g = gifts[s];
+    return `<tr>
+      <td><a class="g-tag ${s}" href="gifts/${s}.html">${esc(g.name.replace(/^The /, ''))}</a></td>
+      <td class="flare-cell">${p.flare.map(v => `<b>${esc(v)}</b>`).join('<i>→</i>')}</td>
+      <td>${esc(p.chronic.name)}</td>
+      <td>${esc(p.restored)}</td>
+    </tr>`;
+  }).join('\n');
+
+  const giftBlocks = ORDER.map(s => {
+    const p = pressure.gifts[s], g = gifts[s], m = META[s];
+    return `
+    <div class="pg-block rv" id="${s}" style="--g:${m.bar};--g-dark:${m.ink}">
+      <div class="pg-head">
+        <img src="images/${s}-thumb.webp" alt="" width="56" height="56" loading="lazy">
+        <div>
+          <h3>${esc(g.name)}</h3>
+          <div class="pg-flare">${p.flare.map(v => `<span>${esc(v)}</span>`).join('<i class="ar">→</i>')}</div>
+        </div>
+      </div>
+      <p class="pg-trigger"><span>Trigger</span> ${esc(p.trigger)}</p>
+      <div class="descent-list compact">${descentLadder(s, { compact: true })}</div>
+      <div class="pg-foot">
+        <div><span class="pg-k">If it settles in</span><b>${esc(p.chronic.name)}</b><p>${esc(p.chronic.body)}</p></div>
+        <div><span class="pg-k">Say this</span><b class="quote">“${esc(p.sayThis)}”</b><p>${esc(p.needs)}</p></div>
+        <div><span class="pg-k">Not this</span><b class="quote no">“${esc(p.notThis)}”</b><p>${esc(p.notThisWhy)}</p></div>
+        <div><span class="pg-k">Their move back</span><p>${esc(p.ownMove)}</p></div>
+      </div>
+      <a class="link-arrow" href="gifts/${s}.html">Full profile for ${esc(g.name)} <span class="ar">→</span></a>
+    </div>`;
+  }).join('\n');
+
+  const jump = ORDER.map(s => `<a class="g-tag ${s}" href="#${s}">${esc(gifts[s].name.replace(/^The /, ''))}</a>`).join('');
+
+  const body = `
+<header class="page-hero">
+  <img class="mark" src="images/crown-thumb.webp" alt="">
+  <div class="kicker">The Gifts Under Pressure</div>
+  <h1>The Three Descents</h1>
+  <p class="lede">${esc(M.premise)}</p>
+</header>
+
+<section class="section">
+  <div class="wrap narrow prose rv">
+    <p class="lead-prose big">${esc(M.theology)}</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">The Model</div><h2>Three Stages, One Gift</h2>
+    <p>Each stage is the same gift, aimed further from its purpose. The earlier you catch it, the cheaper it is to reverse.</p></div>
+    <div class="grid g3 stage-grid">${stageCards}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap narrow">
+    <div class="section-head rv"><div class="kicker center">Four Things Worth Knowing</div><h2>How Distress Actually Works</h2></div>
+    <div class="s-list">${laws}</div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">At a Glance</div><h2>The Seven Flare Signatures</h2>
+    <p>Three verbs per gift, one for each stage of the descent. Learn the first verb and you will catch it while it is still a conversation.</p></div>
+    <div class="table-card rv">
+      <table class="band-table flare-table">
+        <thead><tr><th>Gift</th><th>Strain → Distortion → Captivity</th><th>Chronic Pattern</th><th>Strength Restored</th></tr></thead>
+        <tbody>${quickTable}</tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">Gift by Gift</div><h2>The Seven Descents</h2></div>
+    <div class="jump-bar rv">${jump}</div>
+    <div class="pg-list">${giftBlocks}</div>
+  </div>
+</section>
+
+<section class="cta-band"><div class="rv"><h2>Distress is a language too</h2><p>Knowing your own descent is the difference between catching it at Strain and explaining it at Captivity.</p><a class="btn btn-primary" href="assessment.html">Take the Assessment</a> <a class="btn btn-ghost" href="how-gifts-meet.html">See how gifts collide</a></div></section>`;
+
+  return layout({ title: 'Under Pressure: The Three Descents | 7 Gifts of the Father', desc: 'How each of the seven motivational gifts breaks down under pressure — the three-stage descent, the flare signature for each gift, and the specific path back.', body, root: '', active: 'pressure' });
+}
+
+/* ---------------- how gifts meet ---------------- */
+function interactionPage() {
+  const G = interaction.gap;
+
+  const bands = G.bands.map(b => `
+    <div class="card rv band-card">
+      <div class="band-range">${esc(b.range)}</div>
+      <h3>${esc(b.name)}</h3>
+      <div class="band-line">${esc(b.line)}</div>
+      <p>${esc(b.body)}</p>
+      <p class="band-watch"><span>Watch for</span> ${esc(b.watch)}</p>
+    </div>`).join('\n');
+
+  const gapLaws = G.laws.map(l => `<div class="s-item rv"><span class="dot"></span><div><h4>${esc(l.title)}</h4><p>${esc(l.body)}</p></div></div>`).join('\n');
+
+  const blind = interaction.blindExchange.items.map(i => {
+    const g = gifts[i.gift];
+    return `<div class="blind rv" style="--g:${META[i.gift].bar}">
+      <h4><span class="g-tag ${i.gift}">${esc(g.name.replace(/^The /, ''))}</span> first, meeting ${esc(g.name.replace(/^The /, ''))} last</h4>
+      <div class="blind-grid">
+        <div><span class="pg-k">You see</span><p>${esc(i.youSee)}</p></div>
+        <div><span class="pg-k">They receive</span><p>${esc(i.theyGet)}</p></div>
+        <div><span class="pg-k">You feel</span><p>${esc(i.youFeel)}</p></div>
+        <div><span class="pg-k">They feel</span><p>${esc(i.theyFeel)}</p></div>
+      </div>
+    </div>`;
+  }).join('\n');
+
+  const pairCards = interaction.pairs.map((p, i) => {
+    const ga = gifts[p.a], gb = gifts[p.b];
+    return `<article class="pair rv" data-a="${p.a}" data-b="${p.b}" style="--ga:${META[p.a].bar};--gb:${META[p.b].bar}">
+      <div class="pair-top">
+        <span class="g-tag ${p.a}">${esc(ga.name.replace(/^The /, ''))}</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag ${p.b}">${esc(gb.name.replace(/^The /, ''))}</span>
+      </div>
+      <h3>${esc(p.title)}</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>${esc(p.loop)}</p></div>
+      <div class="pair-eyes">
+        <div><span class="pg-k">${esc(ga.name.replace(/^The /, ''))} sees</span><p>${esc(p.aSees)}</p></div>
+        <div><span class="pg-k">${esc(gb.name.replace(/^The /, ''))} sees</span><p>${esc(p.bSees)}</p></div>
+      </div>
+      <div class="pair-break"><span class="pg-k">What breaks the loop</span><p>${esc(p.breaker)}</p></div>
+      ${p.note ? `<p class="pair-note">${esc(p.note)}</p>` : ''}
+    </article>`;
+  }).join('\n');
+
+  const mirrors = interaction.mirrors.items.map(mi => `
+    <div class="mirror rv" style="--g:${META[mi.gift].bar}">
+      <span class="g-tag ${mi.gift}">${esc(gifts[mi.gift].name.replace(/^The /, ''))} × ${esc(gifts[mi.gift].name.replace(/^The /, ''))}</span>
+      <h4>${esc(mi.line)}</h4>
+      <p>${esc(mi.body)}</p>
+      <p class="mirror-needs"><span>What it needs</span> ${esc(mi.needs)}</p>
+    </div>`).join('\n');
+
+  const calcCol = side => ORDER.map(s => `<button type="button" class="rank-chip ${s}" data-side="${side}" data-gift="${s}"><span class="rank-n"></span>${esc(gifts[s].name.replace(/^The /, ''))}</button>`).join('\n');
+
+  const body = `
+<header class="page-hero">
+  <img class="mark" src="images/crown-thumb.webp" alt="">
+  <div class="kicker">How the Gifts Meet</div>
+  <h1>The Gap</h1>
+  <p class="lede">${esc(G.premise)}</p>
+</header>
+
+<section class="section">
+  <div class="wrap narrow prose rv">
+    <h3 style="margin-top:0">How it is measured</h3>
+    <p>${esc(G.method)}</p>
+    <p class="muted-note">A worked example: if Prophecy sits first for you and fifth for them, that is a difference of four. Do that for all seven gifts and add the results. Two identical profiles score zero. Two perfect inversions score twenty-four.</p>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">Calculate It</div><h2>The Gap Between Two People</h2>
+    <p>Rank each person's gifts by clicking them in order, strongest first. Click a chip again to remove it.</p></div>
+    <div class="calc rv">
+      <div class="calc-cols">
+        <div class="calc-col"><div class="calc-name">Person A</div><div class="rank-set" data-side="a">${calcCol('a')}</div></div>
+        <div class="calc-col"><div class="calc-name">Person B</div><div class="rank-set" data-side="b">${calcCol('b')}</div></div>
+      </div>
+      <div class="calc-out" id="calcOut" aria-live="polite">
+        <div class="calc-empty">Rank all seven gifts for both people to see the Gap.</div>
+      </div>
+      <button type="button" class="btn btn-quiet calc-reset" id="calcReset">Reset</button>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">Reading the Number</div><h2>Four Bands</h2></div>
+    <div class="grid g2 band-grid">${bands}</div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap narrow">
+    <div class="section-head rv"><div class="kicker center">Before You Trust the Score</div><h2>Four Rules That Matter More Than the Number</h2></div>
+    <div class="s-list">${gapLaws}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">${esc(interaction.blindExchange.title)}</div><h2>When Your First Is Their Last</h2>
+    <p>${esc(interaction.blindExchange.premise)}</p></div>
+    <div class="blind-list">${blind}</div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">Twenty-One Collisions</div><h2>Every Pair Under Pressure</h2>
+    <p>Each gift has a flare. Put two flares in a room and they interlock into a predictable loop. Find yours, and find the move that breaks it.</p></div>
+    <div class="pair-filter rv">
+      <button type="button" class="pf active" data-f="all">All pairs</button>
+      ${ORDER.map(s => `<button type="button" class="pf ${s}" data-f="${s}">${esc(gifts[s].name.replace(/^The /, ''))}</button>`).join('\n      ')}
+    </div>
+    <div class="pair-list" id="pairList">${pairCards}</div>
+    <p class="pair-none" id="pairNone" hidden>No pairs match that filter.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv"><div class="kicker center">${esc(interaction.mirrors.title)}</div><h2>The Same-Gift Trap</h2>
+    <p>${esc(interaction.mirrors.premise)}</p></div>
+    <div class="mirror-list">${mirrors}</div>
+  </div>
+</section>
+
+<section class="cta-band"><div class="rv"><h2>Know the gap before the hard week</h2><p>Every relationship is easier to translate when both people know what they are translating from.</p><a class="btn btn-primary" href="assessment.html">Take the Assessment</a> <a class="btn btn-ghost" href="under-pressure.html">Read the three descents</a></div></section>
+
+<script>
+(function(){
+  var ORDER = ${JSON.stringify(ORDER)};
+  var NAMES = ${JSON.stringify(ORDER.reduce((o, s) => (o[s] = gifts[s].name.replace(/^The /, ''), o), {}))};
+  var BANDS = ${JSON.stringify(G.bands.map(b => ({ name: b.name, line: b.line, watch: b.watch })))};
+  var picks = { a: [], b: [] };
+
+  function bandFor(n){ if(n<=5) return 0; if(n<=11) return 1; if(n<=17) return 2; return 3; }
+
+  function paint(){
+    ['a','b'].forEach(function(side){
+      var list = picks[side];
+      document.querySelectorAll('.rank-chip[data-side="'+side+'"]').forEach(function(el){
+        var i = list.indexOf(el.dataset.gift);
+        el.classList.toggle('picked', i > -1);
+        el.querySelector('.rank-n').textContent = i > -1 ? (i+1) : '';
+      });
+    });
+    render();
+  }
+
+  function render(){
+    var out = document.getElementById('calcOut');
+    if(picks.a.length < 7 || picks.b.length < 7){
+      var need = (7 - picks.a.length) + (7 - picks.b.length);
+      out.innerHTML = '<div class="calc-empty">' + need + ' more to place. Rank all seven for both people to see the Gap.</div>';
+      return;
+    }
+    var total = 0, rows = '', inversions = 0;
+    ORDER.forEach(function(g){
+      var ra = picks.a.indexOf(g) + 1, rb = picks.b.indexOf(g) + 1, d = Math.abs(ra - rb);
+      total += d;
+      if((ra <= 3 && rb >= 5) || (rb <= 3 && ra >= 5)) inversions++;
+      rows += '<tr><td><span class="g-tag '+g+'">'+NAMES[g]+'</span></td><td>'+ra+'</td><td>'+rb+'</td><td class="d'+(d>=4?' hi':'')+'">'+d+'</td></tr>';
+    });
+    var b = BANDS[bandFor(total)];
+    out.innerHTML =
+      '<div class="calc-score"><div class="calc-num">'+total+'</div><div><div class="calc-band">'+b.name+'</div><div class="calc-band-line">'+b.line+'</div></div></div>' +
+      '<p class="calc-watch"><span>Watch for</span> '+b.watch+'</p>' +
+      '<p class="calc-inv"><span>Inversions</span> '+inversions+' of 7 — gifts sitting in one person\\'s top three and the other\\'s bottom three. Each one is a place where something obvious to one of you is invisible to the other.</p>' +
+      '<table class="band-table calc-table"><thead><tr><th>Gift</th><th>A</th><th>B</th><th>Diff</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+
+  document.querySelectorAll('.rank-chip').forEach(function(el){
+    el.addEventListener('click', function(){
+      var side = el.dataset.side, g = el.dataset.gift, i = picks[side].indexOf(g);
+      if(i > -1) picks[side].splice(i,1); else if(picks[side].length < 7) picks[side].push(g);
+      paint();
+    });
+  });
+  var rst = document.getElementById('calcReset');
+  if(rst) rst.addEventListener('click', function(){ picks = { a: [], b: [] }; paint(); });
+
+  document.querySelectorAll('.pair-filter .pf').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.pair-filter .pf').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.f, shown = 0;
+      document.querySelectorAll('.pair').forEach(function(c){
+        var ok = f === 'all' || c.dataset.a === f || c.dataset.b === f;
+        c.hidden = !ok; if(ok) shown++;
+      });
+      document.getElementById('pairNone').hidden = shown > 0;
+    });
+  });
+})();
+</script>`;
+
+  return layout({ title: 'How the Gifts Meet: The Gap | 7 Gifts of the Father', desc: 'A measurable model for how two motivational profiles interact — the Gap score, the four bands, the blind exchange, and all 21 pair collisions under pressure.', body, root: '', active: 'meet' });
+}
+
 function assessmentPage() {
   const body = `
 <header class="page-hero no-print">
@@ -848,6 +1243,7 @@ function dataJs() {
       foundationalVerses: g.foundationalVerses, descriptiveWords: g.descriptiveWords,
       coreFramework: g.coreFramework, strengths: g.strengths, challenges: g.challenges,
       leadershipStyle: g.leadershipStyle, interactions: g.interactions, commission: g.commission,
+      pressure: pressure.gifts[s],
     };
   }
   const clientArch = archData.archetypes.map(a => ({
@@ -862,6 +1258,10 @@ window.GIFT_ORDER = ${JSON.stringify(ORDER)};
 window.GIFTS = ${JSON.stringify(clientGifts)};
 window.ARCHETYPES = ${JSON.stringify(clientArch)};
 window.QUESTIONS = ${JSON.stringify(questions)};
+window.PRESSURE_MODEL = ${JSON.stringify(pressure.model)};
+window.GAP_BANDS = ${JSON.stringify(interaction.gap.bands)};
+window.BLIND_EXCHANGE = ${JSON.stringify(interaction.blindExchange.items)};
+window.PAIR_COLLISIONS = ${JSON.stringify(interaction.pairs)};
 window.LOW_GIFTS = {"catalyst": {"struggle": "With the Catalyst's fire burning low, you rarely feel an inner demand to confront what is broken. You may tolerate dysfunctional systems and unspoken problems far longer than is healthy, keep the peace when the moment calls for holy disruption, and feel blindsided when change finally forces itself on you. Necessary conflict can feel like failure rather than faithfulness, so hard conversations get postponed until they become harder ones.", "friction": "People who lead with Prophecy can feel overwhelming to you. Their directness lands like an attack and their urgency like recklessness, and you may quietly write them off as harsh—while they read your patience as complicity with what is broken. When they press for the truth behind a problem, you may hear accusation where they intend rescue.", "bridges": ["When a Catalyst confronts, listen for the love of truth underneath the heat—ask “What are you seeing that I’m not?” before defending.", "Practice naming one broken thing out loud each week; borrowed courage grows.", "Don’t ask a Catalyst to soften the message—ask them to help you build what should replace the broken thing."]}, "servant": {"struggle": "With Service running quiet, practical needs don’t call out to you the way they do to others. Tasks pile up or drift to whoever seems willing, the logistics beneath every good idea get underestimated, and the invisible labor that keeps your home, team, or church running can go unnoticed until it stops. You may carry a reputation for being above the mundane that quietly costs you trust.", "friction": "People who lead with Service often feel unseen around you. Your talk-first instinct frustrates their do-first nature; they feel used when their help is assumed and unthanked, while you may find their focus on tasks small when bigger things are on the table. Your unfinished commitments read to them as broken promises.", "bridges": ["Thank the Servant specifically—name the task, not just the person.", "Before casting the next vision, finish one tangible thing you said you’d do.", "Ask “What needs doing?” and take a visible piece of it yourself."]}, "erudite": {"struggle": "With the Erudite’s hunger dimmed, deep study rarely feels worth the time. You may build strong opinions on thin foundations, decide from intuition alone, and grow impatient with the slow work of truly understanding something. That leaves you vulnerable to shallow answers and confident errors—and prone to repeating problems that an evening of honest study would have prevented.", "friction": "People who lead with Teaching can exhaust you. Their questions feel like doubt, their precision like pedantry, their “let me research it” like delay. Meanwhile they experience your speed as carelessness and your certainty as unearned. Conversations stall when nuance—their native language—gets waved away.", "bridges": ["Bring an Erudite into decisions early, not for rubber-stamping afterward.", "Let them fully vet one significant choice each season—and notice what it saves you.", "Ask “What am I missing?” and genuinely wait for the answer."]}, "enthusiast": {"struggle": "With Encouragement running low, affirmation isn’t your reflex. Relationships can run on function rather than celebration, wins slip past unmarked, and the people closest to you may quietly wonder whether you notice them at all. Without a native supply of hope, setbacks weigh heavier and vision is harder to sustain—for you and for anyone following you.", "friction": "People who lead with Encouragement may strike you as noisy or excessive, and their need for affirmation can feel needy. But your reserve reads to them as disapproval, and they wilt in ways you don’t intend. When they celebrate you, you may deflect—which lands as rejection of the very gift they most love to give.", "bridges": ["Name one strength out loud, per person, per gathering. It will feel like too much; it isn’t.", "Receive an Enthusiast’s praise with a simple thank-you instead of a deflection.", "Let celebration count as real work—it is how belonging gets built."]}, "host": {"struggle": "With Giving quiet in you, resources feel like background details rather than ministry. Generosity happens in bursts instead of rhythms, margins and provision go unplanned, and hospitality can feel like a chore—so gathering people defaults to somebody else. Opportunities that needed seed money, a meal, or an open home pass by unclaimed.", "friction": "People who lead with Giving can seem preoccupied with money, logistics, and stewardship, and their carefulness may read to you as stinginess. But your improvidence genuinely stresses them, and when their quiet provision goes unnoticed they feel taken for granted. Asking them to “just trust” without a plan asks them to violate their design.", "bridges": ["Honor stewardship as a spiritual gift, not accounting—thank the Host for what their planning made possible.", "Schedule one act of intentional generosity each month so giving doesn’t depend on mood.", "Invite a Host to build your budget or event plan with you—and watch the anxiety drop."]}, "strategist": {"struggle": "With Leadership’s long view dimmed, the horizon blurs. Seasons turn busy but directionless, goals drift, and you can wake up wondering how you ended up here. Other people’s plans feel confining, so you improvise—and some of those improvisations become messes a simple map would have prevented. Follow-through on multi-step commitments is the quiet casualty.", "friction": "People who lead with Leadership can feel controlling to you—their structures like cages, their questions about “the plan” like tests you didn’t study for. Meanwhile your spontaneity registers to them as a threat to the mission, and your last-minute pivots undo work they invested in. They don’t need you to become them; they need warning before you swerve.", "bridges": ["Give Strategists the courtesy of a heads-up before changing course.", "Borrow their gift: set one 90-day goal and let them help you sequence it.", "Ask “Where is this going?” before you start—then actually aim."]}, "lover": {"struggle": "With Mercy running quiet, the emotional current of a room flows beneath your notice. You reach for solutions when people need presence, miss the wound behind the behavior, and can leave vulnerable people guarded around you without knowing why. Your own feelings, left unprocessed, tend to leak out sideways as irritation or withdrawal.", "friction": "People who lead with Mercy may seem inefficient to you—slow to decide, quick to feel, forever circling back to how everyone is doing. But your fixes land on them as dismissal, and your pace tramples places that needed gentleness. They need safety before solutions; you lead with solutions.", "bridges": ["Ask “Do you want comfort or counsel?” before offering either.", "Sit with someone’s pain for five full minutes before solving anything.", "Let a Lover teach you what listening without fixing looks like—then practice on them."]}};
 window.INTENSITY = function(score){
   if (score >= 85) return { label: 'Very High', cls: 'vh' };
@@ -938,6 +1338,8 @@ fs.writeFileSync(path.join(OUT, 'gifts', 'index.html'), giftsIndex());
 for (const s of ORDER) fs.writeFileSync(path.join(OUT, 'gifts', `${s}.html`), giftPage(s));
 fs.writeFileSync(path.join(OUT, 'archetypes', 'index.html'), archetypesIndex());
 for (const a of archData.archetypes) fs.writeFileSync(path.join(OUT, 'archetypes', `${a.slug}.html`), archetypePage(a));
+fs.writeFileSync(path.join(OUT, 'under-pressure.html'), pressurePage());
+fs.writeFileSync(path.join(OUT, 'how-gifts-meet.html'), interactionPage());
 fs.writeFileSync(path.join(OUT, 'foundation.html'), foundationPage());
 fs.writeFileSync(path.join(OUT, 'understanding.html'), understandingPage());
 fs.writeFileSync(path.join(OUT, 'assessment.html'), assessmentPage());

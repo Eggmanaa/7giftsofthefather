@@ -5,12 +5,14 @@ Static site for **7giftsofthefather.pages.dev** — the 7 Motivational Giftings 
 ## Structure
 
 - `site/` — the deployable static site (what Cloudflare Pages serves)
-  - 50 prerendered pages in the "Garnet & Vellum" hybrid design system (wine-dark garnet chrome, candlelight gold, parchment reading surfaces, Fraunces + Inter, gift-color ink): home, 7 gift pages, 35 archetype pages, archetype library, biblical foundation, profile guide, assessment, results
+  - 52 prerendered pages in the "Garnet & Vellum" hybrid design system (wine-dark garnet chrome, candlelight gold, parchment reading surfaces, Fraunces + Inter, gift-color ink): home, 7 gift pages, 35 archetype pages, archetype library, biblical foundation, profile guide, **under pressure**, **how gifts meet**, assessment, results
   - `js/data.js` — generated content bundle + official scoring engine (`window.computeScores`)
   - `js/assessment.js` — 77-question wizard (autosave to localStorage, resume support)
   - `js/results.js` — intensity bar chart, archetype reveal, top-3 deep dives
 - `pipeline/` — content extraction + build scripts
-  - `content/*.json` — structured content (7 gifts, 35 archetypes, 77 questions + scoring maps)
+  - `content/*.json` — structured content (7 gifts, 35 archetypes, 77 questions + scoring maps, distress model, interaction model)
+    - `pressure.json` — the Three Descents model (Strain / Distortion / Captivity), per-gift flare signature, chronic pattern, and re-entry path
+    - `interaction.json` — the Gap model (0–24 score, four bands), the Blind Exchange, all 21 pair collisions, and the 7 same-gift mirrors
   - `build.js` — generates all HTML from the JSON
   - `fix_links.py` — post-build link rewrite for Cloudflare pretty URLs
   - `test_scoring.js` — scoring test-suite (max profiles, spec arithmetic, 500 random runs)
@@ -30,5 +32,11 @@ python3 pipeline/fix_links.py # pretty URLs
 node pipeline/test_scoring.js # verify scoring engine
 npx wrangler pages deploy site --project-name=7giftsofthefather --branch=main
 ```
+
+## Distress & interaction model
+
+Each gift carries a three-stage descent — **Strain** (the gift intensified), **Distortion** (the gift weaponized), **Captivity** (the gift inverted) — with one flare verb per stage, a chronic pattern if it settles in, and a named way back. Rendered on `/under-pressure`, on every gift page, and into the top-three deep dives on `/results`.
+
+The **Gap** measures how two profiles interact: sum the rank difference for all seven gifts (0–24), read the band, then check the inversion count. `/how-gifts-meet` carries the interactive calculator, the 21 pair collisions, and the same-gift mirrors. `/results` surfaces the collisions that live *inside* a person's own top three.
 
 Assessment answers and results live only in the visitor's browser (localStorage) — no server, no accounts.
