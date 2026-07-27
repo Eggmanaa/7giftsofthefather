@@ -38,8 +38,6 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '', can
     ['index.html', 'Home', 'home'],
     ['gifts/index.html', 'The 7 Gifts', 'gifts'],
     ['archetypes/index.html', 'The 35 Archetypes', 'archetypes'],
-    ['under-pressure.html', 'Pressure', 'pressure'],
-    ['how-gifts-meet.html', 'Pairings', 'meet'],
     ['foundation.html', 'Foundation', 'foundation'],
     ['understanding.html', 'Your Profile', 'understanding'],
   ];
@@ -850,8 +848,6 @@ function archetypePage(a) {
 
 ${renderCanonSections(a.canonSections)}
 
-${archetypePressureSection(a)}
-
 <section class="section alt">
   <div class="wrap">
     <div class="section-head rv"><div class="kicker center">The Chord Beneath the Name</div><h2>The Three Gifts of ${esc(a.name.replace(/^The /, 'the '))}</h2></div>
@@ -1378,7 +1374,6 @@ function dataJs() {
   }
   const clientArch = archData.archetypes.map(a => ({
     num: a.num, name: a.name, slug: a.slug, gifts: a.gifts.map(g => NAME2SLUG[g]),
-    pressure: archPressure.archetypes[a.slug] || null,
     essence: a.essence, section: a.section, axisSignature: a.axisSignature,
     websiteSummary: a.websiteSummary, sigStrengthName: a.sigStrengthName,
     sigStrengthDesc: a.sigStrengthDesc, sigParadox: a.sigParadox, devQuestion: a.devQuestion,
@@ -1390,8 +1385,6 @@ window.GIFTS = ${JSON.stringify(clientGifts)};
 window.ARCHETYPES = ${JSON.stringify(clientArch)};
 window.QUESTIONS = ${JSON.stringify(questions)};
 window.PRESSURE_MODEL = ${JSON.stringify(pressure.model)};
-window.ARCH_PRESSURE_MODEL = ${JSON.stringify(archPressure.model)};
-window.ARCH_PATTERNS = ${JSON.stringify(archPressure.patterns)};
 window.GAP_BANDS = ${JSON.stringify(interaction.gap.bands)};
 window.BLIND_EXCHANGE = ${JSON.stringify(interaction.blindExchange.items)};
 window.PAIR_COLLISIONS = ${JSON.stringify(interaction.pairs)};
