@@ -49,6 +49,44 @@
       '</div></div></section>';
   }
 
+  /* ---- the three descents ---- */
+  var STAGE_TINT = { Strain: 'var(--servant-bar)', Distortion: 'var(--enthusiast-bar)', Captivity: 'var(--catalyst)' };
+  var STAGE_INK  = { Strain: 'var(--servant)', Distortion: 'var(--enthusiast)', Captivity: 'var(--catalyst)' };
+
+  function pressureBlock(slug) {
+    var g = GIFTS[slug], p = g.pressure;
+    if (!p) return '';
+    var ladder = p.descent.map(function (d, i) {
+      return '<div class="descent" style="--stage:' + STAGE_TINT[d.stage] + ';--stage-ink:' + STAGE_INK[d.stage] + '">' +
+        '<div class="descent-rail"><span class="descent-num">' + (i + 1) + '</span></div>' +
+        '<div class="descent-body"><div class="descent-head">' +
+        '<span class="descent-stage">' + esc(d.stage) + '</span>' +
+        '<span class="descent-verb">' + esc(d.verb) + '</span></div>' +
+        '<p class="descent-tell">' + esc(d.tell) + '</p><p>' + esc(d.body) + '</p>' +
+        '<p class="descent-cost"><span>What it costs</span> ' + esc(d.cost) + '</p></div></div>';
+    }).join('');
+    return '<div class="res-h">Your Gift Under Pressure</div>' +
+      '<div class="flare-strip" style="margin-bottom:30px">' +
+      '<div class="flare-k">Your Flare Signature</div>' +
+      '<div class="flare-verbs">' + p.flare.map(function (v) { return '<span>' + esc(v) + '</span>'; }).join('<i class="ar">→</i>') + '</div>' +
+      '<p class="flare-trigger"><span>What sets it off</span> ' + esc(p.trigger) + '</p></div>' +
+      '<div class="descent-list">' + ladder + '</div>' +
+      '<div class="chronic" style="margin-top:32px"><div class="g-label">If It Settles In</div>' +
+      '<h3>' + esc(p.chronic.name) + '</h3><p>' + esc(p.chronic.body) + '</p></div>' +
+      '<div class="res-h">Your Way Back</div>' +
+      '<div class="grid g2 reentry-grid">' +
+      '<div class="card say-yes"><div class="fw-k">What Others Should Say</div>' +
+      '<blockquote class="say-line">\u201c' + esc(p.sayThis) + '\u201d</blockquote>' +
+      '<p class="say-need"><span>What you actually need</span> ' + esc(p.needs) + '</p></div>' +
+      '<div class="card say-no"><div class="fw-k">What Makes It Worse</div>' +
+      '<blockquote class="say-line">\u201c' + esc(p.notThis) + '\u201d</blockquote>' +
+      '<p class="say-need"><span>Why it escalates</span> ' + esc(p.notThisWhy) + '</p></div></div>' +
+      '<div class="grid g2 reentry-grid" style="margin-top:0">' +
+      '<div class="card"><div class="fw-k">Your Own Move Back</div><p>' + esc(p.ownMove) + '</p></div>' +
+      '<div class="card restored"><div class="fw-k">What Returns</div>' +
+      '<div class="fw-q">' + esc(p.restored) + '</div><p>' + esc(p.restoredBody) + '</p></div></div>';
+  }
+
   /* ---- top-3 deep dives ---- */
   function giftPanel(slug, i) {
     var g = GIFTS[slug], sc = res.scores[slug], band = INT(sc);
@@ -57,7 +95,7 @@
       var m = String(v).match(/^([^-–]+?)\s*[-–]\s*(.*)$/);
       return m ? '<p>' + esc(m[2]) + ' <strong>— ' + esc(m[1].trim()).toUpperCase() + '</strong></p>' : '<p>' + esc(v) + '</p>';
     }).join('');
-    return '<div class="tab-panel" data-p="' + slug + '" style="' + (i ? 'display:none' : '') + '--g:' + bar + ';--g-dark:' + ink + '">' +
+    return '<div class="tab-panel" data-p="' + slug + '" style="' + (i ? 'display:none;' : '') + '--g:' + bar + ';--g-dark:' + ink + '">' +
       '<div class="card" style="padding:44px">' +
 
       '<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:10px">' +
@@ -94,6 +132,8 @@
 
       '<div class="res-h">How Others Can Love You Well</div>' +
       '<ul class="interact-list">' + g.interactions.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
+
+      pressureBlock(slug) +
 
       '<div class="res-h">Foundational Verses</div>' +
       '<div class="verse-card">' + verses + '</div>' +

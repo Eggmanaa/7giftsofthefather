@@ -31,11 +31,22 @@ const json = (obj, status = 200) =>
 function giftBrief(k) {
   const g = CANON.gifts[k];
   if (!g) return '';
+  const p = CANON.pressure && CANON.pressure[k];
+  const under = p ? `
+  Under pressure it flares ${p.flare.join(' → ')} — set off by: ${p.trigger}
+    · Strain (${p.stages[0].verb}): ${p.stages[0].tell}
+    · Distortion (${p.stages[1].verb}): ${p.stages[1].tell}
+    · Captivity (${p.stages[2].verb}): ${p.stages[2].tell}
+  If it settles in, it becomes "${p.chronic}" — ${p.chronicBody}
+  What it needs to come back: ${p.needs}
+  Say this: "${p.sayThis}"  |  Never this: "${p.notThis}" (${p.notThisWhy})
+  Their own move back: ${p.ownMove}
+  Strength restored: ${p.restored}` : '';
   return `- ${g.name} (${g.gift}; ${g.axis} axis). Core question: ${g.coreQuestion}
   Strength: ${g.strength}
   Characterological challenge (${g.challengeName}): ${g.challenge}
   Growth discipline: ${g.discipline}
-  When this gift is low: ${g.absence}`;
+  When this gift is low: ${g.absence}${under}`;
 }
 
 function contentionBrief(a, b) {
@@ -93,6 +104,11 @@ export async function onRequestPost({ request, env }) {
 
 Speak in the language of this framework ONLY. Never use Enneagram, MBTI, DISC, or Life Languages vocabulary. Be warm, direct, and practical — like a trusted pastor-coach who tells the truth kindly. Faith-aware but not preachy. Never diagnose, never label anyone as broken, and never speak about a person who did not consent as if you know their inner life — describe patterns, not verdicts.
 
+THE THREE DESCENTS (how any gift breaks down under pressure — use this vocabulary exactly):
+${CANON.descentStages.map(x => `- ${x.name}: ${x.line} ${x.reversal}`).join('\n')}
+A gift under pressure does not switch off; it works harder in the wrong direction. Distress is the gift aimed
+at the wrong target, usually at whoever is closest. Each gift has its own three flare verbs, below.
+
 THE GIFTS IN PLAY:
 ${giftLines}
 
@@ -103,6 +119,16 @@ RULES:
 - Use the supplied Ease of Flow number and band exactly as given. Never invent a different score.
 - Ground every claim about friction in the documented contentions above, and name each one by its exact
   documented title in bold (for example: **Brutal Honesty vs. Emotional Safety**) before explaining it.
+- When describing how someone shows up under stress, use THIS system's language: name the stage (Strain,
+  Distortion, Captivity) and that gift's actual flare verb in bold — for example **Sharpen**, **Absorb**,
+  **Qualify**. Never invent flare verbs; use only the ones listed for that gift.
+- Prefer Strain-stage description. Most real friction is Strain, and it is the cheapest place to intervene.
+  Only describe Distortion or Captivity if the supplied material genuinely warrants it, and say plainly that
+  earlier stages are easier to reverse.
+- Whenever you name a flare, pair it with the way back: what that person actually needs, the sentence that
+  lands ("Say this"), and the well-meant sentence that makes it worse. Use the documented wording as your
+  basis. Never leave someone with the descent and no re-entry.
+- Treat every flare as a request that was worded badly, never as a character defect.
 - Write EVERY section requested. Do not stop early or merge sections.
 - Name both the gift and the person when describing a pattern (e.g., "Aaron's Catalyst…").
 - Give concrete, sayable language — actual sentences people can use — not abstractions.

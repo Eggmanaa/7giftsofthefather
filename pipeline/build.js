@@ -6,6 +6,7 @@ const OUT = path.join(__dirname, '..', 'site');
 const gifts = JSON.parse(fs.readFileSync(__dirname + '/content/gifts.json', 'utf8'));
 const archData = JSON.parse(fs.readFileSync(__dirname + '/content/archetypes.json', 'utf8'));
 const questions = JSON.parse(fs.readFileSync(__dirname + '/content/questions.json', 'utf8'));
+const pressure = JSON.parse(fs.readFileSync(__dirname + '/content/pressure.json', 'utf8'));
 
 const V = Date.now().toString(36);
 const QCOUNT = questions.likert.length + questions.forcedChoice.length + questions.scenarios.length;
@@ -219,6 +220,80 @@ function giftsIndex() {
 }
 
 /* ---------------- individual gift page ---------------- */
+/* ---------------- the three descents (per gift) ---------------- */
+const STAGE_TINT = { Strain: 'var(--servant-bar)', Distortion: 'var(--enthusiast-bar)', Captivity: 'var(--catalyst)' };
+const STAGE_INK  = { Strain: 'var(--servant)',     Distortion: 'var(--enthusiast)',     Captivity: 'var(--catalyst)' };
+
+function descentLadder(slug) {
+  const p = pressure.gifts[slug];
+  return p.descent.map((d, i) => `
+    <div class="descent rv" style="--stage:${STAGE_TINT[d.stage]};--stage-ink:${STAGE_INK[d.stage]}">
+      <div class="descent-rail"><span class="descent-num">${i + 1}</span></div>
+      <div class="descent-body">
+        <div class="descent-head"><span class="descent-stage">${esc(d.stage)}</span><span class="descent-verb">${esc(d.verb)}</span></div>
+        <p class="descent-tell">${esc(d.tell)}</p>
+        <p>${esc(d.body)}</p>
+        <p class="descent-cost"><span>What it costs</span> ${esc(d.cost)}</p>
+      </div>
+    </div>`).join('\n');
+}
+
+function pressureSection(slug, m) {
+  const p = pressure.gifts[slug], g = gifts[slug];
+  return `
+<section class="g-section pressure-band" style="--g:${m.bar};--g-dark:${m.ink}">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="kicker center">When the Gift Is Under Pressure</div>
+      <h2>The Three Descents</h2>
+      <p>A gift under pressure does not switch off. It works harder in the wrong direction. Here is what that looks like for ${esc(g.name.replace(/^The /, 'the '))}, stage by stage.</p>
+    </div>
+
+    <div class="flare-strip rv">
+      <div class="flare-k">Flare Signature</div>
+      <div class="flare-verbs">${p.flare.map(v => `<span>${esc(v)}</span>`).join('<i class="ar">→</i>')}</div>
+      <p class="flare-trigger"><span>What sets it off</span> ${esc(p.trigger)}</p>
+    </div>
+
+    <div class="descent-list">${descentLadder(slug)}</div>
+
+    <div class="chronic rv">
+      <div class="g-label">If It Settles In</div>
+      <h3>${esc(p.chronic.name)}</h3>
+      <p>${esc(p.chronic.body)}</p>
+    </div>
+
+    <div class="section-head rv" style="margin-top:72px">
+      <div class="kicker center">The Way Back</div>
+      <h2>Re-Entry</h2>
+    </div>
+    <div class="grid g2 reentry-grid">
+      <div class="card rv say-yes">
+        <div class="fw-k">Say This</div>
+        <blockquote class="say-line">“${esc(p.sayThis)}”</blockquote>
+        <p class="say-need"><span>What they actually need</span> ${esc(p.needs)}</p>
+      </div>
+      <div class="card rv say-no">
+        <div class="fw-k">Not This</div>
+        <blockquote class="say-line">“${esc(p.notThis)}”</blockquote>
+        <p class="say-need"><span>Why it escalates</span> ${esc(p.notThisWhy)}</p>
+      </div>
+    </div>
+    <div class="grid g2 reentry-grid" style="margin-top:0">
+      <div class="card rv">
+        <div class="fw-k">Their Own Move Back</div>
+        <p>${esc(p.ownMove)}</p>
+      </div>
+      <div class="card rv restored">
+        <div class="fw-k">What Returns</div>
+        <div class="fw-q">${esc(p.restored)}</div>
+        <p>${esc(p.restoredBody)}</p>
+      </div>
+    </div>
+  </div>
+</section>`;
+}
+
 function giftPage(slug) {
   const g = gifts[slug], m = META[slug];
   const idx = ORDER.indexOf(slug);
@@ -331,6 +406,8 @@ function giftPage(slug) {
     </div>
   </div>
 </section>
+
+${pressureSection(slug, m)}
 
 <section class="g-section alt" style="--g:${m.bar};--g-dark:${m.ink}">
   <div class="wrap">
@@ -846,6 +923,7 @@ function dataJs() {
       foundationalVerses: g.foundationalVerses, descriptiveWords: g.descriptiveWords,
       coreFramework: g.coreFramework, strengths: g.strengths, challenges: g.challenges,
       leadershipStyle: g.leadershipStyle, interactions: g.interactions, commission: g.commission,
+      pressure: pressure.gifts[s],
     };
   }
   const clientArch = archData.archetypes.map(a => ({
