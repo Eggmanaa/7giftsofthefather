@@ -1,0 +1,360 @@
+{
+  "model": {
+    "title": "The Cascade",
+    "premise": "A single gift descends through three stages inside itself: Strain, then Distortion, then Captivity. An archetype descends differently. It runs the same three stages across its three gifts — the lead gift strains, the second distorts, the third goes captive. That is why archetype distress is so hard to catch from the inside: at every stage a different gift is doing the work, and each one has a good reason.",
+    "note": "This cascade is not a prediction that this is how you will fail. It is a map of the path of least resistance. Knowing the order is most of the defense, because the cheapest place to stop it is the first step — and the first step always looks like your gift working properly.",
+    "missingPremise": "Every archetype is three gifts, which means four gifts are quiet. Under pressure that matters more than usual: the check that would catch the cascade lives in the gifts the archetype does not lead with. This is the single most useful reason to keep people around you who are not like you."
+  },
+  "archetypes": {
+    "apex-visionary": {
+      "name": "The Sealed Blueprint",
+      "line": "A complete design no one was allowed to shape, defended by someone who has stopped believing anyone could.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The vision acquires an edge. Every question about the model gets heard as an attempt to dilute it, and answers start arriving with a verdict attached." },
+        { "gift": "erudite", "text": "Rigor becomes the weapon. Objections are met with more evidence and finer distinctions, until being answered feels indistinguishable from being dismissed." },
+        { "gift": "strategist", "text": "The architecture closes. They stop consulting, carry the whole model alone, and read the isolation as proof that few people were ever capable of understanding it." }
+      ],
+      "missing": { "gift": "lover", "text": "Mercy is the brake this archetype does not have. A Lover registers that the room went quiet three meetings ago — the one datum that would have shown the model was losing the people it was built for." }
+    },
+    "principled-reformer": {
+      "name": "The Unpaid Reckoning",
+      "line": "Someone doing the work of reform, keeping private count of who else showed up, and finally going quiet with the receipts.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The call for reform sharpens. What began as naming a broken system becomes naming the people sustaining it, and the standard rises faster than anyone can meet it." },
+        { "gift": "servant", "text": "They stop asking and start absorbing, then tallying. The reform becomes work they are doing alone, and the ledger of who helped runs silently underneath every interaction." },
+        { "gift": "erudite", "text": "The door closes. They withdraw behind the correctness of the original diagnosis, and the withdrawal itself becomes the argument." }
+      ],
+      "missing": { "gift": "enthusiast", "text": "Encouragement is the missing brake. An Enthusiast keeps reform something people want to join rather than something they are being graded on — which is the difference between a movement and an indictment." }
+    },
+    "scholarly-investor": {
+      "name": "The Closed Fund",
+      "line": "Conviction that hardened into criteria, and criteria that hardened into a closed hand.",
+      "cascade": [
+        { "gift": "catalyst", "text": "Discernment turns prosecutorial. The search for what is genuinely worth backing becomes a search for what is disqualifying, and almost everything qualifies as disqualifying." },
+        { "gift": "erudite", "text": "The bar moves. Each round of diligence surfaces one more thing to verify, and the analysis starts functioning as a reason not to decide rather than a way to decide well." },
+        { "gift": "host", "text": "The hand closes. Resources stop moving entirely, and the stewardship language that was true at the beginning is still being used at the end, when it has stopped being true." }
+      ],
+      "missing": { "gift": "lover", "text": "Mercy is the missing brake. A Lover keeps the person on the other side of the decision visible as a person, which is precisely what disappears when everything becomes criteria." }
+    },
+    "insightful-inspirer": {
+      "name": "The Brilliant Exit",
+      "line": "The insight gets sharper, the correction gets public, and then the room loses them entirely.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The insight develops an edge. What was an invitation to see something becomes an accusation that others refuse to, and urgency replaces persuasion." },
+        { "gift": "erudite", "text": "Precision turns punitive. Imprecise restatements get corrected in front of everyone, and being right in the room starts costing more than it earns." },
+        { "gift": "enthusiast", "text": "They disappear. The exit is framed as outgrowing a place that was never going to understand, and the framing is convincing enough that even they believe it." }
+      ],
+      "missing": { "gift": "servant", "text": "Service is the missing brake. A Servant anchors the insight to work that has to be finished in place, and it is very hard to vanish from something you are still holding." }
+    },
+    "compassionate-sage": {
+      "name": "The Wounded Authority",
+      "line": "Truth told with increasing precision by someone increasingly certain it will not be received.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The truth-telling sharpens. Compassion is still the motive, but the delivery starts carrying the weight of every previous time the truth was not welcome." },
+        { "gift": "erudite", "text": "The case gets built. Each retelling adds another layer of justification, and the argument grows more airtight as the relationship grows less able to hold it." },
+        { "gift": "lover", "text": "They go silent. The conclusion arrives as a fact rather than a thought: that the truth was never wanted, and neither were they." }
+      ],
+      "missing": { "gift": "enthusiast", "text": "Encouragement is the missing brake. An Enthusiast keeps the delivery warm enough to survive its own accuracy — this archetype's truth is usually correct and usually arrives at a temperature no one can receive." }
+    },
+    "visionary-implementer": {
+      "name": "The Solitary Build",
+      "line": "A better way, built at real personal cost, by someone who stopped asking for help and then stopped trusting it.",
+      "cascade": [
+        { "gift": "catalyst", "text": "Urgency sharpens. The gap between what should exist and what does becomes intolerable, and anyone moving at a normal pace becomes part of the problem." },
+        { "gift": "servant", "text": "They absorb the whole build, then begin tallying. Asking would take longer than doing, so they do it — and the record of who did not offer runs quietly the entire time." },
+        { "gift": "strategist", "text": "Trust freezes. Delegation stops, the plan contracts to what one person can hold, and the resulting exhaustion gets read as evidence of commitment rather than of a broken system." }
+      ],
+      "missing": { "gift": "lover", "text": "Mercy is the missing brake. A Lover says the cost out loud while it is still a request rather than a grievance — this archetype's failure is almost always a conversation that happened eighteen months too late." }
+    },
+    "resourced-revolutionary": {
+      "name": "The Funded Ultimatum",
+      "line": "A cause genuinely worth backing, backed with strings, run by someone who has stopped consulting anyone.",
+      "cascade": [
+        { "gift": "catalyst", "text": "Conviction sharpens into urgency. The cause becomes non-negotiable, and hesitation from anyone nearby reads as a lack of nerve rather than a lack of information." },
+        { "gift": "host", "text": "Resources become leverage. The funding continues but acquires conditions, and everyone downstream can feel the strings even where no one has named them." },
+        { "gift": "strategist", "text": "Command closes. Decisions consolidate, dissent becomes disloyalty, and the revolution starts being run exactly like the institution it was meant to replace." }
+      ],
+      "missing": { "gift": "servant", "text": "Service is the missing brake. A Servant keeps the work in contact with what it actually costs the people doing it — which is the information this archetype systematically stops receiving." }
+    },
+    "galvanizing-leader": {
+      "name": "The Managed Movement",
+      "line": "A true call, smoothed for the crowd, then executed alone when the crowd does not hold.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The call sharpens. What was an invitation becomes a demand, and the moral weight behind it makes disagreement feel like a character question." },
+        { "gift": "enthusiast", "text": "The message gets managed. Hard parts are softened for the room and objections are absorbed with warmth rather than answered, so nothing difficult ever fully surfaces." },
+        { "gift": "strategist", "text": "The plan closes. When the enthusiasm does not convert into follow-through, they take the whole thing back and run it alone, colder each time." }
+      ],
+      "missing": { "gift": "erudite", "text": "Teaching is the missing brake. An Erudite insists the message stay accurate under compression — this archetype's real risk is that the version everyone repeats is not quite the version that was true." }
+    },
+    "protective-visionary": {
+      "name": "The Guarded Mandate",
+      "line": "Protecting people by deciding for them, until the protector is the loneliest person in the room.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The threat sharpens. They see what is coming for the people in their care and the seeing itself becomes urgent enough to override process." },
+        { "gift": "strategist", "text": "They override. Decisions get made on behalf of the protected rather than with them, and consent is assumed because the motive is good and the danger is real." },
+        { "gift": "lover", "text": "The heart closes. Having carried the weight alone and been resented for it, they conclude that care is not something people actually want, and stop offering it." }
+      ],
+      "missing": { "gift": "erudite", "text": "Teaching is the missing brake. An Erudite slows the certainty enough to ask whether the threat is still what it was — this archetype often keeps defending against a danger that passed some time ago." }
+    },
+    "master-craftsman": {
+      "name": "The Standard No One Meets",
+      "line": "Excellent work absorbed without complaint, then defended as a standard, then kept from everyone.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. Rather than negotiate scope or ask for help, they simply do more and do it well, and the quality of the work hides the size of the load." },
+        { "gift": "erudite", "text": "The standard hardens. What was craftsmanship becomes correctness, and other people's work starts getting assessed rather than received." },
+        { "gift": "strategist", "text": "Control freezes. Nothing important gets handed off, because handing it off means accepting a version of it that is worse — and so the work and the knowledge both stay in one pair of hands." }
+      ],
+      "missing": { "gift": "enthusiast", "text": "Encouragement is the missing brake. An Enthusiast makes a standard something people aspire to rather than something they fail — the same bar, received completely differently." }
+    },
+    "prudent-architect": {
+      "name": "The Conditional Plan",
+      "line": "A decision deferred, then priced, then made unilaterally when the deferral finally ran out.",
+      "cascade": [
+        { "gift": "erudite", "text": "The answer gets qualified. Every recommendation acquires conditions, and the conditions multiply until no one can tell what is actually being advised." },
+        { "gift": "host", "text": "Resources become the lever. Since the analysis will not settle it, the funding decides it — and the terms attached carry the judgment that was never said aloud." },
+        { "gift": "strategist", "text": "The plan closes. Having waited too long for consensus, they make the call alone, and treat the resulting resistance as further evidence that consultation does not work." }
+      ],
+      "missing": { "gift": "catalyst", "text": "Prophecy is the missing brake. A Catalyst names the thing everyone is avoiding while there is still time to change course — this archetype's deferrals are usually protecting one unspoken disagreement." }
+    },
+    "engaging-mentor": {
+      "name": "The Curriculum Without a Student",
+      "line": "Depth withheld until it is ready, packaged when it is not, then delivered to no one in particular.",
+      "cascade": [
+        { "gift": "erudite", "text": "The material gets qualified. It is never quite ready to teach, and the not-quite-readiness starts protecting the teacher more than it protects the student." },
+        { "gift": "enthusiast", "text": "The delivery gets performed. Energy substitutes for the depth that has not been finished, and the room's response becomes the measure of whether it worked." },
+        { "gift": "strategist", "text": "The system closes. Mentoring becomes a program to be administered, and the individual student becomes a participant in it." }
+      ],
+      "missing": { "gift": "lover", "text": "Mercy is the missing brake. A Lover notices which particular student stopped being reached — a signal that vanishes entirely once mentoring becomes a curriculum." }
+    },
+    "wise-shepherd": {
+      "name": "The Silent Rod",
+      "line": "Counsel held back, then a decision made over the top of it, then a shepherd who has gone quiet.",
+      "cascade": [
+        { "gift": "erudite", "text": "The counsel gets withheld. They know what they think, but the case is not airtight, and the pause reads to everyone else as neutrality or approval." },
+        { "gift": "strategist", "text": "They override. When the situation forces a call, it gets made decisively and without the consultation that would have made it land, because there is no longer time." },
+        { "gift": "lover", "text": "The heart closes. The flock's reaction to a decision made for their good confirms a quiet suspicion that the care was never really wanted." }
+      ],
+      "missing": { "gift": "catalyst", "text": "Prophecy is the missing brake. A Catalyst makes the unspoken thing speakable before it calcifies — this archetype's crises are almost always things that were known and unsaid for a long time." }
+    },
+    "practical-revolutionary": {
+      "name": "The Withdrawn Alternative",
+      "line": "A tangible answer to what is broken, built alone, funded alone, and eventually taken back.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The critique sharpens. Building the alternative starts being less about what it makes possible and more about what it proves wrong." },
+        { "gift": "servant", "text": "They absorb the whole build and begin tallying. The hands-on work becomes evidence in an argument nobody knows is being conducted." },
+        { "gift": "host", "text": "The hand closes. Having supplied both the labor and the resources, they withdraw both, and the alternative disappears along with the person who was carrying it." }
+      ],
+      "missing": { "gift": "enthusiast", "text": "Encouragement is the missing brake. An Enthusiast keeps people wanting to be part of the thing — without which the alternative has exactly one owner and therefore exactly one point of failure." }
+    },
+    "faithful-steward": {
+      "name": "The Audited Gift",
+      "line": "Quiet faithfulness that becomes quiet accounting, and finally a closed hand with excellent records.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. The work expands to fill whatever is needed, the asking never happens, and reliability quietly becomes obligation." },
+        { "gift": "erudite", "text": "The accounting sharpens. What was stewardship becomes an assessment of whether others are being as careful, and the answer is usually no." },
+        { "gift": "host", "text": "The hand closes. Generosity is withdrawn on principle, and the principle is defensible enough that no one can name what actually changed." }
+      ],
+      "missing": { "gift": "enthusiast", "text": "Encouragement is the missing brake. An Enthusiast keeps gratitude circulating rather than accumulating — this archetype's collapse is almost always a decade of unacknowledged reliability." }
+    },
+    "joyful-benefactor": {
+      "name": "The Cheerful Depletion",
+      "line": "Giving past capacity with a smile on it, deflecting every offer of help, and then quietly shutting the door.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. The yes is automatic and the cost is invisible, partly because they are genuinely glad to give and partly because saying no has never been practiced." },
+        { "gift": "enthusiast", "text": "The strain gets spun. Concern from others is met with brightness, the offer of help is deflected with a joke, and the performance is convincing enough to buy another year." },
+        { "gift": "host", "text": "The hand closes without warning. To everyone else the withdrawal is sudden; to them it has been coming for years." }
+      ],
+      "missing": { "gift": "strategist", "text": "Leadership is the missing brake. A Strategist sets the limit before the limit sets itself — this archetype has no native mechanism for a planned stop, only for an unplanned one." }
+    },
+    "master-provider": {
+      "name": "The Provisioned Silence",
+      "line": "Everything supplied, conditions attached, and no one left who is able to say no.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. Needs get met before they are voiced, and the household or team reorganizes around a level of provision nobody had to ask for." },
+        { "gift": "host", "text": "Provision becomes leverage. Because so much is being given, expectation follows it, and disagreement starts feeling to everyone like ingratitude." },
+        { "gift": "strategist", "text": "The structure freezes. Decisions consolidate around the one who provides, and the arrangement becomes impossible to challenge without seeming to challenge the generosity itself." }
+      ],
+      "missing": { "gift": "lover", "text": "Mercy is the missing brake. A Lover keeps provision an act of care rather than a term of trade — and can tell the difference from the inside, which this archetype cannot." }
+    },
+    "tender-provider": {
+      "name": "The Quiet Cost",
+      "line": "Care given until it hurts, then care given with a hook in it, and then nothing at all.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. The needs of the household or the team are met invisibly and continuously, and the meeting of them stops being noticed by anyone including them." },
+        { "gift": "host", "text": "The giving acquires terms. Nothing is said, but the provision starts carrying an expectation, and the people receiving it can feel a shift they cannot name." },
+        { "gift": "lover", "text": "The heart closes. The conclusion is quiet and total: that all of it was taken and none of it was seen." }
+      ],
+      "missing": { "gift": "catalyst", "text": "Prophecy is the missing brake. A Catalyst makes the unspoken resentment sayable while it is still small — this archetype's entire failure mode is a true thing that was never once said out loud." }
+    },
+    "compassionate-agitator": {
+      "name": "The Burned Advocate",
+      "line": "A voice raised for people who are hurting, softened to keep the room, and then extinguished.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The advocacy sharpens. The suffering is real and the indifference is real, and the gap between them turns every conversation into a confrontation." },
+        { "gift": "enthusiast", "text": "The message gets managed. To keep the relationships that make the advocacy possible, the hard edge is smoothed — and the smoothing costs the message its force." },
+        { "gift": "lover", "text": "The heart closes. Carrying other people's pain without relief and without result ends in a silence that looks like indifference and is actually depletion." }
+      ],
+      "missing": { "gift": "strategist", "text": "Leadership is the missing brake. A Strategist converts outrage into something with a sequence and a stopping point — without it, this archetype's compassion has no container and burns at full rate until it is gone." }
+    },
+    "devoted-caretaker": {
+      "name": "The Invisible Ledger",
+      "line": "Endless care, unfailing brightness, and a silence at the end that no one saw coming.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. The care is constant and practical and it does not occur to them to name it, because naming it would feel like asking for something." },
+        { "gift": "enthusiast", "text": "The cost gets spun. Everything is fine, the mood stays light, and the brightness is real enough that no one thinks to check underneath it." },
+        { "gift": "lover", "text": "The heart closes. The withdrawal is quiet and complete, and the people who benefited most are the last to understand what happened." }
+      ],
+      "missing": { "gift": "catalyst", "text": "Prophecy is the missing brake. A Catalyst says the true thing out loud years earlier — this archetype has no gift that generates confrontation, which is precisely why the ledger stays invisible until it closes." }
+    },
+    "affectionate-counselor": {
+      "name": "The Withheld Word",
+      "line": "The counsel that was never quite ready, the reassurance offered instead, and the counselor who went quiet.",
+      "cascade": [
+        { "gift": "erudite", "text": "The word gets qualified. They see it clearly, but saying it plainly might wound, so it arrives hedged into something that can be misread as approval." },
+        { "gift": "enthusiast", "text": "Warmth substitutes for the word. Encouragement fills the space where the hard counsel belonged, and the person leaves feeling better and no wiser." },
+        { "gift": "lover", "text": "The heart closes. Watching someone walk into what could have been prevented, having chosen not to say it, produces a guilt that resolves into withdrawal." }
+      ],
+      "missing": { "gift": "strategist", "text": "Leadership is the missing brake. A Strategist forces the decision the caring keeps deferring — this archetype knows the answer far earlier than it says it." }
+    },
+    "lavish-celebrant": {
+      "name": "The Empty Table",
+      "line": "A feast thrown for everyone, subtly invoiced, by a host nobody thought to ask about.",
+      "cascade": [
+        { "gift": "enthusiast", "text": "The celebration intensifies. The gathering gets bigger and warmer, and the energy required to sustain it stops being visible to anyone, including them." },
+        { "gift": "host", "text": "The giving acquires an edge. Provision continues but starts quietly expecting something back, and the expectation is felt long before it is ever stated." },
+        { "gift": "lover", "text": "The heart closes. Having filled every room they ever entered, they conclude that no one was ever coming for them." }
+      ],
+      "missing": { "gift": "erudite", "text": "Teaching is the missing brake. An Erudite asks the honest question underneath the celebration — the one question this archetype's warmth is very good at preventing anyone from asking." }
+    },
+    "encouraging-shepherd": {
+      "name": "The Hollow Rally",
+      "line": "Encouragement turned up, dissent rolled over, and a shepherd who no longer believes their own speech.",
+      "cascade": [
+        { "gift": "enthusiast", "text": "The encouragement intensifies. Morale becomes the metric, and the gap between what is being said about the situation and the situation itself begins to widen." },
+        { "gift": "strategist", "text": "Dissent gets overridden. The person raising the hard question is handled rather than heard, because the plan requires belief and the question threatens it." },
+        { "gift": "lover", "text": "The heart closes. Having asked people to believe something they had stopped believing, they withdraw from the very community the encouragement was for." }
+      ],
+      "missing": { "gift": "erudite", "text": "Teaching is the missing brake. An Erudite checks whether the encouragement is still true — this archetype can sustain a message long past the point where it stopped being accurate." }
+    },
+    "practical-pioneer": {
+      "name": "The Abandoned Prototype",
+      "line": "A new thing built by hand, resented in private, and walked away from without warning.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The idea sharpens into urgency. The prototype has to exist now, and anything slower than now becomes an obstacle rather than a constraint." },
+        { "gift": "servant", "text": "They absorb the build and begin tallying. They are doing the actual work while others discuss it, and the imbalance runs silently and grows." },
+        { "gift": "enthusiast", "text": "They vanish. The exit is sudden and gets framed as needing something new, which is true enough to be believable and incomplete enough to leave everyone confused." }
+      ],
+      "missing": { "gift": "strategist", "text": "Leadership is the missing brake. A Strategist gives the work a horizon long enough to survive its hard middle — this archetype builds beautifully and has no native mechanism for finishing." }
+    },
+    "compassionate-builder": {
+      "name": "The Unspoken Bill",
+      "line": "Work done for people who are suffering, counted silently, and ended in silence.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The wrong sharpens. Seeing what the broken thing costs actual people makes every delay feel like complicity, including delays that are reasonable." },
+        { "gift": "servant", "text": "They absorb and then tally. The work gets done personally and at real cost, and the record of who else showed up runs underneath every conversation." },
+        { "gift": "lover", "text": "The heart closes. The suffering they were carrying and the resentment they were storing arrive at the same conclusion, and they stop." }
+      ],
+      "missing": { "gift": "host", "text": "Giving is the missing brake. A Host resources the work so it does not have to be paid for out of the builder — this archetype consistently funds compassion with its own body." }
+    },
+    "generous-pioneer": {
+      "name": "The Recalled Backing",
+      "line": "A bold bet, sold hard, then pulled when the enthusiasm and the returns run out together.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The bet sharpens into certainty. What was a promising possibility becomes an obvious one, and caution from others starts reading as failure of nerve." },
+        { "gift": "enthusiast", "text": "The pitch gets spun. Difficulties are reframed rather than solved, and the momentum required to keep it moving starts costing more than the thing itself." },
+        { "gift": "host", "text": "The hand closes. Support is withdrawn suddenly and framed as discipline, leaving people who were told to go all in holding something they cannot finish." }
+      ],
+      "missing": { "gift": "erudite", "text": "Teaching is the missing brake. An Erudite tests whether the bet is sound before it needs defending — this archetype's conviction and charm can carry a weak idea a very long way." }
+    },
+    "resourced-healer": {
+      "name": "The Conditional Rescue",
+      "line": "Help offered urgently, then attached to terms, then withdrawn along with the helper.",
+      "cascade": [
+        { "gift": "catalyst", "text": "The need sharpens. The suffering is visible and fixable and the urgency to intervene overrides the question of whether intervention was wanted." },
+        { "gift": "host", "text": "The help acquires terms. Provision continues but starts requiring a particular response, and the person being helped begins managing the helper." },
+        { "gift": "lover", "text": "The heart closes. Having given generously and been met with something other than gratitude, they withdraw the help and the relationship together." }
+      ],
+      "missing": { "gift": "strategist", "text": "Leadership is the missing brake. A Strategist builds the help into something that runs without the healer's presence — otherwise every rescue depends on one person's ongoing goodwill." }
+    },
+    "meticulous-motivator": {
+      "name": "The Corrected Cheer",
+      "line": "Doing everything, correcting everyone, and then simply not being there.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. The details nobody else tracks get tracked, and the tracking becomes invisible infrastructure that everyone depends on and no one names." },
+        { "gift": "erudite", "text": "The correcting starts. Standards that were internal become external, and the encouragement they are known for starts arriving with an amendment attached." },
+        { "gift": "enthusiast", "text": "They vanish. The person who held the details and the morale leaves at once, and both collapse together." }
+      ],
+      "missing": { "gift": "strategist", "text": "Leadership is the missing brake. A Strategist distributes the work before it consumes the person doing it — this archetype will carry an unsustainable load indefinitely without ever flagging it." }
+    },
+    "wise-caretaker": {
+      "name": "The Careful Withdrawal",
+      "line": "Care given precisely, then defended precisely, then withdrawn without explanation.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. Care is delivered thoughtfully and continuously, and the thoughtfulness makes the volume of it easy for everyone to underestimate." },
+        { "gift": "erudite", "text": "The care gets defended. When it is questioned or unnoticed, the response is a well-reasoned account of why it was right, which lands as coldness." },
+        { "gift": "lover", "text": "The heart closes. The withdrawal is quiet, well-considered, and final, and nobody is given a reason because giving one would require asking for something." }
+      ],
+      "missing": { "gift": "enthusiast", "text": "Encouragement is the missing brake. An Enthusiast keeps the relationship warm enough to hold a correction — without it, every piece of feedback in either direction costs more than it should." }
+    },
+    "prudent-mentor": {
+      "name": "The Deferred Investment",
+      "line": "A judgment never quite delivered, a reassurance offered instead, and support quietly discontinued.",
+      "cascade": [
+        { "gift": "erudite", "text": "The verdict gets qualified. They can see where this is going, but the case is not complete, and the incompleteness becomes a reason to say nothing decisive." },
+        { "gift": "enthusiast", "text": "Warmth fills the gap. The mentee receives encouragement instead of the assessment, and reads the encouragement as an assessment." },
+        { "gift": "host", "text": "The support ends. The investment is discontinued quietly, and the person on the other end never learns what the actual judgment was." }
+      ],
+      "missing": { "gift": "catalyst", "text": "Prophecy is the missing brake. A Catalyst forces the honest verdict the prudence keeps postponing — this archetype's kindness reliably delays the one conversation that would have helped." }
+    },
+    "benevolent-counselor": {
+      "name": "The Priced Confidence",
+      "line": "Wisdom held back, help given with terms, and a counselor who stopped answering.",
+      "cascade": [
+        { "gift": "erudite", "text": "The counsel gets qualified. What they actually think stays partly unsaid, and the partial version is easier to receive and less useful to act on." },
+        { "gift": "host", "text": "The help acquires terms. Resources fill the gap left by the unspoken counsel, and the resources carry an expectation the counsel never voiced." },
+        { "gift": "lover", "text": "The heart closes. Having given both wisdom and provision and watched neither be used, they stop returning the call." }
+      ],
+      "missing": { "gift": "catalyst", "text": "Prophecy is the missing brake. A Catalyst names the dynamic while both parties can still hear it — this archetype tends to fund what it should have confronted." }
+    },
+    "inspirational-implementer": {
+      "name": "The Overloaded Engine",
+      "line": "Carrying it all, keeping morale up about it, and finally running it alone in silence.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. Execution lands on them because it always has, and their capacity keeps being read as availability rather than as a limit being approached." },
+        { "gift": "enthusiast", "text": "The strain gets spun. The team stays encouraged, the mood stays good, and the gap between the reported state and the actual state widens quietly." },
+        { "gift": "strategist", "text": "Trust freezes. Having encouraged everyone and been helped by no one, they stop asking and run the whole operation alone and cold." }
+      ],
+      "missing": { "gift": "lover", "text": "Mercy is the missing brake. A Lover registers what the carrying is costing before it hardens — this archetype's own reporting on its own state is systematically unreliable." }
+    },
+    "protective-architect": {
+      "name": "The Fortified Care",
+      "line": "Protection built by hand, imposed without consent, and then abandoned in hurt.",
+      "cascade": [
+        { "gift": "servant", "text": "They absorb. The structures that keep people safe get built quietly and personally, and the building is never presented as a cost." },
+        { "gift": "strategist", "text": "The protection gets imposed. Decisions are made for the good of people who were not consulted, and their objections read as failure to understand the danger." },
+        { "gift": "lover", "text": "The heart closes. Having built the whole thing for them and been resented for it, they withdraw and leave the structure standing without its keeper." }
+      ],
+      "missing": { "gift": "enthusiast", "text": "Encouragement is the missing brake. An Enthusiast keeps the protected people feeling chosen rather than managed — the same safeguards, received as care instead of as control." }
+    },
+    "kingdom-cultivator": {
+      "name": "The Managed Garden",
+      "line": "A community grown warmly, resourced conditionally, and finally governed by one person alone.",
+      "cascade": [
+        { "gift": "enthusiast", "text": "The cultivating intensifies. More gathering, more warmth, more energy poured in, and the community's health becomes indistinguishable from their output." },
+        { "gift": "host", "text": "Resources become leverage. What is provided starts shaping who belongs and on what terms, and the terms operate without ever being published." },
+        { "gift": "strategist", "text": "Governance closes. The garden becomes an organization with one decision-maker, and the warmth that built it becomes the way decisions are delivered." }
+      ],
+      "missing": { "gift": "lover", "text": "Mercy is the missing brake. A Lover knows which specific person in the community has stopped flourishing — a signal that disappears the moment community health becomes an aggregate." }
+    },
+    "benevolent-leader": {
+      "name": "The Measured Mercy",
+      "line": "Generosity that starts counting, leadership that stops asking, and compassion that closes the door.",
+      "cascade": [
+        { "gift": "host", "text": "Generosity starts measuring. What was freely given begins being weighed against what came back, and the weighing is invisible to everyone but them." },
+        { "gift": "strategist", "text": "Consultation stops. The plan tightens and then overrides, and the people it is for become people it is happening to." },
+        { "gift": "lover", "text": "The heart closes. Having provided and led and felt neither received, they withdraw the warmth that made the leadership bearable." }
+      ],
+      "missing": { "gift": "catalyst", "text": "Prophecy is the missing brake. A Catalyst says the thing the kindness is protecting everyone from — this archetype's decline is almost entirely composed of unsaid true things." }
+    }
+  }
+}

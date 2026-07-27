@@ -8,6 +8,7 @@ const archData = JSON.parse(fs.readFileSync(__dirname + '/content/archetypes.jso
 const questions = JSON.parse(fs.readFileSync(__dirname + '/content/questions.json', 'utf8'));
 const pressure = JSON.parse(fs.readFileSync(__dirname + '/content/pressure.json', 'utf8'));
 const interaction = JSON.parse(fs.readFileSync(__dirname + '/content/interaction.json', 'utf8'));
+const archPressure = JSON.parse(fs.readFileSync(__dirname + '/content/archetype-pressure.json', 'utf8'));
 
 const V = Date.now().toString(36);
 const QCOUNT = questions.likert.length + questions.forcedChoice.length + questions.scenarios.length;
@@ -691,6 +692,101 @@ function renderCanonSections(sections) {
   }).join('\n');
 }
 
+/* Returns the unordered pair-collision entries whose BOTH gifts sit in this gift set. */
+function collisionsWithin(giftSlugs) {
+  return interaction.pairs.filter(p => giftSlugs.includes(p.a) && giftSlugs.includes(p.b));
+}
+
+function archetypePressureSection(a) {
+  const e = archPressure.archetypes[a.slug];
+  if (!e) return '';
+  const M = archPressure.model;
+  const slugs = a.gifts.map(g => NAME2SLUG[g]);
+
+  const steps = e.cascade.map((c, i) => {
+    const p = pressure.gifts[c.gift], g = gifts[c.gift], m = META[c.gift];
+    const stage = pressure.model.stages[i];
+    return `<div class="descent rv" style="--stage:${STAGE_TINT[stage.name]}">
+      <div class="descent-rail"><span class="descent-num">${i + 1}</span></div>
+      <div class="descent-body">
+        <div class="descent-head">
+          <span class="descent-stage">${esc(stage.name)}</span>
+          <span class="descent-verb">${esc(p.flare[i])}</span>
+          <a class="g-tag ${c.gift}" href="../gifts/${c.gift}.html" style="margin-left:auto">${esc(g.name.replace(/^The /, ''))}</a>
+        </div>
+        <p>${esc(c.text)}</p>
+      </div>
+    </div>`;
+  }).join('\n');
+
+  const cols = collisionsWithin(slugs).map(p => {
+    const ga = gifts[p.a], gb = gifts[p.b];
+    return `<article class="pair rv" style="--ga:${META[p.a].bar};--gb:${META[p.b].bar}">
+      <div class="pair-top">
+        <span class="g-tag ${p.a}">${esc(ga.name.replace(/^The /, ''))}</span>
+        <i class="pair-x">×</i>
+        <span class="g-tag ${p.b}">${esc(gb.name.replace(/^The /, ''))}</span>
+      </div>
+      <h3>${esc(p.title)}</h3>
+      <div class="pair-sec"><span class="pg-k">The loop</span><p>${esc(p.loop)}</p></div>
+      <div class="pair-break"><span class="pg-k">What breaks it</span><p>${esc(p.breaker)}</p></div>
+    </article>`;
+  }).join('\n');
+
+  const mg = e.missing.gift, mgG = gifts[mg], mgP = pressure.gifts[mg];
+  const quiet = ORDER.filter(s => !slugs.includes(s));
+  const quietChips = quiet.map(s => `<a class="g-tag ${s}${s === mg ? ' primary' : ''}" href="../gifts/${s}.html">${esc(gifts[s].name.replace(/^The /, ''))}</a>`).join('');
+
+  return `
+<section class="section pressure-band arch-pressure">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="kicker center">The Archetype Under Pressure</div>
+      <h2>${esc(e.name)}</h2>
+      <p class="arch-pressure-line">${esc(e.line)}</p>
+    </div>
+
+    <div class="wrap narrow rv" style="padding:0">
+      <p class="lead-prose">${esc(M.premise)}</p>
+    </div>
+
+    <div class="descent-list" style="margin-top:44px">${steps}</div>
+
+    <p class="cascade-note rv">${esc(M.note)}</p>
+
+    <div class="section-head rv" style="margin-top:76px">
+      <div class="kicker center">The Missing Brake</div>
+      <h2>What Would Have Caught It</h2>
+      <p>${esc(M.missingPremise)}</p>
+    </div>
+    <div class="missing-card rv" style="--g:${META[mg].bar}">
+      <div class="missing-head">
+        <img src="../images/${mg}-thumb.webp" alt="" width="52" height="52" loading="lazy">
+        <div>
+          <div class="pg-k">Primary missing check</div>
+          <h3>${esc(mgG.name)}</h3>
+        </div>
+      </div>
+      <p>${esc(e.missing.text)}</p>
+      <p class="missing-restored"><span>What it brings back</span> ${esc(mgP.restored)} — ${esc(mgP.restoredBody)}</p>
+      <div class="missing-quiet">
+        <span class="pg-k">All four quiet gifts</span>
+        <div class="combo">${quietChips}</div>
+      </div>
+    </div>
+
+    ${cols ? `<div class="section-head rv" style="margin-top:76px">
+      <div class="kicker center">Inside This Chord</div>
+      <h2>The Collisions You Carry</h2>
+      <p>These three conflicts normally happen between two people. Because both gifts sit in this archetype, they run internally — which is why certain decisions leave this person divided against themselves for reasons that are hard to name.</p>
+    </div>
+    <div class="pair-list">${cols}</div>` : ''}
+
+    <p class="pressure-more rv"><a class="link-arrow" href="../under-pressure.html">The full model of the three descents <span class="ar">→</span></a></p>
+  </div>
+</section>`;
+}
+
 function archetypePage(a) {
   const sect = archData.sections.find(s => a.section && a.section.startsWith(s.num));
   const siblings = archData.archetypes.filter(x => x.section === a.section && x.num !== a.num);
@@ -721,6 +817,8 @@ function archetypePage(a) {
 </header>
 
 ${renderCanonSections(a.canonSections)}
+
+${archetypePressureSection(a)}
 
 <section class="section alt">
   <div class="wrap">
@@ -1248,6 +1346,7 @@ function dataJs() {
   }
   const clientArch = archData.archetypes.map(a => ({
     num: a.num, name: a.name, slug: a.slug, gifts: a.gifts.map(g => NAME2SLUG[g]),
+    pressure: archPressure.archetypes[a.slug] || null,
     essence: a.essence, section: a.section, axisSignature: a.axisSignature,
     websiteSummary: a.websiteSummary, sigStrengthName: a.sigStrengthName,
     sigStrengthDesc: a.sigStrengthDesc, sigParadox: a.sigParadox, devQuestion: a.devQuestion,
@@ -1259,6 +1358,7 @@ window.GIFTS = ${JSON.stringify(clientGifts)};
 window.ARCHETYPES = ${JSON.stringify(clientArch)};
 window.QUESTIONS = ${JSON.stringify(questions)};
 window.PRESSURE_MODEL = ${JSON.stringify(pressure.model)};
+window.ARCH_PRESSURE_MODEL = ${JSON.stringify(archPressure.model)};
 window.GAP_BANDS = ${JSON.stringify(interaction.gap.bands)};
 window.BLIND_EXCHANGE = ${JSON.stringify(interaction.blindExchange.items)};
 window.PAIR_COLLISIONS = ${JSON.stringify(interaction.pairs)};

@@ -177,6 +177,46 @@
       '</div>';
   }
   var bottom2 = res.ranked.slice(-2).reverse();
+  /* ---- your archetype's cascade: the three stages run across the three gifts ---- */
+  function archCascade() {
+    if (!arch || !arch.pressure) return '';
+    var e = arch.pressure, PM = window.PRESSURE_MODEL;
+    var steps = e.cascade.map(function (c, i) {
+      var g = GIFTS[c.gift], p = g.pressure, stage = PM.stages[i];
+      return '<div class="descent" style="--stage:' + STAGE_TINT[stage.name] + '">' +
+        '<div class="descent-rail"><span class="descent-num">' + (i + 1) + '</span></div>' +
+        '<div class="descent-body"><div class="descent-head">' +
+        '<span class="descent-stage">' + esc(stage.name) + '</span>' +
+        '<span class="descent-verb">' + esc(p.flare[i]) + '</span>' +
+        '<a class="g-tag ' + c.gift + '" href="/gifts/' + c.gift + '" style="margin-left:auto">' + esc(g.name.replace(/^The /, '')) + '</a>' +
+        '</div><p>' + esc(c.text) + '</p></div></div>';
+    }).join('');
+
+    var mg = e.missing.gift, mgG = GIFTS[mg];
+    var quiet = window.GIFT_ORDER.filter(function (s) { return arch.gifts.indexOf(s) === -1; });
+    var chips = quiet.map(function (s) {
+      return '<a class="g-tag ' + s + (s === mg ? ' primary' : '') + '" href="/gifts/' + s + '">' + esc(GIFTS[s].name.replace(/^The /, '')) + '</a>';
+    }).join('');
+
+    return '<section class="section pressure-band arch-pressure"><div class="wrap">' +
+      '<div class="section-head rv"><div class="kicker center">Your Archetype Under Pressure</div>' +
+      '<h2>' + esc(e.name) + '</h2>' +
+      '<p class="arch-pressure-line">' + esc(e.line) + '</p></div>' +
+      '<div class="wrap narrow rv" style="padding:0"><p class="lead-prose">' + esc(window.ARCH_PRESSURE_MODEL.premise) + '</p></div>' +
+      '<div class="descent-list" style="margin-top:44px">' + steps + '</div>' +
+      '<p class="cascade-note rv">' + esc(window.ARCH_PRESSURE_MODEL.note) + '</p>' +
+      '<div class="section-head rv" style="margin-top:72px"><div class="kicker center">Your Missing Brake</div>' +
+      '<h2>What Would Have Caught It</h2>' +
+      '<p>' + esc(window.ARCH_PRESSURE_MODEL.missingPremise) + '</p></div>' +
+      '<div class="missing-card rv" style="--g:' + BAR[mg] + '">' +
+      '<div class="missing-head"><img src="/images/' + mg + '-thumb.webp" alt="" width="52" height="52">' +
+      '<div><div class="pg-k">Primary missing check</div><h3>' + esc(mgG.name) + '</h3></div></div>' +
+      '<p>' + esc(e.missing.text) + '</p>' +
+      '<p class="missing-restored"><span>What it brings back</span> ' + esc(mgG.pressure.restored) + ' — ' + esc(mgG.pressure.restoredBody) + '</p>' +
+      '<div class="missing-quiet"><span class="pg-k">All four quiet gifts</span><div class="combo">' + chips + '</div></div>' +
+      '</div></div></section>';
+  }
+
   /* ---- the collisions you carry: pair conflicts INSIDE your own top three ---- */
   function internalCollisions() {
     var pairs = window.PAIR_COLLISIONS || [], t3 = res.top3, out = [];
@@ -288,6 +328,7 @@
     '<div class="chart-card rv">' + bars + '</div>' + tieNote +
     '</div></section>' +
     archHtml +
+    archCascade() +
     '<section class="section alt"><div class="wrap">' +
     '<div class="section-head rv"><div class="kicker center">Your Top Three</div><h2>Deep Dive into Your Leading Gifts</h2>' +
     '<p>These three gifts carry the highest intensity in your profile. Together they form your archetype; individually, each deserves deep exploration.</p></div>' +
