@@ -52,6 +52,8 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
 <meta property="og:image" content="https://7giftsofthefather.pages.dev/images/og.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="${root}images/favicon.png">
+<link rel="apple-touch-icon" href="${root}images/apple-touch-icon.png">
+<meta name="theme-color" content="#2A141A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -61,7 +63,7 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
 <a class="skip-link" href="#main">Skip to content</a>
 <nav class="nav">
   <div class="nav-inner">
-    <a class="brand" href="${root}index.html"><img src="${root}images/crown-thumb.webp" alt="Crown logo"><span>The 7 Gifts of the Father</span></a>
+    <a class="brand" href="${root}index.html"><img class="brand-mark" src="${root}images/rose-mark-sm.svg" width="200" height="200" alt=""><span>The 7 Gifts of the Father</span></a>
     <button class="nav-burger" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
     <div class="nav-links">
       ${nav.map(([href, label, key]) => `<a href="${root}${href}"${active === key ? ' class="active"' : ''}>${label}</a>`).join('\n      ')}
@@ -74,7 +76,7 @@ ${body}
 </main>
 <footer>
   <div class="foot-inner">
-    <a class="brand" href="${root}index.html"><img src="${root}images/crown-thumb.webp" alt=""><span>The 7 Gifts of the Father</span></a>
+    <a class="brand" href="${root}index.html"><img class="brand-mark" src="${root}images/rose-mark-sm.svg" width="200" height="200" alt=""><span>The 7 Gifts of the Father</span></a>
     <div class="foot-links">
       ${ORDER.map(s => `<a href="${root}gifts/${s}.html">${gifts[s].name}</a>`).join('\n      ')}
     </div>
@@ -118,6 +120,7 @@ text: 'Ministry orientations and callings that equip the church for service and 
 const trinityCards = root => trinity.map(t => `<div class="card trinity-card rv${t.title.includes('Father') ? ' father' : ''}">
         <div class="t-ic">${t.icon}</div>
         <h3>${t.title}</h3><div class="ref">${t.ref}</div><p>${t.text}</p>
+        ${t.title.includes('Father') ? '<span class="t-tag">What this site measures</span>' : ''}
       </div>`).join('\n');
 
 function giftCard(slug, root) {
@@ -134,7 +137,8 @@ function giftCard(slug, root) {
 function homePage() {
   const body = `
 <header class="hero">
-  <img class="crown" src="images/crown.webp" alt="The 7 Gifts of the Father crown with seven gemstones" fetchpriority="high">
+  <img class="crown" src="images/rose-mark.svg" width="200" height="200"
+       alt="A rose window of seven jewelled lights, one for each of the seven gifts" fetchpriority="high">
   <div class="kicker center">Romans 12 · A Motivational Design</div>
   <h1>The 7 Gifts <br><em>of the Father</em></h1>
 <p class="lede">The Father wired seven motivations into you before you were born. You carry all seven, in your own proportions. Learning which ones lead in you changes how you work, how you love, and what you are for.</p>
@@ -143,9 +147,14 @@ function homePage() {
     <a class="link-arrow" href="gifts/index.html">Explore the 7 Gifts <span class="ar">→</span></a>
     <a class="link-arrow" href="archetypes/index.html">The 35 Archetypes <span class="ar">→</span></a>
   </div>
-  <p class="verse">“For by the grace given me I say to every one of you: Do not think of yourself more highly than you ought, but rather think of yourself with sober judgment, in accordance with the <strong>faith God has distributed</strong> to each of you.”<cite>Romans 12:3</cite></p>
-  ${gemDivider}
 </header>
+
+<section class="verse-band">
+  <div class="wrap narrow">
+    ${gemDivider}
+    <p class="verse">“For by the grace given me I say to every one of you: Do not think of yourself more highly than you ought, but rather think of yourself with sober judgment, in accordance with the <strong>faith God has distributed</strong> to each of you.”<cite>Romans 12:3</cite></p>
+  </div>
+</section>
 
 <section class="section">
   <div class="wrap">
@@ -215,7 +224,7 @@ function giftsIndex() {
   }).join('\n');
   const body = `
 <header class="page-hero">
-  <img class="mark" src="../images/crown-thumb.webp" alt="">
+  <img class="mark" src="../images/rose-mark-sm.svg" alt="">
   <h1>The 7 Gifts</h1>
 <p class="lede">Seven motivational drives, distributed by the Father's grace. Each carries its own core question, energizer, and drive. Its own strengths, shadows, and leadership style.</p>
 </header>
@@ -511,7 +520,7 @@ function archetypesIndex() {
   const chordChips = ORDER.map(s => `<button type="button" class="chord-chip" data-slug="${s}" style="--c:var(--${s});--cb:var(--${s}-bar)" aria-pressed="false"><span class="cc-dot"></span>${CHIP_LABEL[s]}</button>`).join('');
   const body = `
 <header class="page-hero">
-  <img class="mark" src="../images/crown-thumb.webp" alt="">
+  <img class="mark" src="../images/rose-mark-sm.svg" alt="">
   <h1>The 35 Archetypes of the Soul</h1>
 <p class="lede">The Motivational Symphony: when your three dominant gifts sound together, they strike a chord, one of thirty-five distinct personality archetypes.</p>
 </header>
@@ -769,7 +778,7 @@ ${siblings.length ? `<section class="section">
 function foundationPage() {
   const body = `
 <header class="page-hero">
-  <img class="mark" src="images/crown-thumb.webp" alt="">
+  <img class="mark" src="images/rose-mark-sm.svg" alt="">
   <h1>The Biblical Foundation</h1>
 <p class="lede">Understanding the scriptural basis for the Father's motivational gifts, and how they fit within the broader framework of divine gifts in the Trinity.</p>
 </header>
@@ -827,7 +836,7 @@ function understandingPage() {
   ];
   const body = `
 <header class="page-hero">
-  <img class="mark" src="images/crown-thumb.webp" alt="">
+  <img class="mark" src="images/rose-mark-sm.svg" alt="">
   <h1>How Scoring Works</h1>
   <p class="lede">No one is a single gift. You carry all seven at different strengths, and that particular mix is what makes you recognisable.</p>
 </header>
@@ -900,7 +909,7 @@ function understandingPage() {
 function assessmentPage() {
   const body = `
 <header class="page-hero no-print">
-  <img class="mark" src="images/crown-thumb.webp" alt="">
+  <img class="mark" src="images/rose-mark-sm.svg" alt="">
   <h1>The Comprehensive Integrated Assessment</h1>
 <p class="lede">A complete measure of your motivational design. ${QCOUNT} questions across three sections, scoring the intensity of all seven gifts, naming your top three, and revealing your archetype of the soul.</p>
 </header>
@@ -916,9 +925,9 @@ function assessmentPage() {
 function resultsPage() {
   const body = `
 <header class="res-hero">
-  <img src="images/crown-thumb.webp" alt="" style="width:58px;margin:0 auto 14px">
+  <img src="images/rose-mark-sm.svg" alt="" style="width:58px;margin:0 auto 14px">
   <h1>Your Motivational Design</h1>
-<p class="lede">Welcome to your personalized profile of the The 7 Gifts of the Father. A portrait of the unique motivational design God has woven into the core of your being.</p>
+<p class="lede">Welcome to your personalized profile of The 7 Gifts of the Father. A portrait of the unique motivational design God has woven into the core of your being.</p>
 </header>
 <div id="results-app"></div>
 <script src="js/data.js?v=${V}"></script>
@@ -929,7 +938,7 @@ function resultsPage() {
 /* ---------------- 404 ---------------- */
 function notFoundPage() {
   const body = `<section class="empty-state"><div class="wrap narrow">
-    <img src="/images/crown-thumb.webp" alt="" style="width:64px;margin:0 auto 20px">
+    <img src="/images/rose-mark-ink.svg" alt="" style="width:64px;margin:0 auto 20px">
     <h2>Page not found</h2>
 <p style="color:var(--muted)">The page you're looking for isn't here, but your gifts are.</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px">
