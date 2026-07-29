@@ -629,7 +629,7 @@ footer { background: var(--garnet-9); color: var(--on-dark-faint); padding: 56px
   .res-hero { padding: 8px 0; border: none; background: #fff; color: #000; }
   .res-hero h1 { color: #000; }
   .res-hero .lede { color: #333; }
-  .card, .chart-card, .arch-reveal { box-shadow: none; break-inside: avoid; }
+  .card, .chart-card, .arch-reveal, .verse-card { box-shadow: none; }
   .bar-fill { transition: none; }
   .tab-panel { display: block !important; }
   a { color: inherit; }
@@ -725,27 +725,52 @@ ol.canon-list li::before{content:counter(cl);top:0;color:var(--gold-ink);font-fa
   .canon-verse { break-inside: avoid; }
 }
 
-/* ---- PRINT SAFETY — no blank pages ---- */
+/* ---- PRINT SAFETY — no blank pages, nothing missing ---- */
 @media print {
   /* reveal-on-scroll animations must never leave printed content invisible */
   .rv, .rv.in, .section-head.rv, .canon-body.rv, #archFull .rv {
     opacity: 1 !important; transform: none !important; transition: none !important;
   }
   #archFull, #archFull * { visibility: visible !important; }
-  /* let content flow naturally; never force a blank page before a block */
-  .tab-panel, .canon-sec, .res-profile, .chart-card {
-    page-break-before: auto !important; break-before: auto !important;
+  /* an empty archetype slot must not reserve a page of its own */
+  #archFull:empty { display: none !important; }
+
+  /* Anything that can outgrow a printed page MUST be allowed to break inside it.
+     A block taller than the page with break-inside:avoid makes the browser bail
+     out to a fresh page and leave the rest of the current one blank. The deep-dive
+     gift cards run past 4,000px and the archetype preview past 1,000px, so both
+     belong here. Only small units get to stay whole, further down. */
+  .tab-panel, .card, .chart-card, .arch-reveal, .low-card, .verse-card,
+  .canon-sec, #archFull .canon-sec, .canon-body, .growth-callout, .res-profile,
+  .section, .wrap, .grid, .framework-grid, .descent-list, .reentry-grid {
+    break-inside: auto !important; page-break-inside: auto !important;
+    break-before: auto !important; page-break-before: auto !important;
   }
-  /* long sections may split across pages rather than push a blank one */
-  .canon-sec, #archFull .canon-sec, .tab-panel { break-inside: auto !important; }
-  /* only keep small units intact */
-  .canon-verse, .canon-sub, .canon-small, .mini, .arch-thrive li { break-inside: avoid; }
+
+  /* no stranded single lines, which is how a lone scripture reference ends up
+     alone on an otherwise empty page */
+  p, li, blockquote, .canon-body, .verse-card { orphans: 3; widows: 3; }
+
+  /* keep only units that comfortably fit intact */
+  .canon-verse, .canon-sub, .canon-small, .mini, .arch-thrive li,
+  .bar-row, .descent, .top3-rank li, .fw-k { break-inside: avoid; }
+  .canon-sub, .canon-small, h2, h3, h4 { break-after: avoid; }
+  .verse-card p { break-inside: avoid; }
+
   /* guarantee readable, on-brand ink in print (never faint or invisible) */
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   #archFull .canon-body, #archFull .canon-body > p, #archFull .canon-sub,
   .tab-panel p, .tab-panel li, .tab-panel h3, .tab-panel h4, .res-h { color: #241F17 !important; }
   #archFull .canon-small, .canon-small, .fw-k { color: #8A6A22 !important; }
   #archFull .canon-verse, .verse-card p { color: #241F17 !important; }
+  /* the verse card is garnet on screen; on paper it must be ink on white */
+  .verse-card { background: #fff !important; border: 1px solid #ddd !important; padding: 20px 24px !important; }
+  .verse-card strong, .verse-card .verse-ref { color: #8A6A22 !important; }
+  /* On screen each section carries 92px of air top and bottom. On paper that is
+     wasted paper, and the trailing padding alone was spilling onto a blank page. */
+  #results-app > section, #results-app > section.alt { padding-top: 14px !important; padding-bottom: 14px !important; }
+  #results-app > section:last-child { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+  body, main { margin-bottom: 0 !important; padding-bottom: 0 !important; }
 }
 
 

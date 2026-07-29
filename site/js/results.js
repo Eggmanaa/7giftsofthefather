@@ -189,7 +189,7 @@ return m ? '<p>' + esc(m[2]) + '<strong class="verse-ref">' + esc(m[1].trim()).t
     (pfMeta.length ? '<div class="res-profile-meta">' + pfMeta.join('  ·  ') + '</div>' : '') +
     '</div>' : '';
   var topActions = '<div class="res-actions res-actions-top no-print">' +
-    '<button class="btn btn-primary" onclick="window.print()">⤓ Save as PDF</button>' +
+    '<button class="btn btn-primary" data-print type="button">⤓ Save as PDF</button>' +
     '<a class="btn btn-quiet" href="/assessment">Retake</a></div>';
   var topThreeHtml = '<div class="top3-summary rv">' +
     '<div class="kicker center" style="justify-content:center">Your Top Three Gifts</div>' +
@@ -220,7 +220,7 @@ return m ? '<p>' + esc(m[2]) + '<strong class="verse-ref">' + esc(m[1].trim()).t
     '<div class="top3-tabs no-print">' + tabs + '</div>' + panels +
     '</div></section>' +
     quieterHtml +
-    '<section class="section" style="padding:56px 0"><div class="res-actions no-print">' +
+    '<section class="section no-print" style="padding:56px 0"><div class="res-actions">' +
     '<a class="btn btn-quiet" href="/assessment">Retake the Assessment</a>' +
     '<a class="btn btn-quiet" href="/archetypes/">Browse All 35 Archetypes</a>' +
     '</div></section>';
@@ -252,26 +252,76 @@ return m ? '<p>' + esc(m[2]) + '<strong class="verse-ref">' + esc(m[1].trim()).t
     }, 180);
   });
 
-  /* ---- full archetype description: reuse the archetype page (single source of truth) ---- */
-  (function () {
-    if (!arch || !arch.slug) return;
+  /* ---- full archetype description: reuse the archetype page (single source of truth) ----
+     This section is fetched, so it can still be in flight when someone hits Save as PDF.
+     archReady resolves once the section is in the DOM (or once we have given up), and
+     every print path waits on it. Without that wait the PDF silently loses the archetype. */
+  var archReady = (function () {
+    if (!arch || !arch.slug) return Promise.resolve('no-archetype');
     var host = document.getElementById('archFull');
-    if (!host) return;
-    fetch('/archetypes/' + arch.slug)
-      .then(function (resp) { return resp.ok ? resp.text() : null; })
-      .then(function (html) {
-        if (!html) return;
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        var secs = doc.querySelectorAll('.canon-sec');
-        if (!secs.length) return;
-        var body = '';
-        Array.prototype.forEach.call(secs, function (s) { body += s.outerHTML; });
+    if (!host) return Promise.resolve('no-host');
+
+    function inject(html) {
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var secs = doc.querySelectorAll('.canon-sec');
+      if (!secs.length) return false;
+      var body = '';
+      Array.prototype.forEach.call(secs, function (s) { body += s.outerHTML; });
+      host.innerHTML =
+        '<section class="section"><div class="wrap narrow"><div class="section-head rv">' +
+        '<div class="kicker center">Your Archetype in Full</div><h2>' + esc(arch.name) + '</h2>' +
+        '<p>' + esc(arch.essence || '') + '</p></div></div></section>' + body;
+      host.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); });
+      return true;
+    }
+
+    /* try the clean URL, then the .html form, so one bad hop does not lose the section */
+    function load(urls) {
+      if (!urls.length) return Promise.resolve(false);
+      return fetch(urls[0])
+        .then(function (r) { return r.ok ? r.text() : null; })
+        .then(function (html) { return html && inject(html) ? true : load(urls.slice(1)); })
+        .catch(function () { return load(urls.slice(1)); });
+    }
+
+    return load(['/archetypes/' + arch.slug, '/archetypes/' + arch.slug + '.html'])
+      .then(function (ok) {
+        if (ok) return 'ready';
+        /* Last resort: print what we already hold in memory rather than a gap. */
         host.innerHTML =
-          '<section class="section"><div class="wrap narrow"><div class="section-head rv">' +
+          '<section class="section"><div class="wrap narrow"><div class="section-head">' +
           '<div class="kicker center">Your Archetype in Full</div><h2>' + esc(arch.name) + '</h2>' +
-          '<p>' + esc(arch.essence || '') + '</p></div></div></section>' + body;
-        host.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); });
-      })
-      .catch(function () {});
+          '<p>' + esc(arch.essence || '') + '</p></div>' +
+          '<div class="canon-body"><p class="lead-prose">' + esc(arch.websiteSummary || arch.essence || '') + '</p>' +
+          '<p class="no-print">The complete write-up lives at <a href="/archetypes/' + arch.slug + '">' +
+          esc(arch.name) + '</a>.</p></div></div></section>';
+        return 'fallback';
+      });
   })();
+
+  /* Every route to a PDF waits for the archetype: the button, and Ctrl+P / browser menu. */
+  window.sg7ArchReady = archReady;
+
+  var printBtn = app.querySelector('[data-print]');
+  if (printBtn) {
+    printBtn.onclick = function () {
+      var b = printBtn, label = b.textContent;
+      b.disabled = true; b.textContent = 'Preparing your PDF…';
+      archReady.then(function () {
+        b.disabled = false; b.textContent = label;
+        window.print();
+      });
+    };
+  }
+
+  /* Backstop for Ctrl+P: if the section has not landed yet, say so rather than
+     handing someone a PDF with a hole in it. */
+  window.addEventListener('beforeprint', function () {
+    var host = document.getElementById('archFull');
+    if (arch && host && !host.innerHTML) {
+      host.innerHTML = '<section class="section"><div class="wrap narrow">' +
+        '<p style="text-align:center;color:#8A6A22">Your archetype section was still loading. ' +
+        'Close this dialog, wait a moment, then use the Save as PDF button.</p></div></section>';
+    }
+  });
 })();
