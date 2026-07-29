@@ -96,7 +96,7 @@ button { font-family: inherit; cursor: pointer; }
   display: flex; align-items: center; gap: 26px; height: 66px;
 }
 .brand { display: flex; align-items: center; gap: 11px; color: var(--on-dark); }
-.brand img { width: 32px; height: auto; }
+.brand img { width: 40px; height: auto; }
 .brand span { font-family: var(--serif); font-size: 1.14rem; font-weight: 600; letter-spacing: .01em; white-space: nowrap; }
 .nav-links { display: flex; gap: 15px; margin-left: auto; align-items: center; }
 .nav-links a {
@@ -204,8 +204,9 @@ a.g-tag:hover { color: var(--ink); text-decoration: underline; text-underline-of
     repeating-linear-gradient(-45deg, rgba(240,206,130,.035) 0 1px, transparent 1px 16px);
 }
 .hero > * { position: relative; z-index: 1; }
-.hero img.crown { width: clamp(104px, 11.6vw, 152px); height: auto; margin: 0 auto 26px;
-  filter: drop-shadow(0 8px 20px rgba(0,0,0,.34)) drop-shadow(0 0 30px rgba(240,206,130,.26)); }
+.hero h1.lockup { margin: 0 0 26px; }
+.hero h1.lockup img { width: clamp(228px, 27vw, 340px); height: auto; margin: 0 auto;
+  filter: drop-shadow(0 14px 32px rgba(0,0,0,.42)) drop-shadow(0 0 46px rgba(240,206,130,.16)); }
 .hero h1 { font-size: clamp(2.7rem, 6.2vw, 4.6rem); font-weight: 540; margin-bottom: 22px; color: #FAF3E1; }
 .hero h1 em { font-style: italic; font-weight: 480; color: var(--gold-bright); }
 .hero .lede { max-width: 640px; margin: 0 auto 34px; font-size: 1.14rem; color: var(--on-dark-soft); line-height: 1.75; }
@@ -230,7 +231,7 @@ a.g-tag:hover { color: var(--ink); text-decoration: underline; text-underline-of
     linear-gradient(180deg, var(--garnet-9), var(--garnet-8)); }
 .page-hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.3rem); color: #FAF3E1; }
 .page-hero .lede { max-width: 700px; margin: 0 auto; color: var(--on-dark-soft); font-size: 1.07rem; }
-.page-hero img.mark { width: 58px; margin: 0 auto 18px; }
+.page-hero img.mark { width: 84px; margin: 0 auto 18px; }
 .page-hero .kicker { justify-content: center; color: var(--gold); }
 .page-hero .kicker::before, .page-hero .kicker::after { content: ""; width: 26px; height: 1px; background: var(--dark-line); }
 
@@ -254,22 +255,30 @@ a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); bor
 .grid.g3 { grid-template-columns: repeat(auto-fit, minmax(288px, 1fr)); }
 
 /* trinity */
+.trinity-card { display: flex; flex-direction: column; }
+.trinity-card .t-top { display: flex; align-items: center; gap: 13px; margin-bottom: 20px; }
 .trinity-card .t-ic {
-  color: var(--gold-ink); margin-bottom: 22px;
-  width: 54px; height: 54px; border-radius: 50%;
+  color: var(--gold-ink); flex: none;
+  width: 44px; height: 44px; border-radius: 50%;
   display: grid; place-items: center;
   border: 1px solid var(--hairline-2);
   background: radial-gradient(circle at 50% 34%, rgba(226,182,90,.16), rgba(226,182,90,.05));
 }
-.trinity-card .t-ic svg { width: 26px; height: 26px; }
+.trinity-card .t-ic svg { width: 22px; height: 22px; }
+.trinity-card .t-from { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+  font-weight: 700; color: var(--gold-ink); }
 .trinity-card.father .t-ic { border-color: var(--gold-soft); box-shadow: 0 0 0 4px rgba(226,182,90,.1); }
-.trinity-card h3 { font-size: 1.34rem; }
-.trinity-card .ref { font-size: .69rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-ink); font-weight: 700; margin-bottom: 14px; }
+.trinity-card h3 { font-size: 1.28rem; margin-bottom: 6px; }
+.trinity-card .ref { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 16px; }
 .trinity-card p { color: var(--ink-soft); font-size: .96rem; margin: 0; }
 .trinity-card.father { border-color: var(--gold-soft); box-shadow: 0 0 0 3px rgba(226,182,90,.09); }
-.trinity-card .t-tag { display: inline-block; margin-top: 18px; font-size: .68rem; letter-spacing: .18em;
-  text-transform: uppercase; font-weight: 700; color: var(--gold-ink);
-  border: 1px solid var(--gold-soft); border-radius: 99px; padding: 5px 12px; }
+.trinity-card .t-given {
+  margin-top: auto; padding-top: 20px; border-top: 1px solid var(--hairline);
+  min-height: calc(3em + 20px);
+  font-family: var(--serif); font-style: italic; font-size: 1rem; line-height: 1.5;
+  color: var(--gold-ink);
+}
+.trinity-card.father .t-given { border-top-color: var(--gold-soft); }
 
 /* ---------- gift cards ---------- */
 .gift-card { display: flex; flex-direction: column; gap: 13px; height: 100%; position: relative; }
@@ -819,7 +828,7 @@ ol.canon-list li::before{content:counter(cl);top:0;color:var(--gold-ink);font-fa
 .verse-ref { display: block; margin-top: 8px; font-size: .7rem; letter-spacing: .16em; }
 
 /* ---------- hero: mark, then the name in live type ---------- */
-.brand img.brand-mark { width: 30px; height: auto; margin-top: 0; }
+.brand img.brand-mark { width: 40px; height: auto; margin-top: 0; }
 
 /* scripture gets its own quiet band instead of competing inside the hero */
 .verse-band { background: var(--garnet-9); border-bottom: 1px solid var(--dark-line);

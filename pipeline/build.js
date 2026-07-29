@@ -63,7 +63,7 @@ function layout({ title, desc, body, root = '', active = '', bodyClass = '' }) {
 <a class="skip-link" href="#main">Skip to content</a>
 <nav class="nav">
   <div class="nav-inner">
-    <a class="brand" href="${root}index.html"><img class="brand-mark" src="${root}images/rose-mark-sm.svg" width="200" height="200" alt=""><span>The 7 Gifts of the Father</span></a>
+    <a class="brand" href="${root}index.html"><img class="brand-mark" src="${root}images/crown-only.webp" width="1182" height="780" alt=""><span>The 7 Gifts of the Father</span></a>
     <button class="nav-burger" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
     <div class="nav-links">
       ${nav.map(([href, label, key]) => `<a href="${root}${href}"${active === key ? ' class="active"' : ''}>${label}</a>`).join('\n      ')}
@@ -76,7 +76,7 @@ ${body}
 </main>
 <footer>
   <div class="foot-inner">
-    <a class="brand" href="${root}index.html"><img class="brand-mark" src="${root}images/rose-mark-sm.svg" width="200" height="200" alt=""><span>The 7 Gifts of the Father</span></a>
+    <a class="brand" href="${root}index.html"><img class="brand-mark" src="${root}images/crown-only.webp" width="1182" height="780" alt=""><span>The 7 Gifts of the Father</span></a>
     <div class="foot-links">
       ${ORDER.map(s => `<a href="${root}gifts/${s}.html">${gifts[s].name}</a>`).join('\n      ')}
     </div>
@@ -110,17 +110,20 @@ const IC = {
 
 /* ---------------- home ---------------- */
 const trinity = [
-  { title: 'The Gifts of the Holy Spirit', ref: '1 Corinthians 12:4–11', icon: IC.flame,
-text: 'Supernatural, power-based manifestations that operate through believers for miraculous works, divine revelation, and spiritual warfare. These include gifts like tongues, prophecy, healing, and words of knowledge, supernatural abilities that transcend natural human capacity.' },
-  { title: 'The Gifts of Jesus', ref: 'Ephesians 4:11–16', icon: IC.cross,
-text: 'Ministry orientations and callings that equip the church for service and maturity. These include apostles, prophets, evangelists, pastors, and teachers, specific roles designed to build up the body of Christ and prepare believers for works of service.' },
-  { title: 'The Gifts of the Father', ref: 'Romans 12:6–8', icon: IC.crown,
-    text: 'Personality-based motivational drives that come wired into us at birth, forming the core of who we are and how we naturally operate in the world and the Church. These seven gifts shape our personalities, drive our decisions, and determine how we naturally approach life and relationships.' },
+  { from: 'From the Spirit', title: 'The Gifts of the Holy Spirit', ref: '1 Corinthians 12:4–11', icon: IC.flame,
+    text: 'Displays of supernatural power working through a believer. Tongues, prophecy, healing, words of knowledge, things no one can do on their own strength.',
+    given: 'Given as the Spirit chooses, moment by moment.' },
+  { from: 'From the Son', title: 'The Gifts of Jesus', ref: 'Ephesians 4:11–16', icon: IC.cross,
+    text: 'Callings that equip the church. Apostles, prophets, evangelists, pastors, teachers, each a role that builds up the body and readies people to serve.',
+    given: 'Given as an assignment to the Church.' },
+  { from: 'From the Father', title: 'The Gifts of the Father', ref: 'Romans 12:6–8', icon: IC.crown,
+    text: 'Motivational drives wired into you at birth. All seven, in proportions unique to you, shaping your personality, your decisions, and how you meet the world.',
+    given: 'Given before you were born. These seven are what this site measures.' },
 ];
 const trinityCards = root => trinity.map(t => `<div class="card trinity-card rv${t.title.includes('Father') ? ' father' : ''}">
-        <div class="t-ic">${t.icon}</div>
+        <div class="t-top"><div class="t-ic">${t.icon}</div><div class="t-from">${t.from}</div></div>
         <h3>${t.title}</h3><div class="ref">${t.ref}</div><p>${t.text}</p>
-        ${t.title.includes('Father') ? '<span class="t-tag">What this site measures</span>' : ''}
+        <div class="t-given">${t.given}</div>
       </div>`).join('\n');
 
 function giftCard(slug, root) {
@@ -137,10 +140,9 @@ function giftCard(slug, root) {
 function homePage() {
   const body = `
 <header class="hero">
-  <img class="crown" src="images/rose-mark.svg" width="200" height="200"
-       alt="A rose window of seven jewelled lights, one for each of the seven gifts" fetchpriority="high">
+  <h1 class="lockup"><img src="images/crown-hero.webp" width="894" height="968"
+       alt="The 7 Gifts of the Father" fetchpriority="high"></h1>
   <div class="kicker center">Romans 12 · A Motivational Design</div>
-  <h1>The 7 Gifts <br><em>of the Father</em></h1>
 <p class="lede">The Father wired seven motivations into you before you were born. You carry all seven, in your own proportions. Learning which ones lead in you changes how you work, how you love, and what you are for.</p>
   <div class="cta-row">
     <a class="btn btn-primary" href="assessment.html">Take the Assessment</a>
@@ -205,7 +207,7 @@ function homePage() {
   </div>
 </section>`;
 
-  return layout({ title: 'The The 7 Gifts of the Father | Discover Your God-Given Design',
+  return layout({ title: 'The 7 Gifts of the Father | Discover Your God-Given Design',
 desc: 'Discover the seven motivational gifts of Romans 12 (Prophecy, Service, Teaching, Encouragement, Giving, Leadership, and Mercy) and the 35 personality archetypes of the soul. Take the free assessment.',
     body, root: '', active: 'home' });
 }
@@ -224,7 +226,7 @@ function giftsIndex() {
   }).join('\n');
   const body = `
 <header class="page-hero">
-  <img class="mark" src="../images/rose-mark-sm.svg" alt="">
+  <img class="mark" src="../images/crown-only.webp" alt="">
   <h1>The 7 Gifts</h1>
 <p class="lede">Seven motivational drives, distributed by the Father's grace. Each carries its own core question, energizer, and drive. Its own strengths, shadows, and leadership style.</p>
 </header>
@@ -520,7 +522,7 @@ function archetypesIndex() {
   const chordChips = ORDER.map(s => `<button type="button" class="chord-chip" data-slug="${s}" style="--c:var(--${s});--cb:var(--${s}-bar)" aria-pressed="false"><span class="cc-dot"></span>${CHIP_LABEL[s]}</button>`).join('');
   const body = `
 <header class="page-hero">
-  <img class="mark" src="../images/rose-mark-sm.svg" alt="">
+  <img class="mark" src="../images/crown-only.webp" alt="">
   <h1>The 35 Archetypes of the Soul</h1>
 <p class="lede">The Motivational Symphony: when your three dominant gifts sound together, they strike a chord, one of thirty-five distinct personality archetypes.</p>
 </header>
@@ -778,7 +780,7 @@ ${siblings.length ? `<section class="section">
 function foundationPage() {
   const body = `
 <header class="page-hero">
-  <img class="mark" src="images/rose-mark-sm.svg" alt="">
+  <img class="mark" src="images/crown-only.webp" alt="">
   <h1>The Biblical Foundation</h1>
 <p class="lede">Understanding the scriptural basis for the Father's motivational gifts, and how they fit within the broader framework of divine gifts in the Trinity.</p>
 </header>
@@ -836,7 +838,7 @@ function understandingPage() {
   ];
   const body = `
 <header class="page-hero">
-  <img class="mark" src="images/rose-mark-sm.svg" alt="">
+  <img class="mark" src="images/crown-only.webp" alt="">
   <h1>How Scoring Works</h1>
   <p class="lede">No one is a single gift. You carry all seven at different strengths, and that particular mix is what makes you recognisable.</p>
 </header>
@@ -909,7 +911,7 @@ function understandingPage() {
 function assessmentPage() {
   const body = `
 <header class="page-hero no-print">
-  <img class="mark" src="images/rose-mark-sm.svg" alt="">
+  <img class="mark" src="images/crown-only.webp" alt="">
   <h1>The Comprehensive Integrated Assessment</h1>
 <p class="lede">A complete measure of your motivational design. ${QCOUNT} questions across three sections, scoring the intensity of all seven gifts, naming your top three, and revealing your archetype of the soul.</p>
 </header>
@@ -925,7 +927,7 @@ function assessmentPage() {
 function resultsPage() {
   const body = `
 <header class="res-hero">
-  <img src="images/rose-mark-sm.svg" alt="" style="width:58px;margin:0 auto 14px">
+  <img src="images/crown-only.webp" alt="" style="width:58px;margin:0 auto 14px">
   <h1>Your Motivational Design</h1>
 <p class="lede">Welcome to your personalized profile of The 7 Gifts of the Father. A portrait of the unique motivational design God has woven into the core of your being.</p>
 </header>
@@ -938,7 +940,7 @@ function resultsPage() {
 /* ---------------- 404 ---------------- */
 function notFoundPage() {
   const body = `<section class="empty-state"><div class="wrap narrow">
-    <img src="/images/rose-mark-ink.svg" alt="" style="width:64px;margin:0 auto 20px">
+    <img src="/images/crown-only.webp" alt="" style="width:64px;margin:0 auto 20px">
     <h2>Page not found</h2>
 <p style="color:var(--muted)">The page you're looking for isn't here, but your gifts are.</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px">
