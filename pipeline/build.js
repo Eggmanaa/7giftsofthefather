@@ -115,7 +115,7 @@ const trinity = [
     given: 'Given as the Spirit chooses, moment by moment.' },
   { from: 'From the Son', title: 'The Gifts of Jesus', ref: 'Ephesians 4:11–16', icon: IC.cross,
     text: 'Callings that equip the church. Apostles, prophets, evangelists, pastors, teachers, each a role that builds up the body and readies people to serve.',
-    given: 'Given as an assignment to the Church.' },
+    given: 'Given as an assignment to the Church, grown into over a lifetime.' },
   { from: 'From the Father', title: 'The Gifts of the Father', ref: 'Romans 12:6–8', icon: IC.crown,
     text: 'Motivational drives wired into you at birth. All seven, in proportions unique to you, shaping your personality, your decisions, and how you meet the world.',
     given: 'Given before you were born. These seven are what this site measures.' },
